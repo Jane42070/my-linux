@@ -1,2 +1,4 @@
-# my-linux
-to help me to use linux easily 
+# My Linux      
+##### [🇨🇳](README.md)  [🇬🇧](README.md)
+
+To help me use linux easily
