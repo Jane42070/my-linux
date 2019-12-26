@@ -4,6 +4,16 @@
 To help me use linux easily
 
 ## Kali Linux
+### About dual graphics laptop
+For example:my laptop couldn't boot into desktop successfully after installation<br>
+My way:disable nouveau driver
+Press `E` when boot into grub
+Input these code in the last third lines, don't forget whitespace!
+```
+nouveau.modeset=0
+```
+Then press `F10` to continue,my problem was solved by this way<br>
+
 ### update source
 Because some reasons,the offical kali source may run slowly in the system,so I have to choose some local sources<br>
 Open terminal then input
