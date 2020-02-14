@@ -4,6 +4,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'mhinz/vim-startify'
 Plug 'pedsm/sprint'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'Shougo/vimfiler.vim'
+Plug 'shougo/unite.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
 Plug 'dracula/dracula-theme',{ 'as': 'dracula' }
@@ -84,7 +86,7 @@ let g:jedi#use_splits_not_buffers = "right"
 map R :source %<CR>
 map Q ::q<CR>
 map W ::w<CR>
-map <F3> :NERDTreeToggle<CR>
+map <F3> ::NERDTree<CR>
 map PL ::PlugInstall<CR>
 map PS ::PlugStatus<CR>
 map PD ::PlugUpdate<CR>
@@ -132,7 +134,6 @@ map <C-r> :call Sprint()<CR>
 " 设置NERDTree 窗口位置，窗口大小
 let NERDTreeWinPos=1
 let NERDTreeWinSize=28
-
 " vim-Startify设置
 " 设置书签
 let g:startify_bookmarks            = [
