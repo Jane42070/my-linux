@@ -1,8 +1,11 @@
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Plug 'weirongxu/coc-explorer'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mhinz/vim-startify'
 Plug 'pedsm/sprint'
+Plug 'junegunn/fzf'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'shougo/unite.vim'
@@ -23,6 +26,7 @@ Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'junegunn/vim-easy-align'
+" html 插件
 Plug 'mattn/emmet-vim'
 Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -36,6 +40,9 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'sbdchd/neoformat'
 Plug 'terryma/vim-multiple-cursors'
 call plug#end()
+"""""""""""""""""""""""""""""""""""""
+"	      CUSTOM MY NVIM	     	"
+"""""""""""""""""""""""""""""""""""""
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -84,13 +91,15 @@ let g:jedi#use_splits_not_buffers = "right"
 
 " 普通快捷键
 map R :source %<CR>
-map Q ::q<CR>
-map W ::w<CR>
-map <F3> ::NERDTree<CR>
-map PL ::PlugInstall<CR>
-map PS ::PlugStatus<CR>
-map PD ::PlugUpdate<CR>
-map PG ::PlugUpgrade<CR>
+map Q :q!<CR>
+map W :w<CR>
+" map <F3> :NERDTree<CR>
+map <F3> :CocCommand explorer --width 30<CR>
+map F  :FZF<CR>
+map PL :PlugInstall<CR>
+map PS :PlugStatus<CR>
+map PD :PlugUpdate<CR>
+map PG :PlugUpgrade<CR>
 " 新建标签页
 map T  :tabe<CR>
 " 前一标签页
