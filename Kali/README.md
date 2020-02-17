@@ -3,7 +3,7 @@
 
 To help me use linux easily
 
-## Kali Linux
+## Linux
 ### About dual graphics laptop
 For example:my laptop couldn't boot into desktop successfully after installation<br>
 My way:disable nouveau driver
@@ -15,30 +15,25 @@ nouveau.modeset=0
 Then press `F10` to continue,my problem was solved by this way<br>
 
 ### update source
-Because some reasons,the offical kali source may run slowly in the system,so I have to choose some local sources<br>
-Open terminal then input
+- Because some reasons,the offical source run very slow in my linux,so I add some local sources<br>
 ```
-vim /etc/apt/source.list
-```
-
-```
-#中科大源     I'm using this for now
+# 中科大源
 deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
 deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
 
-#阿里云
+# 阿里云
 deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
 deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
  
-#清华大学
+# 清华大学
 deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
 deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
  
-#浙大
+# 浙大
 deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
 deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
  
-#东软大学
+# 东软大学
 deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
 deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
  

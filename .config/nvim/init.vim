@@ -1,80 +1,77 @@
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" Plug 'weirongxu/coc-explorer'
+Plug 'weirongxu/coc-explorer'
+" 括号补全
 Plug 'jiangmiao/auto-pairs'
+" nvim startscreen --vim-startify
 Plug 'mhinz/vim-startify'
 Plug 'pedsm/sprint'
+" file search --fzf
 Plug 'junegunn/fzf'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'Shougo/vimfiler.vim'
-Plug 'shougo/unite.vim'
-Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
-Plug 'dracula/dracula-theme',{ 'as': 'dracula' }
+" status bar --airline
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'nvie/vim-flake8'
+" Plug 'nvie/vim-flake8'
 Plug 'haya14busa/incsearch.vim'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'altercation/vim-colors-solarized'
 Plug 'dense-analysis/ale'
-Plug 'terryma/vim-smooth-scroll'
 Plug 'Shougo/deoplete-clangx'
 " markdown语言插件
 Plug 'plasticboy/vim-markdown'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'junegunn/vim-easy-align'
 " html 插件
 Plug 'mattn/emmet-vim'
+" syntax check --neomake
 Plug 'neomake/neomake'
+" autocomplete deoplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
-Plug 'vim-erlang/vim-erlang-compiler'
-Plug 'othree/html5.vim'
 Plug 'davidhalter/jedi-vim'
+" 代码折叠
 Plug 'tmhedberg/SimpylFold'
-Plug 'sbdchd/neoformat'
-Plug 'terryma/vim-multiple-cursors'
+" code format --neoformat
+" Plug 'sbdchd/neoformat'
 call plug#end()
 """""""""""""""""""""""""""""""""""""
 "	      CUSTOM MY NVIM	     	"
 """""""""""""""""""""""""""""""""""""
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:deoplete#enable_at_startup = 1
-let g:airline#extensions#tabline#formatter = 'default'
+" airline config
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#left_sep=' '
+let g:airline#extensions#tabline#left_alt_sep='|'
+let g:deoplete#enable_at_startup=1
+let g:airline#extensions#tabline#formatter='default'
+" 设置airline主题
+let g:airline_theme='deus'
 " 显示行号
 set number
 " 高亮当前行
 set cursorline
 " 设置空白字符的视觉提示
 set list listchars=extends:❯,precedes:❮,tab:▸\ ,trail:˽
-" 设置airline主题
-let g:airline_theme='deus'
 syntax on
-set t_Co=256
+set shiftwidth=4
 set tabstop=4
-set incsearch " 输入字符串就显示匹配点
+set softtabstop=4
+" set cindent			" 设置C自动缩进
+set incsearch		" 输入字符串就显示匹配点
 set hlsearch
-set autoindent " 设置自动缩进
-set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s " 设置C/C++语言的具体缩进方式
-filetype plugin indent on
-filetype on
-set showmatch    "显示匹配的括号
-set scrolloff=3        "距离顶部和底部3行"
-set encoding=utf-8  "编码
-set fenc=utf-8      "编码
-set mouse=a        "启用鼠标
-set hlsearch        "搜索高亮
-let mapleader=" "
+set showmatch		" 显示匹配的括号
+set scrolloff=3     " 距离顶部和底部3行"
+set encoding=utf-8  " 编码
+set fenc=utf-8      " 编码
+set mouse=a			" 启用鼠标
+set hlsearch        " 搜索高亮
+set autoindent      " 设置自动缩进
+" 搜索高亮后　前后跳转: 下一个/上一个
+" n/N
 " 高亮显示复制区域
 hi HighlightedyankRegion cterm=reverse gui=reverse
-let g:highlightedyank_highlight_duration = 1000 " 高亮持续时间为 1000 毫秒
+" let g:highlightedyank_highlight_duration = 1000 " 高亮持续时间为 1000 毫秒
 
 " 设置背景颜色和主题
 colorscheme gruvbox
