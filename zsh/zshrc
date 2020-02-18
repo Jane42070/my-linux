@@ -35,6 +35,7 @@ alias s=screenfetch
 alias n=neofetch
 alias pacman="sudo pacman"
 alias dict="ydict"
+alias md="mkdir"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -137,3 +138,4 @@ eval $(thefuck --alias FUCK)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source /home/diaz/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
