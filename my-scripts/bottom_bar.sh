@@ -5,9 +5,10 @@
 # 1.Show date time
 # 2.Show battery status info
 while true; do
-		xsetroot -name " | Dis.$(df -h | awk '{ if ($6 == "/") print $4 }') | Mem.$(free -h | awk '(NR==2){ print $3 }') | Bat.$(acpi -b|awk '{print $4}') | Vol.$(amixer get Master|tail -n 1|awk '{print $5}'|tr -d '[]') | $(date '+%Y-%m-%d %R') "
-		sleep 1m    # Update time every minute
-done &
+		xsetroot -name " | Dis.$(df -h | awk '{ if ($6 == "/") print $4 }') | Mem.$(free -h | awk '(NR==2){ print $3 }') | Bat.$(acpi -b|awk '{print $4}') | Vol.$(amixer get Master|tail -n 1|awk '{print $5}'|tr -d '[]') | $(date '+%Y-%m-%d %R ')"
+		# Update time
+		sleep 0.2s
+	done &
 # # 3.Show audio info
 # while true;
 # do

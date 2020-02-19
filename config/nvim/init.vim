@@ -1,6 +1,10 @@
 call plug#begin('~/.vim/plugged')
+" 撤销树Gundo
+Plug 'sjl/gundo.vim'
+
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'weirongxu/coc-explorer'
+" Plug 'weirongxu/coc-explorer'
+Plug 'Valloric/YouCompleteMe'
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
 " nvim startscreen --vim-startify
@@ -15,8 +19,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'nvie/vim-flake8'
 Plug 'haya14busa/incsearch.vim'
-Plug 'dense-analysis/ale'
-Plug 'Shougo/deoplete-clangx'
+Plug 'w0rp/ale'
+" Plug 'Shougo/deoplete-clangx'
 " markdown语言插件
 Plug 'plasticboy/vim-markdown'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
@@ -26,16 +30,18 @@ Plug 'mattn/emmet-vim'
 " syntax check --neomake
 Plug 'neomake/neomake'
 " autocomplete deoplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'zchee/deoplete-jedi'
 " Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 " 代码折叠
 Plug 'tmhedberg/SimpylFold'
 " code format --neoformat
 " Plug 'sbdchd/neoformat'
 call plug#end()
+
+
 """""""""""""""""""""""""""""""""""""
 "	      CUSTOM MY NVIM	     	"
 """""""""""""""""""""""""""""""""""""
@@ -43,7 +49,7 @@ call plug#end()
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#left_sep=' '
 let g:airline#extensions#tabline#left_alt_sep='|'
-let g:deoplete#enable_at_startup=1
+let g:ale#enable_at_startup=1
 let g:airline#extensions#tabline#formatter='default'
 " 设置airline主题
 let g:airline_theme='deus'
@@ -53,11 +59,21 @@ set number
 set cursorline
 " 设置空白字符的视觉提示
 set list listchars=extends:❯,precedes:❮,tab:▸\ ,trail:˽
-syntax on
+syntax on	" 语法高亮
+filetype plugin indent on " 根据文件类型自动处理缩进
+
+" 设置持久性撤销和重复
+set undofile
+" if !isdirectory("~/.nvim/undodir")
+" 	call mkdir("~/.nvim/undodir", "p")
+" endif
+" set undodir="~/.nvim/undodir"
+
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-" set cindent			" 设置C自动缩进
+set backspace=2		" 修正多数终端上backspqce行为
+set cindent			" 设置C自动缩进
 set incsearch		" 输入字符串就显示匹配点
 set hlsearch
 set showmatch		" 显示匹配的括号
@@ -66,12 +82,15 @@ set encoding=utf-8  " 编码
 set fenc=utf-8      " 编码
 set mouse=a			" 启用鼠标
 set hlsearch        " 搜索高亮
-set autoindent      " 设置自动缩进
+set autoindent		" 设置自动缩进
 " 搜索高亮后　前后跳转: 下一个/上一个
 " n/N
 " 高亮显示复制区域
 hi HighlightedyankRegion cterm=reverse gui=reverse
 " let g:highlightedyank_highlight_duration = 1000 " 高亮持续时间为 1000 毫秒
+
+" SimpylFold
+let g:SimpylFold_docstring_preview = 1
 
 " 设置背景颜色和主题
 colorscheme gruvbox
@@ -79,17 +98,48 @@ set background=dark
 
 " markdown语言插件配置
 
-" jed-vim 配置
-" disable autocompletion, cause we use deoplete for completion
-let g:jedi#completions_enabled = 0
+" " jed-vim 配置
+" " disable autocompletion, cause we use deoplete for completion
+" let g:jedi#completions_enabled = 0
+" 
+" " open the go-to function in split, not another buffer
+" let g:jedi#use_splits_not_buffers = "right"
 
-" open the go-to function in split, not another buffer
-let g:jedi#use_splits_not_buffers = "right"
+""""""""""""""""""""""""""""""""""
+" ALE
+" 始终开启标志列
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+let g:ale_statusline_format = ['✗ %d', '⚡%d', '✔ OK']
+" let g:ale_echo_msg_error_str = 'E'
+" let g:ale_echo_msg_warning_str = 'W'
+" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"自定义error和warning图标
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
+" 始终开启标志列
+" let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', 'E:')
+" let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', 'W:')
+let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', '✗')
+let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', '⚡')
+" 文件内容发生变化时不进行检查
+" let g:ale_lint_on_text_changed = 1
+" 打开文件时进行检查
+let g:ale_lint_on_enter = 1
 
-" 普通快捷键
-map R :source %<CR>
-map Q :q!<CR>
-map W :w<CR>
+" 使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
+let g:ale_linters = {
+\   'c++': ['clang'],
+\   'c': ['clang'],
+\   'python': ['pylint'],
+\}
+" 对于java在中文系统上乱码
+let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
+"""""""""""""""""""""""""""""""""
+" 快捷键
+" map <C-r> :source %<CR>
+" map <C-q> :q!<CR>
+" map <C-w> :w<CR>
 " map <F3> :NERDTree<CR>
 map <F3> :CocCommand explorer --width 30<CR>
 map F  :FZF<CR>
@@ -108,31 +158,46 @@ map tu :tabe<CR>
 map ti :+tabnext<CR>
 map tn :-tabnext<CR>
 
-" 分屏快捷键
-map sr :set splitright<CR>:vsplit<CR>
-map sl :set nosplitright<CR>:vsplit<CR>
-map su :set nosplitbelow<CR>:split<CR>
-map sd :set splitbelow<CR>:split<CR>
+" 使用s + hjkl 在nvim中快速分屏
+map	sl :set splitright<CR>:vsplit<CR>
+map sh :set nosplitright<CR>:vsplit<CR>
+map sk :set nosplitbelow<CR>:split<CR>
+map sj :set splitbelow<CR>:split<CR>
 
-" 如果neoformat没有检测到文件类型，执行以下命令
-" Enable alignment
-let g:neoformat_basic_format_align = 1
+" 使用<Ctrl> + hjkl 在窗口间快速切换
+noremap <c-h> <c-w><c-h>
+noremap <c-j> <c-w><c-j>
+noremap <c-k> <c-w><c-k>
+noremap <c-l> <c-w><c-l>
 
-" Enable tab to spaces conversion
-let g:neoformat_basic_format_retab = 1
+noremap <leader>] :YcmCompleter GoTo<cr>
 
-" Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
+"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
+nmap sp <Plug>(ale_previous_wrap)
+nmap sn <Plug>(ale_next_wrap)
+"<Leader>s触发/关闭语法检查
+nmap <Leader>s :ALEToggle<CR>
+"<Leader>d查看错误或警告的详细信息
 
-" 指定pylint为python的代码检查器
-let g:neomake_python_enabled_makers = ['pylint']
+
+""""""""""""""""""""""""""""""""""
+" NeoFormat
+" " 如果neoformat没有检测到文件类型，执行以下命令
+" " Enable alignment
+" let g:neoformat_basic_format_align = 1
+" 
+" " Enable tab to spaces conversion
+" let g:neoformat_basic_format_retab = 1
+" 
+" " Enable trimmming of trailing whitespace
+" let g:neoformat_basic_format_trim = 1
+" 
+" " 指定pylint为python的代码检查器
+" " let g:neomake_python_enabled_makers = ['pylint']
+
 
 map <C-r> :call Sprint()<CR>
-" func! RunPython()
-"     if &filetype == 'python'
-"         exec "!time python3.8 %"
-"     endif
-" endfunc
+
 " nerdtree配置
 " 1.打开neovim时自动打开目录
 " autocmd StdinReadPre * let s:std_in=1
