@@ -9,10 +9,11 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'jiangmiao/auto-pairs'
 " nvim startscreen --vim-startify
 Plug 'mhinz/vim-startify'
-Plug 'pedsm/sprint'
 " file search --fzf
 Plug 'junegunn/fzf'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asynctasks.vim'
+" Plug 'Jane42070/Runner'
 Plug 'morhetz/gruvbox'
 " status bar --airline
 Plug 'vim-airline/vim-airline'
@@ -32,7 +33,7 @@ Plug 'neomake/neomake'
 " autocomplete deoplete
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'zchee/deoplete-jedi'
-" Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
 " Plug 'davidhalter/jedi-vim'
 " 代码折叠
@@ -88,9 +89,52 @@ set autoindent		" 设置自动缩进
 " 高亮显示复制区域
 hi HighlightedyankRegion cterm=reverse gui=reverse
 " let g:highlightedyank_highlight_duration = 1000 " 高亮持续时间为 1000 毫秒
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap { {<CR>}<Esc>O
+autocmd Syntax html,vim inoremap < <lt>><Esc>i| inoremap > <c-r>=ClosePair('>')<CR>
+inoremap ) <c-r>=ClosePair(')')<CR>
+inoremap ] <c-r>=ClosePair(']')<CR>
+inoremap } <c-r>=CloseBracket()<CR>
+inoremap " <c-r>=QuoteDelim('"')<CR>
+inoremap ' <c-r>=QuoteDelim("'")<CR>
+
+function ClosePair(char)
+ if getline('.')[col('.') - 1] == a:char
+ return "\<Right>"
+ else
+ return a:char
+ endif
+endf
+
+function CloseBracket()
+ if match(getline(line('.') + 1), '\s*}') < 0
+ return "\<CR>}"
+ else
+ return "\<Esc>j0f}a"
+ endif
+endf
+
+function QuoteDelim(char)
+ let line = getline('.')
+ let col = col('.')
+ if line[col - 2] == "\\"
+ return a:char
+ elseif line[col - 1] == a:char
+ return "\<Right>"
+ else
+ return a:char.a:char."\<Esc>i"
+ endif
+endf
 
 " SimpylFold
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+" Enable folding with the spacebar
+nnoremap <space> za
 let g:SimpylFold_docstring_preview = 1
+
 
 " 设置背景颜色和主题
 colorscheme gruvbox
@@ -106,7 +150,11 @@ set background=dark
 " let g:jedi#use_splits_not_buffers = "right"
 
 """"""""""""""""""""""""""""""""""
-" ALE
+"    _    _     _____
+"   / \  | |   | ____|
+"  / _ \ | |   |  _|
+" / ___ \| |___| |___
+"/_/   \_\_____|_____|
 " 始终开启标志列
 let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
@@ -123,7 +171,7 @@ let g:ale_sign_warning = '⚡'
 let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', '✗')
 let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', '⚡')
 " 文件内容发生变化时不进行检查
-" let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_text_changed = 1
 " 打开文件时进行检查
 let g:ale_lint_on_enter = 1
 
@@ -135,6 +183,7 @@ let g:ale_linters = {
 \}
 " 对于java在中文系统上乱码
 let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
+
 """""""""""""""""""""""""""""""""
 " 快捷键
 " map <C-r> :source %<CR>
@@ -179,6 +228,18 @@ nmap sn <Plug>(ale_next_wrap)
 nmap <Leader>s :ALEToggle<CR>
 "<Leader>d查看错误或警告的详细信息
 
+""""""""""""""""""""""""""""""""""
+"__   __           ____                      _      _       __  __
+"\ \ / /__  _   _ / ___|___  _ __ ___  _ __ | | ___| |_ ___|  \/  | ___
+" \ V / _ \| | | | |   / _ \| '_ ` _ \| '_ \| |/ _ \ __/ _ \ |\/| |/ _ \
+"  | | (_) | |_| | |__| (_) | | | | | | |_) | |  __/ ||  __/ |  | |  __/
+"  |_|\___/ \__,_|\____\___/|_| |_| |_| .__/|_|\___|\__\___|_|  |_|\___|
+"                                     |_|
+set completeopt=longest,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
+let g:ycm_cache_omnifunc=0	" 禁止缓存匹配项,每次都重新生成匹配项
+
+"""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""
 " NeoFormat
@@ -195,8 +256,71 @@ nmap <Leader>s :ALEToggle<CR>
 " " 指定pylint为python的代码检查器
 " " let g:neomake_python_enabled_makers = ['pylint']
 
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"     _
+"    / \   ___ _   _ _ __   ___ _ __ _   _ _ __
+"   / _ \ / __| | | | '_ \ / __| '__| | | | '_ \
+"  / ___ \\__ \ |_| | | | | (__| |  | |_| | | | |
+" /_/   \_\___/\__, |_| |_|\___|_|   \__,_|_| |_|
+"              |___/
+let g:asyncrun_open = 8
+let $PYTHONNUNBUFFERED=1
+function! Runner()
+    w
+    if exists("g:RunnerRun")
+        if g:RunnerRun
+            AsyncStop!
+        endif
+    endif
+    if (&ft=='c')
+        AsyncRun gcc % ; ./a.out
+    endif
+    if (&ft=='cpp')
+        AsyncRun g++ %; ./a.out
+    endif
+    if (&ft=='python')
+        AsyncRun -raw python3.8 %
+    endif
+    if (&ft=='php')
+        AsyncRun php %
+    endif
+    if (&ft=='javascript')
+        AsyncRun node %
+    endif
+    if (&ft=='java')
+        AsyncRun javac Main.java; java Main;
+    endif
+    " if (&ft=='coffee')
+    "     AsyncRun coffee %
+    " endif
+    if (&ft=='rust')
+        AsyncRun rustc %; ./%< ;
+    endif
+    if (&ft=='haskell' || &ft=='lhaskell')
+        AsyncRun ghc %; ./%< ;
+    endif
+    if (&ft=='tex')
+        AsyncRun pdflatex %;
+    endif
+    if (&ft=='markdown')
+        if(expand("%:t") == "README.md")
+            AsyncRun pandoc -s -S -c ~/.vim/bundle/sprint/assets/github.css -o %<.html %;
+        else
+            AsyncRun pandoc -s -S -o %<.pdf %;
+        endif
+    endif
+    if exists("g:RunnerHidden")
+        if g:RunnerHidden == 0
+            copen
+        endif
+    else
+        copen
+    endif
+endfunction
+map <C-r> :call Runner()<CR>
 
-map <C-r> :call Sprint()<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 " nerdtree配置
 " 1.打开neovim时自动打开目录
