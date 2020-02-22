@@ -1,14 +1,20 @@
 call plug#begin('~/.vim/plugged')
 " 撤销树Gundo
 Plug 'sjl/gundo.vim'
-
+" supertab
+Plug 'ervandew/supertab'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " Plug 'weirongxu/coc-explorer'
 Plug 'Valloric/YouCompleteMe'
+"为了Python3的第三方库安装Jedi插件
+Plug 'davidhalter/jedi-vim'
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
 " nvim startscreen --vim-startify
 Plug 'mhinz/vim-startify'
+Plug 'majutsushi/tagbar'
+" Super searching
+Plug 'kien/ctrlp.vim'
 " file search --fzf
 Plug 'junegunn/fzf'
 Plug 'skywind3000/asyncrun.vim'
@@ -22,6 +28,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'haya14busa/incsearch.vim'
 Plug 'w0rp/ale'
 " Plug 'Shougo/deoplete-clangx'
+" Latex插件
+Plug 'lervag/vimtex'
 " markdown语言插件
 Plug 'plasticboy/vim-markdown'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
@@ -29,12 +37,14 @@ Plug 'junegunn/vim-easy-align'
 " html 插件
 Plug 'mattn/emmet-vim'
 " syntax check --neomake
-Plug 'neomake/neomake'
+" Plug 'neomake/neomake'
 " autocomplete deoplete
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'zchee/deoplete-jedi'
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
+" 代码片段
 Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
 " Plug 'davidhalter/jedi-vim'
 " 代码折叠
 Plug 'tmhedberg/SimpylFold'
@@ -62,7 +72,11 @@ set cursorline
 set list listchars=extends:❯,precedes:❮,tab:▸\ ,trail:˽
 syntax on	" 语法高亮
 filetype plugin indent on " 根据文件类型自动处理缩进
-
+filetype on
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+set autochdir
+" 取消注释自动换行
+set paste
 " 设置持久性撤销和重复
 set undofile
 " if !isdirectory("~/.nvim/undodir")
@@ -89,43 +103,7 @@ set autoindent		" 设置自动缩进
 " 高亮显示复制区域
 hi HighlightedyankRegion cterm=reverse gui=reverse
 " let g:highlightedyank_highlight_duration = 1000 " 高亮持续时间为 1000 毫秒
-inoremap ( ()<Esc>i
-inoremap [ []<Esc>i
-inoremap { {<CR>}<Esc>O
-autocmd Syntax html,vim inoremap < <lt>><Esc>i| inoremap > <c-r>=ClosePair('>')<CR>
-inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap ] <c-r>=ClosePair(']')<CR>
-inoremap } <c-r>=CloseBracket()<CR>
-inoremap " <c-r>=QuoteDelim('"')<CR>
-inoremap ' <c-r>=QuoteDelim("'")<CR>
 
-function ClosePair(char)
- if getline('.')[col('.') - 1] == a:char
- return "\<Right>"
- else
- return a:char
- endif
-endf
-
-function CloseBracket()
- if match(getline(line('.') + 1), '\s*}') < 0
- return "\<CR>}"
- else
- return "\<Esc>j0f}a"
- endif
-endf
-
-function QuoteDelim(char)
- let line = getline('.')
- let col = col('.')
- if line[col - 2] == "\\"
- return a:char
- elseif line[col - 1] == a:char
- return "\<Right>"
- else
- return a:char.a:char."\<Esc>i"
- endif
-endf
 
 " SimpylFold
 " Enable folding
@@ -235,11 +213,39 @@ nmap <Leader>s :ALEToggle<CR>
 "  | | (_) | |_| | |__| (_) | | | | | | |_) | |  __/ ||  __/ |  | |  __/
 "  |_|\___/ \__,_|\____\___/|_| |_| |_| .__/|_|\___|\__\___|_|  |_|\___|
 "                                     |_|
-set completeopt=longest,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+set completeopt=menuone,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
+let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_cache_omnifunc=0	" 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_key_invoke_completion = '<c-z>'
+noremap <c-z> <NOP>
+let g:ycm_semantic_triggers =  {
+			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+			\ 'cs,lua,javascript': ['re!\w{2}'],
+			\ }
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+"===============================Jedi==================================
+" if has('python3')
+" let g:loaded_youcompleteme = 1 " 判断如果是python3的话，就禁用ycmd。
+" let g:jedi#force_py_version = 3
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:jedi#popup_on_dot = 0
+" let g:pymode_python = 'python3'
+" endif
+"===============================Jedi===================================
 
-"""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""
+" Latex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+"""""""""""""""""""""""""""""""""""""
+
 
 """"""""""""""""""""""""""""""""""
 " NeoFormat
@@ -320,7 +326,17 @@ endfunction
 map <C-r> :call Runner()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-
+"  ____  _                        _
+" / ___|(_)_ __  _ __  _ __   ___| |_ ___
+" \___ \| | '_ \| '_ \| '_ \ / _ \ __/ __|
+"  ___) | | | | | | | | |_) |  __/ |_\__ \
+" |____/|_|_| |_|_| |_| .__/ \___|\__|___/
+"                     |_|
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " nerdtree配置
 " 1.打开neovim时自动打开目录
