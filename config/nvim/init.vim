@@ -41,7 +41,7 @@ Plug 'mattn/emmet-vim'
 " autocomplete deoplete
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'zchee/deoplete-jedi'
-" Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 " 代码片段
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
