@@ -270,8 +270,10 @@ inoreabbrev <expr> <bar><bar>
 inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
 " To get ReST-compatible tables use
-let g:table_mode_corner_corner='+'
-let g:table_mode_header_fillchar='='
+"let g:table_mode_corner_corner='+'
+" For Markdown-compatible tables use
+let g:table_mode_corner='|'
+"let g:table_mode_header_fillchar='='
 
 
 """""""""""""""""""""""""""""""""""""
