@@ -19,6 +19,9 @@ Plug 'kien/ctrlp.vim'
 Plug 'junegunn/fzf'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
+" vim-ranger
+Plug 'rbgrouleff/bclose.vim'	" neovim dependency
+Plug 'francoiscabrol/ranger.vim'
 " Plug 'Jane42070/Runner'
 Plug 'morhetz/gruvbox'
 " status bar --airline
@@ -27,29 +30,26 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'nvie/vim-flake8'
 Plug 'haya14busa/incsearch.vim'
 Plug 'w0rp/ale'
-" Plug 'Shougo/deoplete-clangx'
 " Latex插件
 Plug 'lervag/vimtex'
+" Python 
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " markdown语言插件
+Plug 'godlygeek/tabular'
+Plug 'mzlogin/vim-markdown-toc'
 Plug 'plasticboy/vim-markdown'
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'junegunn/vim-easy-align'
 " html 插件
 Plug 'mattn/emmet-vim'
-" syntax check --neomake
-" Plug 'neomake/neomake'
-" autocomplete deoplete
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'zchee/deoplete-jedi'
 Plug 'scrooloose/nerdcommenter'
 " 代码片段
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
-" Plug 'davidhalter/jedi-vim'
 " 代码折叠
 Plug 'tmhedberg/SimpylFold'
-" code format --neoformat
-" Plug 'sbdchd/neoformat'
 call plug#end()
 
 
@@ -57,13 +57,23 @@ call plug#end()
 "	      CUSTOM MY NVIM	     	"
 """""""""""""""""""""""""""""""""""""
 " airline config
+" 设置airline主题
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='deus'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#left_sep=' '
 let g:airline#extensions#tabline#left_alt_sep='|'
 let g:ale#enable_at_startup=1
 let g:airline#extensions#tabline#formatter='default'
-" 设置airline主题
-let g:airline_theme='deus'
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.readonly = '⭤'
+" let g:airline_symbols.linenr = ''
 " 显示行号
 set number
 " 高亮当前行
@@ -72,11 +82,13 @@ set cursorline
 set list listchars=extends:❯,precedes:❮,tab:▸\ ,trail:˽
 syntax on	" 语法高亮
 filetype plugin indent on " 根据文件类型自动处理缩进
+" 共享剪切板
+set clipboard+=unnamed
 filetype on
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 set autochdir
 " 取消注释自动换行
-set paste
+" set paste
 " 设置持久性撤销和重复
 set undofile
 " if !isdirectory("~/.nvim/undodir")
@@ -98,11 +110,13 @@ set fenc=utf-8      " 编码
 set mouse=a			" 启用鼠标
 set hlsearch        " 搜索高亮
 set autoindent		" 设置自动缩进
+set wrap			" 设置折叠
+
 " 搜索高亮后　前后跳转: 下一个/上一个
 " n/N
 " 高亮显示复制区域
 hi HighlightedyankRegion cterm=reverse gui=reverse
-" let g:highlightedyank_highlight_duration = 1000 " 高亮持续时间为 1000 毫秒
+let g:highlightedyank_highlight_duration = 1000 " 高亮持续时间为 1000 毫秒
 
 
 " SimpylFold
@@ -119,7 +133,7 @@ colorscheme gruvbox
 set background=dark
 
 " markdown语言插件配置
-
+let g:vim_markdown_math = 1
 " " jed-vim 配置
 " " disable autocompletion, cause we use deoplete for completion
 " let g:jedi#completions_enabled = 0
@@ -146,8 +160,8 @@ let g:ale_sign_warning = '⚡'
 " 始终开启标志列
 " let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', 'E:')
 " let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', 'W:')
-let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', '✗')
-let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', '⚡')
+let airline#extensions#ale#error_symbol = '✗:'
+let airline#extensions#ale#warning_symbol = '⚡:'
 " 文件内容发生变化时不进行检查
 let g:ale_lint_on_text_changed = 1
 " 打开文件时进行检查
@@ -175,15 +189,19 @@ map PS :PlugStatus<CR>
 map PD :PlugUpdate<CR>
 map PG :PlugUpgrade<CR>
 " 新建标签页
-map T  :tabe<CR>
+map <C-t>  :tabe<CR>
 " 前一标签页
 map t- :-tabnext<CR>
 " 后一标签页
 map t= :+tabnext<CR>
 " 浏览标签页
-map tu :tabe<CR>
+" map tu :tabe<CR>
 map ti :+tabnext<CR>
 map tn :-tabnext<CR>
+map tc :tabclose<CR>
+" 快捷缩进
+vnoremap < <v
+vnoremap > >v
 
 " 使用s + hjkl 在nvim中快速分屏
 map	sl :set splitright<CR>:vsplit<CR>
@@ -238,6 +256,62 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 "===============================Jedi===================================
 
 """""""""""""""""""""""""""""""""""""
+" vim-table-mode
+function! s:isAtStartOfLine(mapping)
+  let text_before_cursor = getline('.')[0 : col('.')-1]
+  let mapping_pattern = '\V' . escape(a:mapping, '\')
+  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+endfunction
+
+inoreabbrev <expr> <bar><bar>
+          \ <SID>isAtStartOfLine('\|\|') ?
+          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+inoreabbrev <expr> __
+          \ <SID>isAtStartOfLine('__') ?
+" To get ReST-compatible tables use
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
+
+
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" python-mode
+let g:pymode_rope_rename_bind = '<C-c>rr'
+" 项目修改后重新生成缓存
+let g:pymode_rope_regenerate_on_write = 1
+let g:pymode_rope_completion = 1
+"开启python所有的语法高亮
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+" "发现错误时不自动打开QuickFix窗口
+let g:pymode_lint_cwindow = 0
+" 高亮缩进错误
+let g:pymode_options_max_line_length = 79
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+"高亮空格错误
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+"不在父目录下查找.ropeproject，能提升响应速度
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope_complete_on_dot = 1
+let g:pymode_run = 0
+let g:pymode_lint = 1
+let g:pymode_lint_checkers = ['pyflakes', 'pep8']
+"侧边栏不显示python-mode相关的标志
+let g:pymode_lint_signs = 0
+
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" markdown-preview
+let g:mkdp_path_to_chrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+
+"""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
 " Latex
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
@@ -269,6 +343,7 @@ let g:tex_conceal='abdmg'
 "  / ___ \\__ \ |_| | | | | (__| |  | |_| | | | |
 " /_/   \_\___/\__, |_| |_|\___|_|   \__,_|_| |_|
 "              |___/
+"   设置运行可执行文件
 let g:asyncrun_open = 8
 let $PYTHONNUNBUFFERED=1
 function! Runner()
@@ -323,8 +398,49 @@ function! Runner()
         copen
     endif
 endfunction
-map <C-r> :call Runner()<CR>
+map <leader>R :call Runner()<CR>
 
+" 自动插入文件头
+autocmd BufNewFile *.cpp,*.cc,*.c,*h,*.sh,*.py exec ":call SetHeader()" 
+func! SetHeader() 
+    if expand("%:e") == 'sh'
+        call setline(1,"\#!/bin/bash") 
+        call append(line("."), "") 
+    elseif expand("%:e") == 'py'
+        call setline(1, "#!/usr/bin/env python3.8")
+		call setline(2, "# -*- coding: utf-8 -*-")
+        call append(line(".")+1, "") 
+    elseif expand("%:e") == 'cpp' 
+        call setline(1,"#include <iostream>") 
+        call setline(2, "")
+        call setline(3, "using std::cin;") 
+        call setline(4, "using std::cout;") 
+        call setline(5, "using std::endl;") 
+        call setline(6, "")
+    elseif expand("%:e") == 'cc' 
+        call setline(1,"#include <iostream>") 
+        call setline(2, "")
+        call setline(3, "using std::cin;") 
+        call setline(4, "using std::cout;") 
+        call setline(5, "using std::endl;") 
+        call setline(6, "")
+    elseif expand("%:e") == 'c'
+        call setline(1,"#include <stdio.h>") 
+        call setline(2,"#include <stdlib.h>")
+        call setline(3,"")
+    elseif expand("%:e") == 'h'
+        call setline(1, "#ifndef ".toupper(expand("%:r"))."_H")
+        call setline(2, "#define ".toupper(expand("%:r"))."_H")
+        call setline(3,"")
+        call setline(4, "#endif")
+    endif
+endfunc
+autocmd BufNewFile * normal G
+
+" 打开一个文件自动定位到上一次退出时的位置
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "  ____  _                        _
 " / ___|(_)_ __  _ __  _ __   ___| |_ ___
@@ -348,7 +464,6 @@ let NERDTreeWinSize=28
 " vim-Startify设置
 " 设置书签
 let g:startify_bookmarks            = [
-            \ '~/Neo-vim/使用手册.md',
             \ '~/.config/nvim/init.vim',
             \]
 
