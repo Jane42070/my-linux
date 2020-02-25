@@ -42,3 +42,27 @@ sudo reboot
 
 ### Usefull Tools
 - [Paste](https://pasteapp.io/) A clipboard time machine
+- [Chromium](http://www.chromium.org/Home)A liter, faster google browser
+  - In Mac, Chromium doesn't have API key to login google account, there is a way to slove the problem
+    1. Browse the chromium's official webiste, it has documation about get API keys
+	2. After that, copy the neccessary information
+	3. Then, follow these code on terminal
+	```
+	# backup Chromium
+	mv /Applications/Chromium.app/Contents/MacOS/Chromium /Applications/Chromium.app/Contents/MacOS/Chromium_bin
+	# create a shell script
+	vim Chromium
+	```
+	4. Copy these code to the script
+	```
+	#!/bin/bash
+
+	# Set up environment variables
+	export GOOGLE_API_KEY="AIzaSyBNicn6Vtk-GdpsudrqDGBkgZkZeoSF-Xk"
+	export GOOGLE_DEFAULT_CLIENT_ID="962830587107-n89d129m422baq3obsheoll1n3pe7esj.apps.googleusercontent.com"
+	export GOOGLE_DEFAULT_CLIENT_SECRET="kwHjQIEpsD5FYsWavma1Lo1b"
+	# These keys are mine
+	# Launch Chromium
+	/Applications/Chromium.app/Contents/MacOS/Chromium_bin
+	```	
+- [Chrome](https://www.google.cn/intl/zh-CN/chrome/)Google-Chrome
