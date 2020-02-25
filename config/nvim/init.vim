@@ -1,6 +1,8 @@
 call plug#begin('~/.vim/plugged')
 " 撤销树Gundo
 Plug 'sjl/gundo.vim'
+" A Vim Plugin for Lively Previewing LaTeX PDF Output
+Plug 'xuhdev/vim-latex-live-preview'
 " supertab
 Plug 'ervandew/supertab'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
@@ -10,6 +12,8 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'davidhalter/jedi-vim'
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
+" vim dict
+Plug 'iamcco/dict.vim'
 " nvim startscreen --vim-startify
 Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
@@ -91,7 +95,8 @@ set autochdir
 " set paste
 " 设置持久性撤销和重复
 set undofile
-" if !isdirectory("~/.nvim/undodir")
+" set spell " 学英语
+"if !isdirectory("~/.nvim/undodir")
 " 	call mkdir("~/.nvim/undodir", "p")
 " endif
 " set undodir="~/.nvim/undodir"
@@ -255,6 +260,15 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 " endif
 "===============================Jedi===================================
 
+
+"""""""""""""""""""""""""""""""""""""
+" latex-preview
+"let g:livepreview_previewer = 'zathura'
+"let g:livepreview_cursorhold_recompile = 0
+autocmd Filetype tex setl updatetime=1 
+let g:livepreview_previewer = 'open -a Preview'
+"""""""""""""""""""""""""""""""""""""
+
 """""""""""""""""""""""""""""""""""""
 " vim-table-mode
 function! s:isAtStartOfLine(mapping)
@@ -315,11 +329,17 @@ let g:mkdp_auto_close = 1
 
 """""""""""""""""""""""""""""""""""""
 " Latex
+set shellslash
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" vim-dict
+
 """""""""""""""""""""""""""""""""""""
 
 
