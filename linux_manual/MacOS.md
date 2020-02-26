@@ -5,15 +5,7 @@
 ### Installation
 - Input this code in terminal 
 - `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-### Change the source
-- `vim brew_install`
-- Edit code like this
-```
-# BREW_REPO = "https://github.com/Homebrew/brew".freeze
-# CORE_TAP_REPO = "https://github.com/Homebrew/homebrew-core".freeze
-BREW_REPO = "git://mirrors.ustc.edu.cn/brew.git".freeze
-CORE_TAP_REPO = "git://mirrors.ustc.edu.cn/homebrew-core.git".freeze
-```
+- [Replace homebrew source](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)
 
 ### NTFS Tools
 - [NTFS-3G](https://www.tuxera.com/community/ntfs-3g-manual/) it's an opensource NTFS dirver, safe but slow
@@ -36,6 +28,18 @@ sudo ln -sf /usr/local/sbin/mount_ntfs /sbin/mount_ntfs
 # reboot
 sudo reboot
  ```
+
+## About vimtex
+- Firstly, install MacTex
+- I've tried over 2 days to find a good PDFviewer to match vimtex, it's really hard, but worth it.
+- ~~zathura~~: It basic functions are working in MacOS, but when I enable `Sync` in my vim config file `autocmd Filetype tex setl updatetime=1`, It trying to sync and happen a blank screen, few seconds will return to normal, but still can't accept
+- <u>evince</u>: Not bad, but it's linux's app, compatiblity is not play well in MacOS, and I don't like the interface under MacOS, and can't use **Spectacle** to resize it's layout.
+- ~~Skim~~: Not suitable for live preview, can't use `Sync`, interface and other functions are good
+- **Texshop**: The best Latex live preview app for now, support `Sync` and stable, use
+	- `brew cask install texshop`
+	- Adapt high rate refresh, but lose focus after once, use this command 
+	`defaults write TeXShop BringPdfFrontOnAutomaticUpdate NO`
+	- Perfectly slove the problem!
 
 ## Change folder permission
 - Edit folder permission `sudo chmod -R 777 Foldername` to make it writable
