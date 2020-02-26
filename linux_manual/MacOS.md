@@ -58,10 +58,9 @@ sudo reboot
 	#!/bin/bash
 
 	# Set up environment variables
-	export GOOGLE_API_KEY="AIzaSyBNicn6Vtk-GdpsudrqDGBkgZkZeoSF-Xk"
-	export GOOGLE_DEFAULT_CLIENT_ID="962830587107-n89d129m422baq3obsheoll1n3pe7esj.apps.googleusercontent.com"
-	export GOOGLE_DEFAULT_CLIENT_SECRET="kwHjQIEpsD5FYsWavma1Lo1b"
-	# These keys are mine
+	export GOOGLE_API_KEY="YOUR_API_KEY"
+	export GOOGLE_DEFAULT_CLIENT_ID="YOUR_CLIENT_ID"
+	export GOOGLE_DEFAULT_CLIENT_SECRET="YOUR_CLIENT_SECRET"
 	# Launch Chromium
 	/Applications/Chromium.app/Contents/MacOS/Chromium_bin
 	```	
