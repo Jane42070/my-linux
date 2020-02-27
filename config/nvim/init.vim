@@ -14,6 +14,8 @@ Plug 'davidhalter/jedi-vim'
 Plug 'jiangmiao/auto-pairs'
 " vim dict
 Plug 'iamcco/dict.vim'
+" Calendar
+Plug 'itchyny/calendar.vim'
 " nvim startscreen --vim-startify
 Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
@@ -87,7 +89,7 @@ set list listchars=extends:❯,precedes:❮,tab:▸\ ,trail:˽
 syntax on	" 语法高亮
 filetype plugin indent on " 根据文件类型自动处理缩进
 " 共享剪切板
-set clipboard+=unnamed
+"set clipboard+=unnamed
 filetype on
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 set autochdir
@@ -260,13 +262,33 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 " endif
 "===============================Jedi===================================
 
+"""""""""""""""""""""""""""""""""""""
+" vim-calendar
+"let g:calendar_google_calendar = 1
+"let g:calendar_google_task = 1
+" Google-api
+" source ~/.cache/calendar.vim/credentials.vim
+""""""""""""""""""""""""""""""""""""
+
 
 """""""""""""""""""""""""""""""""""""
 " latex-preview
 "let g:livepreview_previewer = 'zathura'
-"let g:livepreview_cursorhold_recompile = 0
-autocmd Filetype tex setl updatetime=1 
-let g:livepreview_previewer = 'open -a Preview'
+"let g:livepreview_engine = 'xelatex'
+autocmd Filetype tex setl updatetime=1
+"let g:livepreview_previewer = 'evince'
+nmap <F12> :LLPStartPreview<cr>
+let g:vimtex_compiler_latexmk = {
+    \ 'options' : [
+    \   '-xelatex',
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode',
+    \ ],
+    \}
+let g:tex_conceal='abdmg'
+let g:livepreview_previewer = 'open -a texshop'
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
