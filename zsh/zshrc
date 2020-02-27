@@ -193,3 +193,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # _COLUMNS=$(tput cols)
 # _MESSAGE="(Title 17, United States Code, Section 506)."
 eval `gdircolors -b $HOME/.dir_colors`
+export PATH="/usr/local/opt/libarchive/bin:$PATH"
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
