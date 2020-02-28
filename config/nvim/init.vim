@@ -119,6 +119,11 @@ set hlsearch        " 搜索高亮
 set autoindent		" 设置自动缩进
 set wrap			" 设置折叠
 
+" Resize splits with arrow keys
+noremap <up> :res +5<CR>
+noremap <down> :res -5<CR>
+noremap <left> :vertical resize-5<CR>
+noremap <right> :vertical resize+5<CR>
 " 搜索高亮后　前后跳转: 下一个/上一个
 " n/N
 " 高亮显示复制区域
@@ -195,6 +200,7 @@ map PL :PlugInstall<CR>
 map PS :PlugStatus<CR>
 map PD :PlugUpdate<CR>
 map PG :PlugUpgrade<CR>
+map ,r :source %<CR>
 " 新建标签页
 map <C-t>  :tabe<CR>
 " 前一标签页
@@ -222,7 +228,7 @@ noremap <c-j> <c-w><c-j>
 noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
 
-noremap <leader>] :YcmCompleter GoTo<cr>
+"noremap <leader>] :YcmCompleter GoTo<cr>
 
 "普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
 nmap sp <Plug>(ale_previous_wrap)
@@ -241,9 +247,14 @@ nmap <Leader>s :ALEToggle<CR>
 set completeopt=menuone,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
 let g:ycm_add_preview_to_completeopt = 0
+" mac pyhton path
+let g:ycm_python_binary_path = '/Library/Frameworks/Python.framework/Versions/3.8/bin/python3.8'
 let g:ycm_cache_omnifunc=0	" 禁止缓存匹配项,每次都重新生成匹配项
 let g:ycm_key_invoke_completion = '<c-z>'
 noremap <c-z> <NOP>
+let g:ycm_seed_identifiers_with_syntax = 1  "开启使用语言的一些关键字查询"
+let g:ycm_confirm_extra_conf = 1
+let g:ycm_autoclose_preview_window_after_completion=1 "补全后自动关闭预览窗口"
 let g:ycm_semantic_triggers =  {
 			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
 			\ 'cs,lua,javascript': ['re!\w{2}'],
@@ -252,6 +263,8 @@ let g:ycm_semantic_triggers =  {
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+" code jump
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "===============================Jedi==================================
 " if has('python3')
 " let g:loaded_youcompleteme = 1 " 判断如果是python3的话，就禁用ycmd。
@@ -267,6 +280,8 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 "let g:calendar_google_calendar = 1
 "let g:calendar_google_task = 1
 " Google-api
+map tl :Calendar -view=clock<CR>
+map tt :Calendar<CR>
 " source ~/.cache/calendar.vim/credentials.vim
 """"""""""""""""""""""""""""""""""""
 
@@ -449,7 +464,11 @@ autocmd BufNewFile *.cpp,*.cc,*.c,*h,*.sh,*.py exec ":call SetHeader()"
 func! SetHeader() 
     if expand("%:e") == 'sh'
         call setline(1,"\#!/bin/bash") 
-        call append(line("."), "") 
+        call append(line("."), "")
+    elseif expand("%:e") == 'tex'
+        call setline(1, "%! Tex program = xelatex")
+		call setline(2, "%-- coding: UTF-8 --")
+        call append(line(".")+1, "") 
     elseif expand("%:e") == 'py'
         call setline(1, "#!/usr/bin/env python3.8")
 		call setline(2, "# -*- coding: utf-8 -*-")
