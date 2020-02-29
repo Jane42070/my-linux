@@ -44,6 +44,9 @@ alias pacman="sudo pacman"
 alias dict="ydict"
 alias md="mkdir"
 alias python="python3.8"
+alias tomcat="catalina"
+# Backup conf files in Mac
+alias backup="sh ~/OpenSource/my-linux/my-scripts/backup.sh"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -196,3 +199,4 @@ eval `gdircolors -b $HOME/.dir_colors`
 export PATH="/usr/local/opt/libarchive/bin:$PATH"
 export PATH="/usr/local/opt/libxml2/bin:$PATH"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+export PATH="/usr/local/sbin:$PATH"

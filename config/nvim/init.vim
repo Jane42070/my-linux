@@ -21,6 +21,8 @@ Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
 " Super searching
 Plug 'kien/ctrlp.vim'
+" vim git
+Plug 'tpope/vim-fugitive'
 " file search --fzf
 Plug 'junegunn/fzf'
 Plug 'skywind3000/asyncrun.vim'
@@ -208,7 +210,7 @@ map t- :-tabnext<CR>
 " 后一标签页
 map t= :+tabnext<CR>
 " 浏览标签页
-" map tu :tabe<CR>
+map tu :tabe<CR>
 map ti :+tabnext<CR>
 map tn :-tabnext<CR>
 map tc :tabclose<CR>
@@ -253,7 +255,7 @@ let g:ycm_cache_omnifunc=0	" 禁止缓存匹配项,每次都重新生成匹配�
 let g:ycm_key_invoke_completion = '<c-z>'
 noremap <c-z> <NOP>
 let g:ycm_seed_identifiers_with_syntax = 1  "开启使用语言的一些关键字查询"
-let g:ycm_confirm_extra_conf = 1
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_completion=1 "补全后自动关闭预览窗口"
 let g:ycm_semantic_triggers =  {
 			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],

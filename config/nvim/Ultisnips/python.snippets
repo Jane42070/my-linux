@@ -1,9 +1,10 @@
 snippet main "__name__ == '__main__'"
-def ${1:main}(object):
+def ${1:main(object)}:
 	${2:code}
 
+
 if __name__ == '__main__':
-	$1()
+	$1
 endsnippet
 
 snippet for "for . in ."
