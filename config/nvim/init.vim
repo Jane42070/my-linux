@@ -6,7 +6,7 @@ Plug 'xuhdev/vim-latex-live-preview'
 " supertab
 Plug 'ervandew/supertab'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" Plug 'weirongxu/coc-explorer'
+"Plug 'weirongxu/coc-explorer'
 Plug 'Valloric/YouCompleteMe'
 "为了Python3的第三方库安装Jedi插件
 Plug 'davidhalter/jedi-vim'
@@ -38,6 +38,8 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'nvie/vim-flake8'
 Plug 'haya14busa/incsearch.vim'
 Plug 'w0rp/ale'
+" Debugger support: pyhton, java, bash-script, c, c++(maybe)
+Plug 'puremourning/vimspector'
 " Latex插件
 Plug 'lervag/vimtex'
 " Python 
@@ -196,12 +198,14 @@ let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
 " map <C-q> :q!<CR>
 " map <C-w> :w<CR>
 " map <F3> :NERDTree<CR>
-map <F3> :CocCommand explorer --width 30<CR>
-map F  :FZF<CR>
-map PL :PlugInstall<CR>
-map PS :PlugStatus<CR>
-map PD :PlugUpdate<CR>
-map PG :PlugUpgrade<CR>
+map <space>e :CocCommand explorer<CR>
+map ,f  :FZF<CR>
+map ,pl :PlugInstall<CR>
+map ,ps :PlugStatus<CR>
+map ,pd :PlugUpdate<CR>
+map ,pg :PlugUpgrade<CR>
+map ,pc :PlugClean<CR>
+map ,ps :PlugStatus<CR>
 map ,r :source %<CR>
 " 新建标签页
 map <C-t>  :tabe<CR>
@@ -238,6 +242,10 @@ nmap sn <Plug>(ale_next_wrap)
 "<Leader>s触发/关闭语法检查
 nmap <Leader>s :ALEToggle<CR>
 "<Leader>d查看错误或警告的详细信息
+"""""""""""""""""""""""""""""""""""""
+" Coc-explorer
+
+"""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""
 "__   __           ____                      _      _       __  __
@@ -465,14 +473,14 @@ map <leader>R :call Runner()<CR>
 autocmd BufNewFile *.cpp,*.cc,*.c,*h,*.sh,*.py exec ":call SetHeader()" 
 func! SetHeader() 
     if expand("%:e") == 'sh'
-        call setline(1,"\#!/bin/bash") 
+        call setline(1,"\#!/bin/bash")
         call append(line("."), "")
     elseif expand("%:e") == 'tex'
         call setline(1, "%! Tex program = xelatex")
 		call setline(2, "%-- coding: UTF-8 --")
         call append(line(".")+1, "") 
     elseif expand("%:e") == 'py'
-        call setline(1, "#!/usr/bin/env python3.8")
+        call setline(1, "#!/usr/local/bin/python3.8")
 		call setline(2, "# -*- coding: utf-8 -*-")
         call append(line(".")+1, "") 
     elseif expand("%:e") == 'cpp' 

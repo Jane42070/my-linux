@@ -1,0 +1,8 @@
+{
+	"explorer.width": 38,
+	"explorer.width": 35,
+	"explorer.file.column.indent.indentLine": true,
+	"explorer.file.showHiddenFiles": true,
+	"explorer.icon.enableNerdfont": true,
+	"explorer.file.column.git.showIgnored": true
+}
