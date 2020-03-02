@@ -8,7 +8,7 @@ cp -r ~/.config/ranger/* ~/OpenSource/my-linux/config/ranger &
 echo "back up ranger-config"
 cp ~/.gvimrc ~/OpenSource/my-linux/jane &
 echo "back up MacVim-config"
-cp ~/.mycli ~/OpenSource/my-linux/jane &
+cp ~/.myclirc ~/OpenSource/my-linux/jane &
 echo "back up mycli-config"
 echo "Done"
 
