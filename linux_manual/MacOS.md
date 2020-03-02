@@ -33,23 +33,26 @@ sudo reboot
 - Firstly, install MacTex
 - I've tried over 2 days to find a good PDFviewer to match vimtex, it's really hard, but worth it.
 - ~~zathura~~: It basic functions are working in MacOS, but when I enable `Sync` in my vim config file `autocmd Filetype tex setl updatetime=1`, It trying to sync and happen a blank screen, few seconds will return to normal, but still can't accept
-- <u>evince</u>: Not bad, but it's linux's app, compatiblity is not play well in MacOS, and I don't like the interface under MacOS, and can't use **Spectacle** to resize it's layout.
+- <u>evince</u>: Not bad, but it's linux's app, compatibility is not play well in MacOS, and I don't like the interface under MacOS, and can't use **Spectacle** to resize it's layout.
 - ~~Skim~~: Not suitable for live preview, can't use `Sync`, interface and other functions are good
 - **Texshop**: The best Latex live preview app for now, support `Sync` and stable, use
 	- `brew cask install texshop`
 	- Adapt high rate refresh, but lose focus after once, use this command 
 	`defaults write TeXShop BringPdfFrontOnAutomaticUpdate NO`
-	- Perfectly slove the problem!
+	- Perfectly solve the problem!
 
 ## Change folder permission
 - Edit folder permission `sudo chmod -R 777 Foldername` to make it writable
 
-### Usefull Tools
+## Clear DNS cache
+- `sudo dscacheutil -flushcache`
+
+### Useful Tools
 - [Paste](https://pasteapp.io/) A clipboard time machine
 - [Chromium](http://www.chromium.org/Home)A liter, faster google browser
-  - In Mac, Chromium doesn't have API key to login google account, there is a way to slove the problem
-    1. Browse the chromium's official webiste, it has documation about get API keys
-	2. After that, copy the neccessary information
+  - In Mac, Chromium doesn't have API key to login google account, there is a way to solve the problem
+    1. Browse the chromium's official website, it has document about get API keys
+	2. After that, copy the necessary information
 	3. Then, follow these code on terminal
 	```
 	# backup Chromium
