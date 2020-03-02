@@ -3,11 +3,12 @@ call plug#begin('~/.vim/plugged')
 Plug 'sjl/gundo.vim'
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
 Plug 'xuhdev/vim-latex-live-preview'
-" supertab
-Plug 'ervandew/supertab'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+"" supertab
+"Plug 'ervandew/supertab'
+" coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'weirongxu/coc-explorer'
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 "为了Python3的第三方库安装Jedi插件
 Plug 'davidhalter/jedi-vim'
 " 括号补全
@@ -35,15 +36,16 @@ Plug 'morhetz/gruvbox'
 " status bar --airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'chriskempson/base16-vim'
 " Plug 'nvie/vim-flake8'
 Plug 'haya14busa/incsearch.vim'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 " Debugger support: pyhton, java, bash-script, c, c++(maybe)
 Plug 'puremourning/vimspector'
 " Latex插件
 Plug 'lervag/vimtex'
 " Python 
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " markdown语言插件
 Plug 'godlygeek/tabular'
 Plug 'mzlogin/vim-markdown-toc'
@@ -52,6 +54,8 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'junegunn/vim-easy-align'
+" vim-colorscheme
+Plug 'flazz/vim-colorschemes'
 " html 插件
 Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdcommenter'
@@ -68,22 +72,52 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""
 " airline config
 " 设置airline主题
+"nmap <s-tab> :bn<cr>  "设置tab键映射
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='deus'
+let g:airline_theme='base16'
+let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#left_sep=' '
-let g:airline#extensions#tabline#left_alt_sep='|'
-let g:ale#enable_at_startup=1
+let g:airline#extensions#tabline#left_sep=''
+let g:airline#extensions#tabline#left_alt_sep=''
+let airline#extensions#coc#error_symbol = '✗'
+let airline#extensions#coc#warning_symbol = '⚡'
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
+"① ⓪ ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩
+"let g:airline#extensions#tabline#buffer_idx_format = {
+	"\ '0': '0 ',
+	"\ '1': '1 ',
+	"\ '2': '2 ',
+	"\ '3': '3 ',
+	"\ '4': '4 ',
+	"\ '5': '5 ',
+	"\ '6': '6 ',
+	"\ '7': '7 ',
+	"\ '8': '8 ',
+	"\ '9': '9 '
+	"\}
+"let g:ale_sign_error = '✗'
+"let g:ale_sign_warning = '⚡'
+"let g:ale#enable_at_startup=1
 let g:airline#extensions#tabline#formatter='default'
 " powerline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = '⭤'
-" let g:airline_symbols.linenr = ''
 " 显示行号
 set number
 " 高亮当前行
@@ -110,7 +144,7 @@ set undofile
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-set backspace=2		" 修正多数终端上backspqce行为
+set backspace=2		" 修正多数终端上backspace 行为
 set cindent			" 设置C自动缩进
 set incsearch		" 输入字符串就显示匹配点
 set hlsearch
@@ -135,7 +169,7 @@ hi HighlightedyankRegion cterm=reverse gui=reverse
 let g:highlightedyank_highlight_duration = 1000 " 高亮持续时间为 1000 毫秒
 
 
-" SimpylFold
+" SimplyFold
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
@@ -147,6 +181,7 @@ let g:SimpylFold_docstring_preview = 1
 " 设置背景颜色和主题
 colorscheme gruvbox
 set background=dark
+"let base16colorspace=256
 
 " markdown语言插件配置
 let g:vim_markdown_math = 1
@@ -157,6 +192,11 @@ let g:vim_markdown_math = 1
 " " open the go-to function in split, not another buffer
 " let g:jedi#use_splits_not_buffers = "right"
 
+" coc-spell-checker
+"<leader>aap for current paragraph
+"<leader>aw for current word
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 """"""""""""""""""""""""""""""""""
 "    _    _     _____
 "   / \  | |   | ____|
@@ -164,33 +204,33 @@ let g:vim_markdown_math = 1
 " / ___ \| |___| |___
 "/_/   \_\_____|_____|
 " 始终开启标志列
-let g:ale_sign_column_always = 1
-let g:ale_set_highlights = 0
-let g:ale_statusline_format = ['✗ %d', '⚡%d', '✔ OK']
-" let g:ale_echo_msg_error_str = 'E'
-" let g:ale_echo_msg_warning_str = 'W'
-" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-"自定义error和warning图标
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚡'
-" 始终开启标志列
-" let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', 'E:')
-" let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', 'W:')
-let airline#extensions#ale#error_symbol = '✗:'
-let airline#extensions#ale#warning_symbol = '⚡:'
-" 文件内容发生变化时不进行检查
-let g:ale_lint_on_text_changed = 1
-" 打开文件时进行检查
-let g:ale_lint_on_enter = 1
+"let g:ale_sign_column_always = 1
+"let g:ale_set_highlights = 0
+"let g:ale_statusline_format = ['✗ %d', '⚡%d', '✔ OK']
+"" let g:ale_echo_msg_error_str = 'E'
+"" let g:ale_echo_msg_warning_str = 'W'
+"" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+""自定义error和warning图标
+"let g:ale_sign_error = '✗'
+"let g:ale_sign_warning = '⚡'
+"" 始终开启标志列
+"" let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', 'E:')
+"" let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', 'W:')
+"let airline#extensions#ale#error_symbol = '✗:'
+"let airline#extensions#ale#warning_symbol = '⚡:'
+"" 文件内容发生变化时不进行检查
+"let g:ale_lint_on_text_changed = 1
+"" 打开文件时进行检查
+"let g:ale_lint_on_enter = 1
 
-" 使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
-let g:ale_linters = {
-\   'c++': ['clang'],
-\   'c': ['clang'],
-\   'python': ['pylint'],
-\}
-" 对于java在中文系统上乱码
-let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
+"" 使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
+"let g:ale_linters = {
+"\   'c++': ['clang'],
+"\   'c': ['clang'],
+"\   'python': ['pylint'],
+"\}
+"" 对于java在中文系统上乱码
+"let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
 
 """""""""""""""""""""""""""""""""
 " 快捷键
@@ -198,7 +238,8 @@ let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
 " map <C-q> :q!<CR>
 " map <C-w> :w<CR>
 " map <F3> :NERDTree<CR>
-map <space>e :CocCommand explorer<CR>
+map <F3>:CocCommand explorer<CR>
+map C	:CocCommand<CR>
 map ,f  :FZF<CR>
 map ,pl :PlugInstall<CR>
 map ,ps :PlugStatus<CR>
@@ -243,8 +284,191 @@ nmap sn <Plug>(ale_next_wrap)
 nmap <Leader>s :ALEToggle<CR>
 "<Leader>d查看错误或警告的详细信息
 """""""""""""""""""""""""""""""""""""
-" Coc-explorer
+" COC.NVIM
+" TextEdit might fail if hidden is not set.
+set hidden
 
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=1
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Introduce function text object
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for selections ranges.
+" NOTE: Requires 'textDocument/selectionRange' support from the language server.
+" coc-tsserver, coc-python are the examples of servers that support it.
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+	call add(msgs, 'E' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+	call add(msgs, 'W' . info['warning'])
+  endif
+  return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
+endfunction
+
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{StatusDiagnostic()}
+
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" coc-snippets
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 """""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""
@@ -254,27 +478,27 @@ nmap <Leader>s :ALEToggle<CR>
 "  | | (_) | |_| | |__| (_) | | | | | | |_) | |  __/ ||  __/ |  | |  __/
 "  |_|\___/ \__,_|\____\___/|_| |_| |_| .__/|_|\___|\__\___|_|  |_|\___|
 "                                     |_|
-set completeopt=menuone,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
-let g:ycm_add_preview_to_completeopt = 0
-" mac pyhton path
-let g:ycm_python_binary_path = '/Library/Frameworks/Python.framework/Versions/3.8/bin/python3.8'
-let g:ycm_cache_omnifunc=0	" 禁止缓存匹配项,每次都重新生成匹配项
-let g:ycm_key_invoke_completion = '<c-z>'
-noremap <c-z> <NOP>
-let g:ycm_seed_identifiers_with_syntax = 1  "开启使用语言的一些关键字查询"
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_autoclose_preview_window_after_completion=1 "补全后自动关闭预览窗口"
-let g:ycm_semantic_triggers =  {
-			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-			\ 'cs,lua,javascript': ['re!\w{2}'],
-			\ }
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-" code jump
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"set completeopt=menuone,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
+"let g:ycm_add_preview_to_completeopt = 0
+"" mac pyhton path
+"let g:ycm_python_binary_path = '/Library/Frameworks/Python.framework/Versions/3.8/bin/python3.8'
+"let g:ycm_cache_omnifunc=0	" 禁止缓存匹配项,每次都重新生成匹配项
+"let g:ycm_key_invoke_completion = '<c-z>'
+"noremap <c-z> <NOP>
+"let g:ycm_seed_identifiers_with_syntax = 1  "开启使用语言的一些关键字查询"
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_autoclose_preview_window_after_completion=1 "补全后自动关闭预览窗口"
+"let g:ycm_semantic_triggers =  {
+			"\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+			"\ 'cs,lua,javascript': ['re!\w{2}'],
+			"\ }
+"" make YCM compatible with UltiSnips (using supertab)
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"let g:SuperTabDefaultCompletionType = '<C-n>'
+"" code jump
+"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "===============================Jedi==================================
 " if has('python3')
 " let g:loaded_youcompleteme = 1 " 判断如果是python3的话，就禁用ycmd。
@@ -340,29 +564,29 @@ let g:table_mode_corner='|'
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
-" python-mode
-let g:pymode_rope_rename_bind = '<C-c>rr'
-" 项目修改后重新生成缓存
-let g:pymode_rope_regenerate_on_write = 1
-let g:pymode_rope_completion = 1
-"开启python所有的语法高亮
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-" "发现错误时不自动打开QuickFix窗口
-let g:pymode_lint_cwindow = 0
-" 高亮缩进错误
-let g:pymode_options_max_line_length = 79
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-"高亮空格错误
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-"不在父目录下查找.ropeproject，能提升响应速度
-let g:pymode_rope_lookup_project = 0
-let g:pymode_rope_complete_on_dot = 1
-let g:pymode_run = 0
-let g:pymode_lint = 1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8']
-"侧边栏不显示python-mode相关的标志
-let g:pymode_lint_signs = 0
+"" python-mode
+"let g:pymode_rope_rename_bind = '<C-c>rr'
+"" 项目修改后重新生成缓存
+"let g:pymode_rope_regenerate_on_write = 1
+"let g:pymode_rope_completion = 1
+""开启python所有的语法高亮
+"let g:pymode_syntax = 1
+"let g:pymode_syntax_all = 1
+"" "发现错误时不自动打开QuickFix窗口
+"let g:pymode_lint_cwindow = 0
+"" 高亮缩进错误
+"let g:pymode_options_max_line_length = 79
+"let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+""高亮空格错误
+"let g:pymode_syntax_space_errors = g:pymode_syntax_all
+""不在父目录下查找.ropeproject，能提升响应速度
+"let g:pymode_rope_lookup_project = 0
+"let g:pymode_rope_complete_on_dot = 1
+"let g:pymode_run = 0
+"let g:pymode_lint = 1
+"let g:pymode_lint_checkers = ['pyflakes', 'pep8']
+""侧边栏不显示python-mode相关的标志
+"let g:pymode_lint_signs = 0
 
 """""""""""""""""""""""""""""""""""""
 
