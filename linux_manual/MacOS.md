@@ -3,7 +3,7 @@
 ## Brew
 - A macos application manager
 ### Installation
-- Input this code in terminal 
+- Input this code in terminal
 - `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 - [Replace homebrew source](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)
 
@@ -37,7 +37,7 @@ sudo reboot
 - ~~Skim~~: Not suitable for live preview, can't use `Sync`, interface and other functions are good
 - **Texshop**: The best Latex live preview app for now, support `Sync` and stable, use
 	- `brew cask install texshop`
-	- Adapt high rate refresh, but lose focus after once, use this command 
+	- Adapt high rate refresh, but lose focus after once, use this command
 	`defaults write TeXShop BringPdfFrontOnAutomaticUpdate NO`
 	- Perfectly solve the problem!
 
@@ -70,5 +70,5 @@ sudo reboot
 	export GOOGLE_DEFAULT_CLIENT_SECRET="YOUR_CLIENT_SECRET"
 	# Launch Chromium
 	/Applications/Chromium.app/Contents/MacOS/Chromium_bin
-	```	
+	```
 - [Chrome](https://www.google.cn/intl/zh-CN/chrome/)Google-Chrome
