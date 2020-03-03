@@ -5,6 +5,8 @@ Plug 'sjl/gundo.vim'
 Plug 'xuhdev/vim-latex-live-preview'
 "" supertab
 "Plug 'ervandew/supertab'
+" Omnisharp
+Plug 'omnisharp/omnisharp-vim'
 " coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'Valloric/YouCompleteMe'
@@ -12,41 +14,49 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'davidhalter/jedi-vim'
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
+" 中文标准化排版
+Plug 'hotoo/pangu.vim'
+"输入法切换
+"Plug 'CodeFalling/fcitx-vim-osx'
 " vim dict
 Plug 'iamcco/dict.vim'
 " Calendar
 Plug 'itchyny/calendar.vim'
+" xtabline
+Plug 'mg979/vim-xtabline'
 " nvim startscreen --vim-startify
 Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
 " Super searching
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 " vim git
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 " file search --fzf
-Plug 'junegunn/fzf'
+"Plug 'junegunn/fzf'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
 " vim-ranger
-Plug 'rbgrouleff/bclose.vim'	" neovim dependency
-Plug 'francoiscabrol/ranger.vim'
+"Plug 'rbgrouleff/bclose.vim'	" neovim dependency
+"Plug 'francoiscabrol/ranger.vim'
 " Plug 'Jane42070/Runner'
 Plug 'morhetz/gruvbox'
-" status bar --airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim'
+" lightline
+Plug 'itchyny/lightline.vim'
+"" status bar --airline
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'chriskempson/base16-vim'
 " Plug 'nvie/vim-flake8'
 Plug 'haya14busa/incsearch.vim'
-"Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 " Debugger support: pyhton, java, bash-script, c, c++(maybe)
 Plug 'puremourning/vimspector'
 " Latex插件
 Plug 'lervag/vimtex'
-" Python 
+" Python
 "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " markdown语言插件
-Plug 'godlygeek/tabular'
+"Plug 'godlygeek/tabular'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'plasticboy/vim-markdown'
 Plug 'dhruvasagar/vim-table-mode'
@@ -54,7 +64,7 @@ Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'junegunn/vim-easy-align'
 " vim-colorscheme
-Plug 'flazz/vim-colorschemes'
+"Plug 'flazz/vim-colorschemes'
 " html 插件
 Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdcommenter'
@@ -65,58 +75,140 @@ Plug 'SirVer/ultisnips'
 Plug 'tmhedberg/SimpylFold'
 call plug#end()
 
-
 """""""""""""""""""""""""""""""""""""
 "	      CUSTOM MY NVIM	     	"
 """""""""""""""""""""""""""""""""""""
-" airline config
-" 设置airline主题
-nmap <s-tab> :bn<cr>  "设置tab键映射
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='base16'
-let g:airline#extensions#coc#enabled = 1
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#left_sep=''
-let g:airline#extensions#tabline#left_alt_sep=''
-let airline#extensions#coc#error_symbol = '✗'
-let airline#extensions#coc#warning_symbol = '⚡'
-let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>- <Plug>AirlineSelectPrevTab
-nmap <leader>+ <Plug>AirlineSelectNextTab
-"① ⓪ ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩
+" 开启中文规范
+autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
+"""modeconfig"""
+"""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""
+" xtabline
+let g:xtabline_lazy=1
+let g:xtabline_settings_indicators={
+  \ 'modified': '[+]',
+  \ 'pinned': '[📌]',
+  \}
+
+let g:xtabline_settings_icons={
+  \'pin': '📌',
+  \'star': '★',
+  \'book': '📖',
+  \'lock': '🔒',
+  \'hammer': '🔨',
+  \'tick': '✔',
+  \'cross': '✖',
+  \'warning': '⚠',
+  \'menu': '☰',
+  \'apple': '🍎',
+  \'linux': '🐧',
+  \'windows': '⌘',
+  \'git': '',
+  \'palette': '🎨',
+  \'lens': '🔍',
+  \'flag': '🏁',
+  \}
+
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" tagbar
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+nmap <silent> <F9> :TagbarToggle<CR>
+let g:tagbar_width=35
+let g:tagbar_autofocus = 1
+" Auto open tagbar when opening a supported file/files
+"autocmd FileType * nested :call tagbar#autoopen(0)
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" omnisharp
+let g:OmniSharp_server_stdio = 1
+
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" coc-git
+nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
+"" navigate chunks of current buffer
+"nmap [g <Plug>(coc-git-prevchunk)
+"nmap ]g <Plug>(coc-git-nextchunk)
+"" show chunk diff at current position
+"nmap gs <Plug>(coc-git-chunkinfo)
+"" show commit contains current position
+"nmap gc <Plug>(coc-git-commit)
+"" create text object for git chunks
+"omap ig <Plug>(coc-git-chunk-inner)
+"xmap ig <Plug>(coc-git-chunk-inner)
+"omap ag <Plug>(coc-git-chunk-outer)
+"xmap ag <Plug>(coc-git-chunk-outer)
+
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+" Set invoked default directory to working direcotry
+let g:ctrlp_working_path_mode = 'ra'
+" Use a custom file listing command
+let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+" Ignore files in .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+"""""""""""""""""""""""""""""""""""""
+
+"" airline config
+"" 设置airline主题
+"nmap <s-tab> :bn<cr>  "设置tab键映射
+"" 设置tabline时间显示
+"" 只显示文件名
+"let g:airline#extensions#tabline#fnamemod = ':t'
+"let g:airline_powerline_fonts = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline_theme='base16'
+""let g:airline#extensions#coc#enabled = 1
+"let g:airline#extensions#tabline#enabled=1
+"let g:airline#extensions#tabline#left_sep=''
+"let g:airline#extensions#tabline#left_alt_sep=''
+""let airline#extensions#coc#error_symbol = '✗'
+""let airline#extensions#coc#warning_symbol = '⚡'
+""let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+""let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+"let g:airline#extensions#tabline#buffer_idx_mode = 1
+"nmap <leader>1 <Plug>AirlineSelectTab1
+"nmap <leader>2 <Plug>AirlineSelectTab2
+"nmap <leader>3 <Plug>AirlineSelectTab3
+"nmap <leader>4 <Plug>AirlineSelectTab4
+"nmap <leader>5 <Plug>AirlineSelectTab5
+"nmap <leader>6 <Plug>AirlineSelectTab6
+"nmap <leader>7 <Plug>AirlineSelectTab7
+"nmap <leader>8 <Plug>AirlineSelectTab8
+"nmap <leader>9 <Plug>AirlineSelectTab9
+"nmap <leader>- <Plug>AirlineSelectPrevTab
+"nmap <leader>+ <Plug>AirlineSelectNextTab
+""① ⓪ ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩
 "let g:airline#extensions#tabline#buffer_idx_format = {
-	"\ '0': '0 ',
-	"\ '1': '1 ',
-	"\ '2': '2 ',
-	"\ '3': '3 ',
-	"\ '4': '4 ',
-	"\ '5': '5 ',
-	"\ '6': '6 ',
-	"\ '7': '7 ',
-	"\ '8': '8 ',
-	"\ '9': '9 '
+	"\ '0': '⓪ ',
+	"\ '1': '① ',
+	"\ '2': '② ',
+	"\ '3': '③ ',
+	"\ '4': '④ ',
+	"\ '5': '⑤ ',
+	"\ '6': '⑥ ',
+	"\ '7': '⑦ ',
+	"\ '8': '⑧ ',
+	"\ '9': '⑨ '
 	"\}
-"let g:ale_sign_error = '✗'
-"let g:ale_sign_warning = '⚡'
-"let g:ale#enable_at_startup=1
-let g:airline#extensions#tabline#formatter='default'
-" powerline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
+let g:ale#enable_at_startup=1
+"let g:airline#extensions#tabline#formatter='default'
+"" powerline symbols
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
 " 显示行号
 set number
 " 高亮当前行
@@ -128,7 +220,6 @@ filetype plugin indent on " 根据文件类型自动处理缩进
 " 共享剪切板
 "set clipboard+=unnamed
 filetype on
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 set autochdir
 " 取消注释自动换行
 " set paste
@@ -184,10 +275,11 @@ set background=dark
 
 " markdown语言插件配置
 let g:vim_markdown_math = 1
+let g:markdown_fenced_languages = ['css', 'js=javascript']
 " " jed-vim 配置
 " " disable autocompletion, cause we use deoplete for completion
 " let g:jedi#completions_enabled = 0
-" 
+"
 " " open the go-to function in split, not another buffer
 " let g:jedi#use_splits_not_buffers = "right"
 
@@ -203,33 +295,31 @@ nmap <leader>a <Plug>(coc-codeaction-selected)
 " / ___ \| |___| |___
 "/_/   \_\_____|_____|
 " 始终开启标志列
-"let g:ale_sign_column_always = 1
-"let g:ale_set_highlights = 0
-"let g:ale_statusline_format = ['✗ %d', '⚡%d', '✔ OK']
-"" let g:ale_echo_msg_error_str = 'E'
-"" let g:ale_echo_msg_warning_str = 'W'
-"" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-""自定义error和warning图标
-"let g:ale_sign_error = '✗'
-"let g:ale_sign_warning = '⚡'
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+let g:ale_statusline_format = ['✗ %d', '⚡%d', '✔ OK']
+" let g:ale_echo_msg_error_str = 'E'
+" let g:ale_echo_msg_warning_str = 'W'
+" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"自定义error和warning图标
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
 "" 始终开启标志列
 "" let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', 'E:')
 "" let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', 'W:')
 "let airline#extensions#ale#error_symbol = '✗:'
 "let airline#extensions#ale#warning_symbol = '⚡:'
 "" 文件内容发生变化时不进行检查
-"let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_text_changed = 1
 "" 打开文件时进行检查
-"let g:ale_lint_on_enter = 1
+let g:ale_lint_on_enter = 1
 
 "" 使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
-"let g:ale_linters = {
-"\   'c++': ['clang'],
-"\   'c': ['clang'],
-"\   'python': ['pylint'],
-"\}
-"" 对于java在中文系统上乱码
-"let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
+let g:ale_linters = {
+\   'python': ['pylint'],
+\}
+" 对于java在中文系统上乱码
+let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
 
 """""""""""""""""""""""""""""""""
 " 快捷键
@@ -237,9 +327,9 @@ nmap <leader>a <Plug>(coc-codeaction-selected)
 " map <C-q> :q!<CR>
 " map <C-w> :w<CR>
 " map <F3> :NERDTree<CR>
-map <F3>:CocCommand explorer<CR>
+map <F3> :CocCommand explorer<CR>
 map C	:CocCommand<CR>
-map ,f  :FZF<CR>
+"map ,f  :FZF<CR>
 map ,pl :PlugInstall<CR>
 map ,ps :PlugStatus<CR>
 map ,pd :PlugUpdate<CR>
@@ -248,15 +338,16 @@ map ,pc :PlugClean<CR>
 map ,ps :PlugStatus<CR>
 map ,r :source %<CR>
 " 新建标签页
-map <C-t>  :tabe<CR>
-" 前一标签页
-map t- :-tabnext<CR>
-" 后一标签页
-map t= :+tabnext<CR>
-" 浏览标签页
-map tu :tabe<CR>
-map ti :+tabnext<CR>
-map tn :-tabnext<CR>
+map tt :tabe<CR>
+"" 前一标签页
+"map t- :-tabnext<CR>
+"" 后一标签页
+"map t= :+tabnext<CR>
+"" 浏览标签页
+map <TAB><TAB> :tabnext<CR>
+"map tu :tabe<CR>
+"map ti :+tabnext<CR>
+"map tn :-tabnext<CR>
 map tc :tabclose<CR>
 " 快捷缩进
 vnoremap < <v
@@ -277,10 +368,10 @@ noremap <c-l> <c-w><c-l>
 "noremap <leader>] :YcmCompleter GoTo<cr>
 
 "普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
-nmap sp <Plug>(ale_previous_wrap)
-nmap sn <Plug>(ale_next_wrap)
+"nmap sp <Plug>(ale_previous_wrap)
+"nmap sn <Plug>(ale_next_wrap)
 "<Leader>s触发/关闭语法检查
-nmap <Leader>s :ALEToggle<CR>
+"nmap <Leader>s :ALEToggle<CR>
 "<Leader>d查看错误或警告的详细信息
 """""""""""""""""""""""""""""""""""""
 " COC.NVIM
@@ -292,11 +383,11 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=1
+set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=200
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -455,19 +546,19 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "let g:coc_snippet_next = '<tab>'
 
 " Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
+"imap <C-l> <Plug>(coc-snippets-expand)
 
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
+"" Use <C-j> for select text for visual placeholder of snippet.
+"vmap <C-j> <Plug>(coc-snippets-select)
 
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
+"" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+"let g:coc_snippet_next = '<c-j>'
 
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
+"" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+"let g:coc_snippet_prev = '<c-k>'
 
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
+"" Use <C-j> for both expand and jump (make expand higher priority.)
+"imap <C-j> <Plug>(coc-snippets-expand-jump)
 """""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""
@@ -513,8 +604,8 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 "let g:calendar_google_calendar = 1
 "let g:calendar_google_task = 1
 " Google-api
-map tl :Calendar -view=clock<CR>
-map tt :Calendar<CR>
+map TL :Calendar -view=clock<CR>
+map TT :Calendar<CR>
 " source ~/.cache/calendar.vim/credentials.vim
 """"""""""""""""""""""""""""""""""""
 
@@ -612,22 +703,6 @@ let g:tex_conceal='abdmg'
 
 """""""""""""""""""""""""""""""""""""
 
-
-""""""""""""""""""""""""""""""""""
-" NeoFormat
-" " 如果neoformat没有检测到文件类型，执行以下命令
-" " Enable alignment
-" let g:neoformat_basic_format_align = 1
-" 
-" " Enable tab to spaces conversion
-" let g:neoformat_basic_format_retab = 1
-" 
-" " Enable trimmming of trailing whitespace
-" let g:neoformat_basic_format_trim = 1
-" 
-" " 指定pylint为python的代码检查器
-" " let g:neomake_python_enabled_makers = ['pylint']
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "     _
 "    / \   ___ _   _ _ __   ___ _ __ _   _ _ __
@@ -692,36 +767,36 @@ function! Runner()
 endfunction
 map <leader>R :call Runner()<CR>
 
-" 自动插入文件头
-autocmd BufNewFile *.cpp,*.cc,*.c,*h,*.sh,*.py exec ":call SetHeader()" 
-func! SetHeader() 
+"自动插入文件头
+autocmd BufNewFile *.cpp,*.cc,*.c,*h,*.sh,*.py exec ":call SetHeader()"
+func! SetHeader()
     if expand("%:e") == 'sh'
         call setline(1,"\#!/bin/bash")
         call append(line("."), "")
     elseif expand("%:e") == 'tex'
         call setline(1, "%! Tex program = xelatex")
 		call setline(2, "%-- coding: UTF-8 --")
-        call append(line(".")+1, "") 
+        call append(line(".")+1, "")
     elseif expand("%:e") == 'py'
         call setline(1, "#!/usr/local/bin/python3.8")
 		call setline(2, "# -*- coding: utf-8 -*-")
-        call append(line(".")+1, "") 
-    elseif expand("%:e") == 'cpp' 
-        call setline(1,"#include <iostream>") 
+        call append(line(".")+1, "")
+    elseif expand("%:e") == 'cpp'
+        call setline(1,"#include <iostream>")
         call setline(2, "")
-        call setline(3, "using std::cin;") 
-        call setline(4, "using std::cout;") 
-        call setline(5, "using std::endl;") 
+        call setline(3, "using std::cin;")
+        call setline(4, "using std::cout;")
+        call setline(5, "using std::endl;")
         call setline(6, "")
-    elseif expand("%:e") == 'cc' 
-        call setline(1,"#include <iostream>") 
+    elseif expand("%:e") == 'cc'
+        call setline(1,"#include <iostream>")
         call setline(2, "")
-        call setline(3, "using std::cin;") 
-        call setline(4, "using std::cout;") 
-        call setline(5, "using std::endl;") 
+        call setline(3, "using std::cin;")
+        call setline(4, "using std::cout;")
+        call setline(5, "using std::endl;")
         call setline(6, "")
     elseif expand("%:e") == 'c'
-        call setline(1,"#include <stdio.h>") 
+        call setline(1,"#include <stdio.h>")
         call setline(2,"#include <stdlib.h>")
         call setline(3,"")
     elseif expand("%:e") == 'h'
@@ -765,3 +840,78 @@ let g:startify_bookmarks            = [
 
 " 起始页显示的列表长度
 let g:startify_files_number = 20
+
+""""""""""""""""""""""""""""""""""""""
+"" lightline
+:set laststatus=2
+if !has('gui_running')
+  set t_Co=256
+endif
+set noshowmode
+let g:lightline = {
+  \ 'component': {
+  \   'lineinfo': '%3l:%-2v%<',
+  \ },
+  \ 'colorscheme': 'one',
+  \ 'active': {
+  \   'left': [
+  \     [ 'mode', 'paste' ],
+  \		['gitbranch', 'ctrlpmark'],
+  \     [ 'blame', 'LightlineMode'],
+  \     [ 'filename', 'readonly', 'modified' ],
+  \   ],
+  \   'right':[
+  \     [ 'filetype', 'fileformat', 'lineinfo', 'percent', 'ale' ],
+  \		['diagnostic', 'cocstatus'],
+  \   ],
+  \ },
+  \ 'component_function': {
+  \   'blame': 'LightlineGitBlame',
+  \	  'readonly': 'LightlineReadonly',
+  \	  'mode': 'LightlineMode',
+  \	  'cocstatus':'coc#status',
+  \   'filetype': 'LightlineFiletype',
+  \   'fileformat': 'LightlineFileformat',
+  \   'ale':'LinterStatus',
+  \ }
+\ }
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '⚡:%d ✗:%d',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightlineReadonly()
+  return &readonly && &filetype !=# 'help' ? 'RO' : ''
+endfunction
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+
+function! LightlineGitBlame() abort
+  let blame = get(b:, 'coc_git_blame', '')
+  " return blame
+  return winwidth(0) > 120 ? blame : ''
+endfunction
+function! LightlineMode()
+  return expand('%:t') =~# '^__Tagbar__' ? 'Tagbar':
+        \ expand('%:t') ==# 'ControlP' ? 'CtrlP' :
+        \ &filetype ==# 'unite' ? 'Unite' :
+        \ &filetype ==# 'coc-explorer' ? 'explorer' :
+        \ &filetype ==# 'vimshell' ? 'VimShell' :
+        \ lightline#mode()
+endfunction
+"""""""""""""""""""""""""""""""""""""
