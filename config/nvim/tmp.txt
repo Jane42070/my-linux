@@ -1,0 +1,297 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.008  000.008: --- NVIM STARTING ---
+000.700  000.691: locale set
+001.109  000.409: inits 1
+001.127  000.019: window checked
+001.132  000.004: parsing arguments
+001.346  000.215: expanding arguments
+001.404  000.057: inits 2
+001.841  000.437: init highlight
+002.066  000.225: waiting for UI
+005.137  003.071: done waiting for UI
+005.144  000.007: initialized screen early for UI
+006.954  001.522  001.522: sourcing /Users/jane/.local/share/nvim/site/autoload/plug.vim
+017.250  000.017  000.017: sourcing /Users/jane/.vim/plugged/vim-fugitive/ftdetect/fugitive.vim
+017.442  000.021  000.021: sourcing /Users/jane/.vim/plugged/vim-markdown-toc/ftdetect/markdown.vim
+017.575  000.039  000.039: sourcing /Users/jane/.vim/plugged/vim-markdown/ftdetect/markdown.vim
+017.737  000.023  000.023: sourcing /Users/jane/.vim/plugged/ultisnips/ftdetect/snippets.vim
+017.882  005.618  005.517: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/filetype.vim
+018.199  000.037  000.037: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/ftplugin.vim
+018.554  000.037  000.037: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/indent.vim
+019.391  000.211  000.211: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+019.506  000.573  000.362: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/synload.vim
+019.532  000.857  000.285: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syntax.vim
+020.029  000.233  000.233: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/nosyntax.vim
+020.636  000.123  000.123: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+020.742  000.475  000.352: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/synload.vim
+020.765  001.054  000.346: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syntax.vim
+021.014  000.017  000.017: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/filetype.vim
+021.286  000.016  000.016: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/ftplugin.vim
+021.594  000.015  000.015: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/indent.vim
+021.863  000.016  000.016: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/filetype.vim
+022.906  000.232  000.232: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+023.745  000.136  000.136: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+030.614  008.461  008.093: sourcing /Users/jane/.vim/plugged/gruvbox/colors/gruvbox.vim
+031.694  000.229  000.229: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+032.847  000.208  000.208: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+038.569  007.766  007.329: sourcing /Users/jane/.vim/plugged/gruvbox/colors/gruvbox.vim
+039.437  034.104  008.689: sourcing /Users/jane/.config/nvim/init.vim
+039.447  000.198: sourcing vimrc file(s)
+039.919  000.041  000.041: sourcing /Users/jane/.vim/plugged/gundo.vim/plugin/gundo.vim
+040.737  000.077  000.077: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/provider/pythonx.vim
+070.640  000.185  000.185: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/remote/host.vim
+070.733  030.333  030.071: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/provider/python3.vim
+071.214  000.028  000.028: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/provider.vim
+148.875  108.776  078.415: sourcing /Users/jane/.vim/plugged/vim-latex-live-preview/plugin/latexlivepreview.vim
+149.659  000.104  000.104: sourcing /Users/jane/.vim/plugged/coc.nvim/autoload/coc/rpc.vim
+150.352  000.591  000.591: sourcing /Users/jane/.vim/plugged/coc.nvim/autoload/coc/util.vim
+150.787  000.155  000.155: sourcing /Users/jane/.vim/plugged/coc.nvim/autoload/coc/client.vim
+154.850  005.432  004.582: sourcing /Users/jane/.vim/plugged/coc.nvim/plugin/coc.vim
+155.481  000.361  000.361: sourcing /Users/jane/.vim/plugged/auto-pairs/plugin/auto-pairs.vim
+180.449  024.479  024.479: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/provider/python.vim
+180.637  024.966  000.487: sourcing /Users/jane/.vim/plugged/dict.vim/plugin/dict.vim
+180.918  000.070  000.070: sourcing /Users/jane/.vim/plugged/calendar.vim/plugin/calendar.vim
+181.200  000.105  000.105: sourcing /Users/jane/.vim/plugged/vim-startify/plugin/startify.vim
+182.154  000.777  000.777: sourcing /Users/jane/.vim/plugged/tagbar/plugin/tagbar.vim
+182.758  000.182  000.182: sourcing /Users/jane/.vim/plugged/ctrlp.vim/autoload/ctrlp/mrufiles.vim
+182.907  000.543  000.361: sourcing /Users/jane/.vim/plugged/ctrlp.vim/plugin/ctrlp.vim
+184.132  001.042  001.042: sourcing /Users/jane/.vim/plugged/vim-fugitive/plugin/fugitive.vim
+184.878  000.542  000.542: sourcing /Users/jane/.vim/plugged/fzf/plugin/fzf.vim
+186.006  000.950  000.950: sourcing /Users/jane/.vim/plugged/asyncrun.vim/plugin/asyncrun.vim
+186.939  000.754  000.754: sourcing /Users/jane/.vim/plugged/asynctasks.vim/plugin/asynctasks.vim
+187.203  000.072  000.072: sourcing /Users/jane/.vim/plugged/bclose.vim/plugin/bclose.vim
+187.571  000.140  000.140: sourcing /Users/jane/.vim/plugged/ranger.vim/plugin/ranger.vim
+188.209  000.094  000.094: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/init.vim
+188.710  000.083  000.083: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/parts.vim
+189.722  000.144  000.144: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/util.vim
+189.810  002.015  001.694: sourcing /Users/jane/.vim/plugged/vim-airline/plugin/airline.vim
+190.036  000.037  000.037: sourcing /Users/jane/.vim/plugged/vim-airline-themes/plugin/airline-themes.vim
+190.435  000.205  000.205: sourcing /Users/jane/.vim/plugged/incsearch.vim/plugin/incsearch.vim
+190.767  000.135  000.135: sourcing /Users/jane/.vim/plugged/vimspector/plugin/vimspector.vim
+191.532  000.510  000.510: sourcing /Users/jane/.vim/plugged/vim-table-mode/plugin/table-mode.vim
+191.909  000.191  000.191: sourcing /Users/jane/.vim/plugged/mathjax-support-for-mkdp/plugin/mathjax.vim
+192.225  000.145  000.145: sourcing /Users/jane/.vim/plugged/markdown-preview.nvim/plugin/mkdp.vim
+192.539  000.138  000.138: sourcing /Users/jane/.vim/plugged/vim-easy-align/plugin/easy_align.vim
+194.554  001.784  001.784: sourcing /Users/jane/.vim/plugged/emmet-vim/plugin/emmet.vim
+199.116  004.367  004.367: sourcing /Users/jane/.vim/plugged/nerdcommenter/plugin/NERD_commenter.vim
+199.419  000.043  000.043: sourcing /Users/jane/.vim/plugged/vim-snippets/plugin/vimsnippets.vim
+200.139  000.071  000.071: sourcing /Users/jane/.vim/plugged/ultisnips/autoload/UltiSnips/map_keys.vim
+200.228  000.619  000.548: sourcing /Users/jane/.vim/plugged/ultisnips/plugin/UltiSnips.vim
+200.443  000.035  000.035: sourcing /Users/jane/.vim/plugged/SimpylFold/plugin/SimpylFold.vim
+201.609  000.223  000.223: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/gzip.vim
+201.699  000.018  000.018: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/health.vim
+201.836  000.072  000.072: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/man.vim
+203.815  000.245  000.245: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+203.880  001.976  001.731: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/matchit.vim
+204.125  000.167  000.167: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/matchparen.vim
+204.637  000.432  000.432: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/netrwPlugin.vim
+205.464  000.176  000.176: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/remote/define.vim
+206.078  001.169  000.993: sourcing /Users/jane/.local/share/nvim/rplugin.vim
+206.086  001.366  000.196: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/rplugin.vim
+206.280  000.105  000.105: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/shada.vim
+206.424  000.030  000.030: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/spellfile.vim
+206.703  000.201  000.201: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/tarPlugin.vim
+206.897  000.091  000.091: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/tohtml.vim
+206.998  000.026  000.026: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/tutor.vim
+207.249  000.162  000.162: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/zipPlugin.vim
+207.259  008.148: loading plugins
+207.379  000.121: loading packages
+207.828  000.107  000.107: sourcing /Users/jane/.vim/plugged/ultisnips/after/plugin/UltiSnips_after.vim
+207.863  000.377: loading after plugins
+207.876  000.013: inits 3
+210.683  002.807: reading ShaDa
+211.433  000.400  000.400: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions.vim
+211.718  000.090  000.090: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/quickfix.vim
+212.203  000.320  000.320: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline.vim
+212.487  000.067  000.067: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/netrw.vim
+213.001  000.113  000.113: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/section.vim
+213.586  000.348  000.348: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/highlighter.vim
+213.787  001.107  000.645: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/term.vim
+214.121  000.125  000.125: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/ctrlp.vim
+214.469  000.115  000.115: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tagbar.vim
+214.767  000.075  000.075: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/csv.vim
+215.314  000.336  000.336: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/branch.vim
+215.645  000.086  000.086: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/fugitiveline.vim
+215.984  000.091  000.091: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/coc.vim
+216.407  000.201  000.201: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/whitespace.vim
+217.021  000.167  000.167: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/wordcount.vim
+217.501  000.292  000.292: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline.vim
+217.778  000.083  000.083: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/autoshow.vim
+218.222  000.150  000.150: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/tabs.vim
+218.648  000.214  000.214: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/buffers.vim
+218.970  000.028  000.028: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/keymap.vim
+220.072  000.881  000.881: sourcing /Users/jane/.vim/plugged/vimtex/autoload/vimtex.vim
+220.368  000.130  000.130: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/vimtex.vim
+226.247  000.053  000.053: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/themes.vim
+227.597  001.728  001.674: sourcing /Users/jane/.vim/plugged/vim-airline-themes/autoload/airline/themes/base16.vim
+231.576  001.453  001.453: sourcing /Users/jane/.vim/plugged/vim-airline-themes/autoload/airline/themes/base16.vim
+252.711  000.144  000.144: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/builder.vim
+253.222  000.083  000.083: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/default.vim
+272.372  053.324: opening buffers
+273.567  001.195: BufEnter autocommands
+273.570  000.003: editing files in windows
+274.455  000.645  000.645: sourcing /Users/jane/.vim/plugged/vim-startify/autoload/startify.vim
+274.750  000.061  000.061: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/buflist.vim
+275.322  000.381  000.381: sourcing /Users/jane/.vim/plugged/vim-startify/autoload/startify/fortune.vim
+297.625  000.304  000.304: sourcing /Users/jane/.vim/plugged/vim-startify/syntax/startify.vim
+300.719  025.759: VimEnter autocommands
+300.722  000.003: UIEnter autocommands
+300.723  000.001: before starting main loop
+301.596  000.104  000.104: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/ctrlspace.vim
+301.864  000.090  000.090: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/tabws.vim
+302.381  000.140  000.140: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/builder.vim
+314.808  013.750: first screen update
+314.833  000.025: --- NVIM STARTED ---
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.007  000.007: --- NVIM STARTING ---
+000.921  000.914: locale set
+001.375  000.453: inits 1
+001.395  000.020: window checked
+001.399  000.005: parsing arguments
+001.662  000.262: expanding arguments
+001.719  000.057: inits 2
+002.141  000.422: init highlight
+002.420  000.280: waiting for UI
+005.872  003.451: done waiting for UI
+005.883  000.011: initialized screen early for UI
+007.614  001.416  001.416: sourcing /Users/jane/.local/share/nvim/site/autoload/plug.vim
+017.645  000.032  000.032: sourcing /Users/jane/.vim/plugged/vim-markdown-toc/ftdetect/markdown.vim
+017.821  000.047  000.047: sourcing /Users/jane/.vim/plugged/vim-markdown/ftdetect/markdown.vim
+018.007  000.021  000.021: sourcing /Users/jane/.vim/plugged/ultisnips/ftdetect/snippets.vim
+018.182  005.963  005.864: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/filetype.vim
+018.496  000.039  000.039: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/ftplugin.vim
+018.791  000.037  000.037: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/indent.vim
+019.679  000.240  000.240: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+019.806  000.621  000.381: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/synload.vim
+019.844  000.915  000.294: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syntax.vim
+020.739  000.535  000.535: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/nosyntax.vim
+021.384  000.129  000.129: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+021.496  000.504  000.375: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/synload.vim
+021.520  001.413  000.374: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syntax.vim
+021.792  000.029  000.029: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/filetype.vim
+022.139  000.021  000.021: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/ftplugin.vim
+022.428  000.016  000.016: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/indent.vim
+022.706  000.017  000.017: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/filetype.vim
+023.672  000.145  000.145: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+024.282  000.131  000.131: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+030.348  007.360  007.085: sourcing /Users/jane/.vim/plugged/gruvbox/colors/gruvbox.vim
+031.372  000.239  000.239: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+032.575  000.217  000.217: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/syntax/syncolor.vim
+038.957  008.466  008.010: sourcing /Users/jane/.vim/plugged/gruvbox/colors/gruvbox.vim
+039.691  033.600  007.907: sourcing /Users/jane/.config/nvim/init.vim
+039.702  000.219: sourcing vimrc file(s)
+040.142  000.040  000.040: sourcing /Users/jane/.vim/plugged/gundo.vim/plugin/gundo.vim
+040.983  000.081  000.081: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/provider/pythonx.vim
+071.751  000.181  000.181: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/remote/host.vim
+071.843  031.205  030.943: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/provider/python3.vim
+072.317  000.033  000.033: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/provider.vim
+149.754  109.422  078.184: sourcing /Users/jane/.vim/plugged/vim-latex-live-preview/plugin/latexlivepreview.vim
+150.253  000.097  000.097: sourcing /Users/jane/.vim/plugged/coc.nvim/autoload/coc/rpc.vim
+150.893  000.543  000.543: sourcing /Users/jane/.vim/plugged/coc.nvim/autoload/coc/util.vim
+151.293  000.148  000.148: sourcing /Users/jane/.vim/plugged/coc.nvim/autoload/coc/client.vim
+155.384  005.368  004.580: sourcing /Users/jane/.vim/plugged/coc.nvim/plugin/coc.vim
+155.981  000.368  000.368: sourcing /Users/jane/.vim/plugged/auto-pairs/plugin/auto-pairs.vim
+156.289  000.077  000.077: sourcing /Users/jane/.vim/plugged/pangu.vim/plugin/pangu.vim
+181.581  024.834  024.834: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/provider/python.vim
+181.771  025.311  000.477: sourcing /Users/jane/.vim/plugged/dict.vim/plugin/dict.vim
+182.046  000.074  000.074: sourcing /Users/jane/.vim/plugged/calendar.vim/plugin/calendar.vim
+182.323  000.105  000.105: sourcing /Users/jane/.vim/plugged/vim-startify/plugin/startify.vim
+183.312  000.808  000.808: sourcing /Users/jane/.vim/plugged/tagbar/plugin/tagbar.vim
+183.995  000.218  000.218: sourcing /Users/jane/.vim/plugged/ctrlp.vim/autoload/ctrlp/mrufiles.vim
+184.161  000.627  000.409: sourcing /Users/jane/.vim/plugged/ctrlp.vim/plugin/ctrlp.vim
+185.291  000.940  000.940: sourcing /Users/jane/.vim/plugged/asyncrun.vim/plugin/asyncrun.vim
+186.190  000.718  000.718: sourcing /Users/jane/.vim/plugged/asynctasks.vim/plugin/asynctasks.vim
+186.874  000.097  000.097: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/init.vim
+187.300  000.076  000.076: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/parts.vim
+188.325  000.140  000.140: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/util.vim
+188.407  001.965  001.651: sourcing /Users/jane/.vim/plugged/vim-airline/plugin/airline.vim
+188.625  000.036  000.036: sourcing /Users/jane/.vim/plugged/vim-airline-themes/plugin/airline-themes.vim
+189.007  000.201  000.201: sourcing /Users/jane/.vim/plugged/incsearch.vim/plugin/incsearch.vim
+189.844  000.084  000.084: sourcing /Users/jane/.vim/plugged/ale/autoload/ale/events.vim
+189.995  000.812  000.727: sourcing /Users/jane/.vim/plugged/ale/plugin/ale.vim
+190.320  000.139  000.139: sourcing /Users/jane/.vim/plugged/vimspector/plugin/vimspector.vim
+191.097  000.514  000.514: sourcing /Users/jane/.vim/plugged/vim-table-mode/plugin/table-mode.vim
+191.467  000.189  000.189: sourcing /Users/jane/.vim/plugged/mathjax-support-for-mkdp/plugin/mathjax.vim
+191.802  000.141  000.141: sourcing /Users/jane/.vim/plugged/markdown-preview.nvim/plugin/mkdp.vim
+192.117  000.139  000.139: sourcing /Users/jane/.vim/plugged/vim-easy-align/plugin/easy_align.vim
+194.143  001.853  001.853: sourcing /Users/jane/.vim/plugged/emmet-vim/plugin/emmet.vim
+198.461  004.121  004.121: sourcing /Users/jane/.vim/plugged/nerdcommenter/plugin/NERD_commenter.vim
+198.851  000.107  000.107: sourcing /Users/jane/.vim/plugged/vim-snippets/plugin/vimsnippets.vim
+199.669  000.072  000.072: sourcing /Users/jane/.vim/plugged/ultisnips/autoload/UltiSnips/map_keys.vim
+199.768  000.618  000.547: sourcing /Users/jane/.vim/plugged/ultisnips/plugin/UltiSnips.vim
+200.035  000.038  000.038: sourcing /Users/jane/.vim/plugged/SimpylFold/plugin/SimpylFold.vim
+201.415  000.306  000.306: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/gzip.vim
+201.517  000.022  000.022: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/health.vim
+201.707  000.122  000.122: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/man.vim
+203.652  000.249  000.249: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+203.715  001.938  001.689: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/matchit.vim
+203.943  000.156  000.156: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/matchparen.vim
+204.476  000.440  000.440: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/netrwPlugin.vim
+205.282  000.159  000.159: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/autoload/remote/define.vim
+205.941  001.183  001.024: sourcing /Users/jane/.local/share/nvim/rplugin.vim
+205.949  001.388  000.206: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/rplugin.vim
+206.132  000.102  000.102: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/shada.vim
+206.238  000.029  000.029: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/spellfile.vim
+206.440  000.132  000.132: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/tarPlugin.vim
+206.635  000.085  000.085: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/tohtml.vim
+206.731  000.024  000.024: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/tutor.vim
+206.990  000.189  000.189: sourcing /usr/local/Cellar/neovim/0.4.3/share/nvim/runtime/plugin/zipPlugin.vim
+206.999  007.635: loading plugins
+207.117  000.118: loading packages
+207.559  000.105  000.105: sourcing /Users/jane/.vim/plugged/ultisnips/after/plugin/UltiSnips_after.vim
+207.593  000.371: loading after plugins
+207.605  000.012: inits 3
+210.250  002.644: reading ShaDa
+210.815  000.250  000.250: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions.vim
+211.044  000.051  000.051: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/quickfix.vim
+211.351  000.168  000.168: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline.vim
+211.574  000.033  000.033: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/netrw.vim
+211.988  000.059  000.059: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/section.vim
+212.383  000.173  000.173: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/highlighter.vim
+212.529  000.786  000.554: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/term.vim
+212.832  000.120  000.120: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/ctrlp.vim
+213.134  000.094  000.094: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tagbar.vim
+213.416  000.087  000.087: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/csv.vim
+213.847  000.172  000.172: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/ale.vim
+214.314  000.117  000.117: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/coc.vim
+214.897  000.319  000.319: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/whitespace.vim
+215.523  000.160  000.160: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/wordcount.vim
+216.058  000.296  000.296: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline.vim
+216.361  000.101  000.101: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/autoshow.vim
+217.046  000.164  000.164: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/tabs.vim
+217.547  000.246  000.246: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/buffers.vim
+217.887  000.052  000.052: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/keymap.vim
+219.090  000.991  000.991: sourcing /Users/jane/.vim/plugged/vimtex/autoload/vimtex.vim
+219.415  000.174  000.174: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/vimtex.vim
+225.424  000.100  000.100: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/themes.vim
+227.005  001.985  001.885: sourcing /Users/jane/.vim/plugged/vim-airline-themes/autoload/airline/themes/base16.vim
+231.279  001.717  001.717: sourcing /Users/jane/.vim/plugged/vim-airline-themes/autoload/airline/themes/base16.vim
+252.865  000.321  000.321: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/builder.vim
+253.393  000.131  000.131: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/default.vim
+272.228  000.288  000.288: sourcing /Users/jane/.vim/plugged/ale/autoload/ale.vim
+272.988  053.917: opening buffers
+274.160  001.172: BufEnter autocommands
+274.163  000.003: editing files in windows
+275.169  000.767  000.767: sourcing /Users/jane/.vim/plugged/vim-startify/autoload/startify.vim
+275.443  000.055  000.055: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/buflist.vim
+275.968  000.351  000.351: sourcing /Users/jane/.vim/plugged/vim-startify/autoload/startify/fortune.vim
+298.063  000.307  000.307: sourcing /Users/jane/.vim/plugged/vim-startify/syntax/startify.vim
+301.353  000.253  000.253: sourcing /Users/jane/.vim/plugged/ale/autoload/ale/util.vim
+301.815  025.919: VimEnter autocommands
+301.818  000.003: UIEnter autocommands
+301.820  000.001: before starting main loop
+302.725  000.099  000.099: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/ctrlspace.vim
+302.997  000.092  000.092: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/tabws.vim
+303.490  000.123  000.123: sourcing /Users/jane/.vim/plugged/vim-airline/autoload/airline/extensions/tabline/builder.vim
+315.878  013.744: first screen update
+315.881  000.003: --- NVIM STARTED ---

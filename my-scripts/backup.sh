@@ -10,5 +10,7 @@ cp ~/.gvimrc ~/OpenSource/my-linux/jane &
 echo "back up MacVim-config"
 cp ~/.myclirc ~/OpenSource/my-linux/jane &
 echo "back up mycli-config"
+cp /etc/hosts ~/OpenSource/my-linux/etc &
+echo "back up hosts"
 echo "Done"
 

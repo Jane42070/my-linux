@@ -130,18 +130,18 @@ let g:OmniSharp_server_stdio = 1
 """""""""""""""""""""""""""""""""""""
 " coc-git
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
-"" navigate chunks of current buffer
-"nmap [g <Plug>(coc-git-prevchunk)
-"nmap ]g <Plug>(coc-git-nextchunk)
-"" show chunk diff at current position
-"nmap gs <Plug>(coc-git-chunkinfo)
-"" show commit contains current position
-"nmap gc <Plug>(coc-git-commit)
-"" create text object for git chunks
-"omap ig <Plug>(coc-git-chunk-inner)
-"xmap ig <Plug>(coc-git-chunk-inner)
-"omap ag <Plug>(coc-git-chunk-outer)
-"xmap ag <Plug>(coc-git-chunk-outer)
+" navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap gc <Plug>(coc-git-commit)
+" create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
 
 """""""""""""""""""""""""""""""""""""
 
@@ -151,6 +151,16 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 " Set invoked default directory to working direcotry
 let g:ctrlp_working_path_mode = 'ra'
+" Exclude files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 " Use a custom file listing command
 let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
 " Ignore files in .gitignore
@@ -256,7 +266,7 @@ noremap <right> :vertical resize+5<CR>
 " n/N
 " 高亮显示复制区域
 hi HighlightedyankRegion cterm=reverse gui=reverse
-let g:highlightedyank_highlight_duration = 1000 " 高亮持续时间为 1000 毫秒
+let g:highlightedyank_highlight_duration = 500
 
 
 " SimplyFold
@@ -267,11 +277,11 @@ set foldlevel=99
 nnoremap <space> za
 let g:SimpylFold_docstring_preview = 1
 
-
 " 设置背景颜色和主题
+let g:gruvbox_italicize_strings=0
+let g:gruvbox_improved_strings=1
 colorscheme gruvbox
 set background=dark
-"let base16colorspace=256
 
 " markdown语言插件配置
 let g:vim_markdown_math = 1
@@ -383,7 +393,7 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -509,7 +519,7 @@ function! StatusDiagnostic() abort
   return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
 endfunction
 
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{StatusDiagnostic()}
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{StatusDiagnostic()}
 
 " Mappings using CoCList:
 " Show all diagnostics.
@@ -852,23 +862,24 @@ let g:lightline = {
   \ 'component': {
   \   'lineinfo': '%3l:%-2v%<',
   \ },
-  \ 'colorscheme': 'one',
+  \ 'colorscheme': 'wombat',
   \ 'active': {
   \   'left': [
-  \     [ 'mode', 'paste' ],
+  \     ['paste', 'mode'],
+  \     ['blame', 'readonly', 'filename'],
   \		['gitbranch', 'ctrlpmark'],
-  \     [ 'blame', 'LightlineMode'],
-  \     [ 'filename', 'readonly', 'modified' ],
   \   ],
   \   'right':[
-  \     [ 'filetype', 'fileformat', 'lineinfo', 'percent', 'ale' ],
+  \     ['fileformat', 'lineinfo', 'percent', 'ale'],
   \		['diagnostic', 'cocstatus'],
+  \		['filetype']
   \   ],
   \ },
   \ 'component_function': {
   \   'blame': 'LightlineGitBlame',
   \	  'readonly': 'LightlineReadonly',
   \	  'mode': 'LightlineMode',
+  \   'filename': 'LightlineFilename',
   \	  'cocstatus':'coc#status',
   \   'filetype': 'LightlineFiletype',
   \   'fileformat': 'LightlineFileformat',
@@ -887,6 +898,13 @@ function! LinterStatus() abort
     \   all_errors
     \)
 endfunction
+
+function! LightlineFilename()
+  let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+  let modified = &modified ? ' +' : ''
+  return filename . modified
+endfunction
+
 function! LightlineFileformat()
   return winwidth(0) > 70 ? &fileformat : ''
 endfunction
@@ -914,4 +932,7 @@ function! LightlineMode()
         \ &filetype ==# 'vimshell' ? 'VimShell' :
         \ lightline#mode()
 endfunction
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
 """""""""""""""""""""""""""""""""""""
