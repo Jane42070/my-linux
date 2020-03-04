@@ -81,7 +81,7 @@
 	"python.linting.flake8CategorySeverity.F":"Information",
 	"python.linting.flake8CategorySeverity.W":"Warning",
 	"python.linting.flake8Enabled":true,
-	"python.linting.flake8Path":"/Library/Frameworks/Python.framework/Versions/3.8/bin/flake8",
+	"python.linting.flake8Path":"flake8",
 	"python.pipenvPath":"/Library/Frameworks/Python.framework/Versions/3.8/bin/pip3.8",
 	"python.autoComplete.addBrackets": true,
 	"python.jediEnabled": false,
@@ -92,7 +92,10 @@
         "--style",
         "{SPACES_AROUND_POWER_OPERATOR: True, SPACES_BEFORE_COMMENT: 1}"
     ],
+	"json.format.enable":true,
+	"html.format.enable": true,
 	"list.previewHighlightGroup": "Statement",
+	"signature.target":"float",
 	"coc.preferences.formatOnSaveFiletypes": [
 		"javascript",
 		"html",
@@ -140,11 +143,11 @@
 				  "ignoredRootPaths": ["~"]
 				}
 		},
-	"explorer.width": 35,
+	"explorer.width": 38,
 	"explorer.file.column.indent.indentLine": true,
 	"explorer.file.showHiddenFiles": true,
 	"explorer.icon.enableNerdfont": true,
-	 "explorer.file.column.git.showIgnored": true,
+	"explorer.file.column.git.showIgnored": true,
 	"cSpell.userWords": [
     "Nerdfont",
     "deoplete",

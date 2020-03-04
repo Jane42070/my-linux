@@ -45,12 +45,13 @@ Plug 'itchyny/lightline.vim'
 "" status bar --airline
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
-"Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim'
 " Plug 'nvie/vim-flake8'
 Plug 'haya14busa/incsearch.vim'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 " Debugger support: pyhton, java, bash-script, c, c++(maybe)
-Plug 'puremourning/vimspector'
+"Plug 'puremourning/vimspector'
+Plug 'joonty/vdebug'
 " Latex插件
 Plug 'lervag/vimtex'
 " Python
@@ -82,6 +83,13 @@ call plug#end()
 autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
 """modeconfig"""
 """""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""
+" vimspector
+"let g:vimspector_enable_mappings = 'HUMAN'
+"packadd! vimspector
+
+"""""""""""""""""""""""""""""""""""""
+
 """""""""""""""""""""""""""""""""""""
 " xtabline
 let g:xtabline_lazy=1
@@ -210,9 +218,9 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 	"\ '8': '⑧ ',
 	"\ '9': '⑨ '
 	"\}
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚡'
-let g:ale#enable_at_startup=1
+"let g:ale_sign_error = '✗'
+"let g:ale_sign_warning = '⚡'
+"let g:ale#enable_at_startup=1
 "let g:airline#extensions#tabline#formatter='default'
 "" powerline symbols
 "let g:airline_left_sep = ''
@@ -278,9 +286,19 @@ nnoremap <space> za
 let g:SimpylFold_docstring_preview = 1
 
 " 设置背景颜色和主题
+let g:gruvbox_italicize_comments=1
 let g:gruvbox_italicize_strings=0
 let g:gruvbox_improved_strings=1
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_improved_warnings=1
+let g:gruvbox_termcolors=256
+
+"let g:gruvbox_invert_signs=1
 colorscheme gruvbox
+set termguicolors
+"let base16colorspace=256
+"colorscheme base16-default-dark
 set background=dark
 
 " markdown语言插件配置
@@ -298,38 +316,38 @@ let g:markdown_fenced_languages = ['css', 'js=javascript']
 "<leader>aw for current word
 vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
-""""""""""""""""""""""""""""""""""
-"    _    _     _____
-"   / \  | |   | ____|
-"  / _ \ | |   |  _|
-" / ___ \| |___| |___
-"/_/   \_\_____|_____|
-" 始终开启标志列
-let g:ale_sign_column_always = 1
-let g:ale_set_highlights = 0
-let g:ale_statusline_format = ['✗ %d', '⚡%d', '✔ OK']
-" let g:ale_echo_msg_error_str = 'E'
-" let g:ale_echo_msg_warning_str = 'W'
-" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-"自定义error和warning图标
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚡'
+"""""""""""""""""""""""""""""""""""
+""    _    _     _____
+""   / \  | |   | ____|
+""  / _ \ | |   |  _|
+"" / ___ \| |___| |___
+""/_/   \_\_____|_____|
 "" 始终开启标志列
-"" let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', 'E:')
-"" let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', 'W:')
-"let airline#extensions#ale#error_symbol = '✗:'
-"let airline#extensions#ale#warning_symbol = '⚡:'
-"" 文件内容发生变化时不进行检查
-let g:ale_lint_on_text_changed = 1
-"" 打开文件时进行检查
-let g:ale_lint_on_enter = 1
+"let g:ale_sign_column_always = 1
+"let g:ale_set_highlights = 0
+"let g:ale_statusline_format = ['✗ %d', '⚡%d', '✔ OK']
+"" let g:ale_echo_msg_error_str = 'E'
+"" let g:ale_echo_msg_warning_str = 'W'
+"" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+""自定义error和warning图标
+"let g:ale_sign_error = '✗'
+"let g:ale_sign_warning = '⚡'
+""" 始终开启标志列
+""" let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', 'E:')
+""" let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', 'W:')
+""let airline#extensions#ale#error_symbol = '✗:'
+""let airline#extensions#ale#warning_symbol = '⚡:'
+""" 文件内容发生变化时不进行检查
+"let g:ale_lint_on_text_changed = 1
+""" 打开文件时进行检查
+"let g:ale_lint_on_enter = 1
 
-"" 使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
-let g:ale_linters = {
-\   'python': ['pylint'],
-\}
-" 对于java在中文系统上乱码
-let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
+""" 使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
+"let g:ale_linters = {
+"\   'python': ['pylint'],
+"\}
+"" 对于java在中文系统上乱码
+"let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
 
 """""""""""""""""""""""""""""""""
 " 快捷键
@@ -385,6 +403,8 @@ noremap <c-l> <c-w><c-l>
 "<Leader>d查看错误或警告的详细信息
 """""""""""""""""""""""""""""""""""""
 " COC.NVIM
+let g:coc_global_extensions = ['coc-python', 'coc-pyright', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-flutter']
+"let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter']
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -853,7 +873,7 @@ let g:startify_files_number = 20
 
 """"""""""""""""""""""""""""""""""""""
 "" lightline
-:set laststatus=2
+set laststatus=2
 if !has('gui_running')
   set t_Co=256
 endif
@@ -867,10 +887,10 @@ let g:lightline = {
   \   'left': [
   \     ['paste', 'mode'],
   \     ['blame', 'readonly', 'filename'],
-  \		['gitbranch', 'ctrlpmark'],
+  \		['ctrlpmark'],
   \   ],
   \   'right':[
-  \     ['fileformat', 'lineinfo', 'percent', 'ale'],
+  \     ['fileformat', 'lineinfo', 'percent'],
   \		['diagnostic', 'cocstatus'],
   \		['filetype']
   \   ],
@@ -883,21 +903,20 @@ let g:lightline = {
   \	  'cocstatus':'coc#status',
   \   'filetype': 'LightlineFiletype',
   \   'fileformat': 'LightlineFileformat',
-  \   'ale':'LinterStatus',
   \ }
 \ }
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
+"function! LinterStatus() abort
+    "let l:counts = ale#statusline#Count(bufnr(''))
 
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
+    "let l:all_errors = l:counts.error + l:counts.style_error
+    "let l:all_non_errors = l:counts.total - l:all_errors
 
-    return l:counts.total == 0 ? 'OK' : printf(
-    \   '⚡:%d ✗:%d',
-    \   all_non_errors,
-    \   all_errors
-    \)
-endfunction
+    "return l:counts.total == 0 ? 'OK' : printf(
+    "\   '⚡:%d ✗:%d',
+    "\   all_non_errors,
+    "\   all_errors
+    "\)
+"endfunction
 
 function! LightlineFilename()
   let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
@@ -924,6 +943,9 @@ function! LightlineGitBlame() abort
   " return blame
   return winwidth(0) > 120 ? blame : ''
 endfunction
+
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
 function! LightlineMode()
   return expand('%:t') =~# '^__Tagbar__' ? 'Tagbar':
         \ expand('%:t') ==# 'ControlP' ? 'CtrlP' :
@@ -934,5 +956,6 @@ function! LightlineMode()
 endfunction
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
+let g:explorer_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 """""""""""""""""""""""""""""""""""""
