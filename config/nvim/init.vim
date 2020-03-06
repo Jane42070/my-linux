@@ -83,39 +83,10 @@ call plug#end()
 autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
 """modeconfig"""
 """""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""
-" vimspector
-"let g:vimspector_enable_mappings = 'HUMAN'
-"packadd! vimspector
-
-"""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
 " xtabline
 let g:xtabline_lazy=1
-let g:xtabline_settings_indicators={
-  \ 'modified': '[+]',
-  \ 'pinned': '[📌]',
-  \}
-
-let g:xtabline_settings_icons={
-  \'pin': '📌',
-  \'star': '★',
-  \'book': '📖',
-  \'lock': '🔒',
-  \'hammer': '🔨',
-  \'tick': '✔',
-  \'cross': '✖',
-  \'warning': '⚠',
-  \'menu': '☰',
-  \'apple': '🍎',
-  \'linux': '🐧',
-  \'windows': '⌘',
-  \'git': '',
-  \'palette': '🎨',
-  \'lens': '🔍',
-  \'flag': '🏁',
-  \}
 
 """""""""""""""""""""""""""""""""""""
 
@@ -243,11 +214,6 @@ set autochdir
 " set paste
 " 设置持久性撤销和重复
 set undofile
-" set spell " 学英语
-"if !isdirectory("~/.nvim/undodir")
-" 	call mkdir("~/.nvim/undodir", "p")
-" endif
-" set undodir="~/.nvim/undodir"
 
 set shiftwidth=4
 set tabstop=4
@@ -307,13 +273,6 @@ set background=dark
 " markdown语言插件配置
 let g:vim_markdown_math = 1
 let g:markdown_fenced_languages = ['css', 'js=javascript']
-" " jed-vim 配置
-" " disable autocompletion, cause we use deoplete for completion
-" let g:jedi#completions_enabled = 0
-"
-" " open the go-to function in split, not another buffer
-" let g:jedi#use_splits_not_buffers = "right"
-
 " coc-spell-checker
 "<leader>aap for current paragraph
 "<leader>aw for current word
@@ -354,10 +313,6 @@ nmap <leader>a <Plug>(coc-codeaction-selected)
 
 """""""""""""""""""""""""""""""""
 " 快捷键
-" map <C-r> :source %<CR>
-" map <C-q> :q!<CR>
-" map <C-w> :w<CR>
-" map <F3> :NERDTree<CR>
 map <F3> :CocCommand explorer<CR>
 map C	:CocCommand<CR>
 "map ,f  :FZF<CR>
@@ -398,14 +353,6 @@ noremap <c-j> <c-w><c-j>
 noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
 
-"noremap <leader>] :YcmCompleter GoTo<cr>
-
-"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
-"nmap sp <Plug>(ale_previous_wrap)
-"nmap sn <Plug>(ale_next_wrap)
-"<Leader>s触发/关闭语法检查
-"nmap <Leader>s :ALEToggle<CR>
-"<Leader>d查看错误或警告的详细信息
 """""""""""""""""""""""""""""""""""""
 " COC.NVIM
 let g:coc_global_extensions = ['coc-python', 'coc-pyright', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-flutter']
@@ -566,75 +513,6 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
-" coc-snippets
-"inoremap <silent><expr> <TAB>
-      "\ pumvisible() ? coc#_select_confirm() :
-      "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      "\ <SID>check_back_space() ? "\<TAB>" :
-      "\ coc#refresh()
-
-"function! s:check_back_space() abort
-  "let col = col('.') - 1
-  "return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
-
-"let g:coc_snippet_next = '<tab>'
-
-" Use <C-l> for trigger snippet expand.
-"imap <C-l> <Plug>(coc-snippets-expand)
-
-"" Use <C-j> for select text for visual placeholder of snippet.
-"vmap <C-j> <Plug>(coc-snippets-select)
-
-"" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-"let g:coc_snippet_next = '<c-j>'
-
-"" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-"let g:coc_snippet_prev = '<c-k>'
-
-"" Use <C-j> for both expand and jump (make expand higher priority.)
-"imap <C-j> <Plug>(coc-snippets-expand-jump)
-"""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""
-"__   __           ____                      _      _       __  __
-"\ \ / /__  _   _ / ___|___  _ __ ___  _ __ | | ___| |_ ___|  \/  | ___
-" \ V / _ \| | | | |   / _ \| '_ ` _ \| '_ \| |/ _ \ __/ _ \ |\/| |/ _ \
-"  | | (_) | |_| | |__| (_) | | | | | | |_) | |  __/ ||  __/ |  | |  __/
-"  |_|\___/ \__,_|\____\___/|_| |_| |_| .__/|_|\___|\__\___|_|  |_|\___|
-"                                     |_|
-"set completeopt=menuone,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-"autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
-"let g:ycm_add_preview_to_completeopt = 0
-"" mac pyhton path
-"let g:ycm_python_binary_path = '/Library/Frameworks/Python.framework/Versions/3.8/bin/python3.8'
-"let g:ycm_cache_omnifunc=0	" 禁止缓存匹配项,每次都重新生成匹配项
-"let g:ycm_key_invoke_completion = '<c-z>'
-"noremap <c-z> <NOP>
-"let g:ycm_seed_identifiers_with_syntax = 1  "开启使用语言的一些关键字查询"
-"let g:ycm_confirm_extra_conf = 0
-"let g:ycm_autoclose_preview_window_after_completion=1 "补全后自动关闭预览窗口"
-"let g:ycm_semantic_triggers =  {
-			"\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-			"\ 'cs,lua,javascript': ['re!\w{2}'],
-			"\ }
-"" make YCM compatible with UltiSnips (using supertab)
-"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-"let g:SuperTabDefaultCompletionType = '<C-n>'
-"" code jump
-"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"===============================Jedi==================================
-" if has('python3')
-" let g:loaded_youcompleteme = 1 " 判断如果是python3的话，就禁用ycmd。
-" let g:jedi#force_py_version = 3
-" let g:SuperTabDefaultCompletionType = "context"
-" let g:jedi#popup_on_dot = 0
-" let g:pymode_python = 'python3'
-" endif
-"===============================Jedi===================================
-
-"""""""""""""""""""""""""""""""""""""
 " vim-calendar
 "let g:calendar_google_calendar = 1
 "let g:calendar_google_task = 1
@@ -643,7 +521,6 @@ map TL :Calendar -view=clock<CR>
 map TT :Calendar<CR>
 " source ~/.cache/calendar.vim/credentials.vim
 """"""""""""""""""""""""""""""""""""
-
 
 """""""""""""""""""""""""""""""""""""
 " latex-preview
@@ -685,33 +562,6 @@ inoreabbrev <expr> __
 let g:table_mode_corner='|'
 "let g:table_mode_header_fillchar='='
 
-
-"""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""
-"" python-mode
-""let g:pymode_rope_rename_bind = '<C-c>rr'
-"" 项目修改后重新生成缓存
-"let g:pymode_rope_regenerate_on_write = 1
-"let g:pymode_rope_completion = 1
-"""开启python所有的语法高亮
-"let g:pymode_syntax = 1
-"let g:pymode_syntax_all = 1
- ""发现错误时不自动打开QuickFix窗口
-"let g:pymode_lint_cwindow = 0
-""" 高亮缩进错误
-""let g:pymode_options_max_line_length = 79
-""let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-"""高亮空格错误
-""let g:pymode_syntax_space_errors = g:pymode_syntax_all
-""不在父目录下查找.ropeproject，能提升响应速度
-"let g:pymode_rope_lookup_project = 0
-"let g:pymode_rope_complete_on_dot = 1
-"let g:pymode_run = 0
-"let g:pymode_lint = 1
-"let g:pymode_lint_checkers = ['pyflakes', 'pep8']
-""侧边栏不显示python-mode相关的标志
-"let g:pymode_lint_signs = 0
 
 """""""""""""""""""""""""""""""""""""
 
