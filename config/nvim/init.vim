@@ -295,6 +295,9 @@ let g:gruvbox_improved_warnings=1
 let g:gruvbox_termcolors=256
 
 "let g:gruvbox_invert_signs=1
+" For MacVim
+"set macligatures
+"set guifont=Fira\ Code:h17 "设置字体和大小
 colorscheme gruvbox
 set termguicolors
 "let base16colorspace=256
@@ -381,6 +384,8 @@ map tc :tabclose<CR>
 vnoremap < <v
 vnoremap > >v
 
+" 映射 jk 为<ESC>
+inoremap jk <ESC>
 " 使用s + hjkl 在nvim中快速分屏
 map	sl :set splitright<CR>:vsplit<CR>
 map sh :set nosplitright<CR>:vsplit<CR>
@@ -413,7 +418,7 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=1
+set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -685,20 +690,20 @@ let g:table_mode_corner='|'
 
 """""""""""""""""""""""""""""""""""""
 "" python-mode
-"let g:pymode_rope_rename_bind = '<C-c>rr'
+""let g:pymode_rope_rename_bind = '<C-c>rr'
 "" 项目修改后重新生成缓存
 "let g:pymode_rope_regenerate_on_write = 1
 "let g:pymode_rope_completion = 1
-""开启python所有的语法高亮
+"""开启python所有的语法高亮
 "let g:pymode_syntax = 1
 "let g:pymode_syntax_all = 1
-"" "发现错误时不自动打开QuickFix窗口
+ ""发现错误时不自动打开QuickFix窗口
 "let g:pymode_lint_cwindow = 0
-"" 高亮缩进错误
-"let g:pymode_options_max_line_length = 79
-"let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-""高亮空格错误
-"let g:pymode_syntax_space_errors = g:pymode_syntax_all
+""" 高亮缩进错误
+""let g:pymode_options_max_line_length = 79
+""let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+"""高亮空格错误
+""let g:pymode_syntax_space_errors = g:pymode_syntax_all
 ""不在父目录下查找.ropeproject，能提升响应速度
 "let g:pymode_rope_lookup_project = 0
 "let g:pymode_rope_complete_on_dot = 1
@@ -741,61 +746,33 @@ let g:tex_conceal='abdmg'
 " /_/   \_\___/\__, |_| |_|\___|_|   \__,_|_| |_|
 "              |___/
 "   设置运行可执行文件
-let g:asyncrun_open = 8
+let g:asyncrun_open = 6
 let $PYTHONNUNBUFFERED=1
-function! Runner()
-    w
-    if exists("g:RunnerRun")
-        if g:RunnerRun
-            AsyncStop!
-        endif
-    endif
-    if (&ft=='c')
-        AsyncRun gcc % ; ./a.out
-    endif
-    if (&ft=='cpp')
-        AsyncRun g++ %; ./a.out
-    endif
-    if (&ft=='python')
-        AsyncRun -raw python3.8 %
-    endif
-    if (&ft=='php')
-        AsyncRun php %
-    endif
-    if (&ft=='javascript')
-        AsyncRun node %
-    endif
-    if (&ft=='java')
-        AsyncRun javac Main.java; java Main;
-    endif
-    " if (&ft=='coffee')
-    "     AsyncRun coffee %
-    " endif
-    if (&ft=='rust')
-        AsyncRun rustc %; ./%< ;
-    endif
-    if (&ft=='haskell' || &ft=='lhaskell')
-        AsyncRun ghc %; ./%< ;
-    endif
-    if (&ft=='tex')
-        AsyncRun pdflatex %;
-    endif
-    if (&ft=='markdown')
-        if(expand("%:t") == "README.md")
-            AsyncRun pandoc -s -S -c ~/.vim/bundle/sprint/assets/github.css -o %<.html %;
-        else
-            AsyncRun pandoc -s -S -o %<.pdf %;
-        endif
-    endif
-    if exists("g:RunnerHidden")
-        if g:RunnerHidden == 0
-            copen
-        endif
-    else
-        copen
-    endif
-endfunction
-map <leader>R :call Runner()<CR>
+map <leader>R :call CompileRun()<CR>
+    func! CompileRun()
+        exec "w"
+if &filetype == 'c'
+            exec "AsyncRun -focus=0 gcc % -o %<; ./%<"
+elseif &filetype == 'cpp'
+            exec "AsyncRun -focus=0 g++ % -o %<; ./%<"
+elseif &filetype == 'java'
+            exec "AsyncRun -focus=0 javac %; java %<"
+elseif &filetype == 'sh'
+            exec "AsyncRun -focus=0 bash %"
+elseif &filetype == 'python'
+            exec "AsyncRun -focus=0 -raw python3.8 %"
+elseif &filetype == 'html'
+            exec "!open % &"
+elseif &filetype == 'go'
+			exec "AsyncRun -focus=0 go build %<; go run %"
+elseif &filetype == 'markdown'
+            "exec "!~/.vim/markdown.pl % > %.html &"
+            "exec "!firefox %.html &"
+			exec "MarkdownPreview"	
+elseif &filetype == 'tex'
+			exec "LLPStartPreview"
+endif
+    endfunc
 
 "自动插入文件头
 autocmd BufNewFile *.cpp,*.cc,*.c,*h,*.sh,*.py exec ":call SetHeader()"
@@ -952,6 +929,7 @@ function! LightlineMode()
         \ &filetype ==# 'unite' ? 'Unite' :
         \ &filetype ==# 'coc-explorer' ? 'explorer' :
         \ &filetype ==# 'vimshell' ? 'VimShell' :
+        \ &filetype ==# 'qf' ? 'QuickFix' :
         \ lightline#mode()
 endfunction
 let g:unite_force_overwrite_statusline = 0

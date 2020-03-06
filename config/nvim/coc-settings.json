@@ -150,11 +150,13 @@
 	"explorer.file.column.git.showIgnored": true,
 	"cSpell.userWords": [
     "Nerdfont",
+    "Sergent",
     "deoplete",
     "dscacheutil",
     "dtype",
     "flushcache",
     "loadtxt",
+    "noob",
     "noselect",
     "numpy"
   ],

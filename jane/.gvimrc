@@ -13,7 +13,8 @@ set nobackup
 set ruler
 set tabstop=4 
 set t_Co=256 "开启256色
-set guifont=Hack\ Nerd\ Font:h17 "设置字体和大小
+set macligatures
+set guifont=Fira\ Code:h17 "设置字体和大小
 colorscheme gruvbox "设置配色方案
 
 
