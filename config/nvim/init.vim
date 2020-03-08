@@ -9,7 +9,6 @@ Plug 'xuhdev/vim-latex-live-preview'
 Plug 'omnisharp/omnisharp-vim'
 " coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'Valloric/YouCompleteMe'
 "为了Python3的第三方库安装Jedi插件
 "Plug 'davidhalter/jedi-vim'
 " 括号补全
@@ -31,8 +30,15 @@ Plug 'majutsushi/tagbar'
 Plug 'ctrlpvim/ctrlp.vim'
 " vim git
 "Plug 'tpope/vim-fugitive'
+" Easy motion
+Plug 'easymotion/vim-easymotion'
+" Cursor Word
+Plug 'itchyny/vim-cursorword'
+
+" Interesting words
+Plug 'lfv89/vim-interestingwords'
 " file search --fzf
-"Plug 'junegunn/fzf'
+Plug 'junegunn/fzf'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
 " vim-ranger
@@ -50,8 +56,8 @@ Plug 'chriskempson/base16-vim'
 Plug 'haya14busa/incsearch.vim'
 "Plug 'w0rp/ale'
 " Debugger support: pyhton, java, bash-script, c, c++(maybe)
-"Plug 'puremourning/vimspector'
-Plug 'joonty/vdebug'
+"Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python'}
+"Plug 'joonty/vdebug'
 " Latex插件
 Plug 'lervag/vimtex'
 " Python
@@ -83,6 +89,39 @@ call plug#end()
 autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
 """modeconfig"""
 """""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""
+"" vimspector
+"let g:vimspector_enable_mappings='HUMAN'
+"nmap <F5> <Plug>VimspectorContinue
+
+"function! s:read_template_into_buffer(template)
+	"" has to be a function to avoid the extra space fzf#run insers otherwise
+	"execute '0r ~/.config/nvim/sample_vimspector_json/'.a:template
+"endfunction
+"command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
+			"\   'source': 'ls -1 ~/.config/nvim/sample_vimspector_json',
+			"\   'down': 20,
+			"\   'sink': function('<sid>read_template_into_buffer')
+			"\ })
+"noremap <leader>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
+"sign define vimspectorBP text=🔴 texthl=Normal
+"sign define vimspectorBPDisabled text=🔵 texthl=Normal
+"sign define vimspectorPC text=🔶 texthl=SpellBad
+""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" Interesting words
+nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
+nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+
+nnoremap <silent> n :call WordNavigation('forward')<cr>
+nnoremap <silent> N :call WordNavigation('backward')<cr>
+
+let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
+let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222']
+"let g:interestingWordsRandomiseColors = 1
+"""""""""""""""""""""""""""""""""""""
+
 
 """""""""""""""""""""""""""""""""""""
 " xtabline
@@ -355,7 +394,7 @@ noremap <c-l> <c-w><c-l>
 
 """""""""""""""""""""""""""""""""""""
 " COC.NVIM
-let g:coc_global_extensions = ['coc-python', 'coc-pyright', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-flutter']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-flutter']
 "let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter']
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -365,7 +404,7 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -528,7 +567,7 @@ map TT :Calendar<CR>
 "let g:livepreview_engine = 'xelatex'
 autocmd Filetype tex setl updatetime=1
 "let g:livepreview_previewer = 'evince'
-nmap <F12> :LLPStartPreview<cr>
+"nmap <F12> :LLPStartPreview<cr>
 let g:vimtex_compiler_latexmk = {
     \ 'options' : [
     \   '-xelatex',
@@ -574,7 +613,7 @@ let g:mkdp_auto_close = 1
 """""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
-" Latex
+" Vimtex Latex
 set shellslash
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'

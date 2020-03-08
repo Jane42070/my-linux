@@ -72,3 +72,6 @@ sudo reboot
 	/Applications/Chromium.app/Contents/MacOS/Chromium_bin
 	```
 - [Chrome](https://www.google.cn/intl/zh-CN/chrome/)Google-Chrome
+
+### Pyinstaller in MacOS
+1. [Problem with hook-_tkinter.py using Python3.7 on MacOS](https://github.com/pyinstaller/pyinstaller/issues/3753)

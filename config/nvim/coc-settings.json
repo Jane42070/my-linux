@@ -73,6 +73,16 @@
 	"git.changeRemovedSign.text": "↹",
 	"git.enableGlobalStatus": false,
 	"git.signOffset": 2,
+	"java.home": "/Library/Java/JavaVirtualMachines/jdk-13.0.1.jdk/Contents/Home",
+	"java.format.enabled": true,
+	"java.completion.enabled": true,
+	"java.format.onType.enabled": true,
+	"java.completion.importOrder": [
+		"java",
+		"javax",
+		"com",
+		"org"
+	],
 	"python.pythonPath":"/Library/Frameworks/Python.framework/Versions/3.8/bin/python3.8",
 	"python.linting.pylintUseMinimalCheckers":true,
 	"python.linting.pylintPath":"/Library/Frameworks/Python.framework/Versions/3.8/bin/pylint",
@@ -92,8 +102,22 @@
         "--style",
         "{SPACES_AROUND_POWER_OPERATOR: True, SPACES_BEFORE_COMMENT: 1}"
     ],
+	"pyright.useLibraryCodeForTypes":true,
+	"pyright.openFilesOnly":true,
+	"pyright.disableLanguageServices":true,
 	"json.format.enable":true,
+	"css.enable": true,
+	"latex.forwardSearch.executable":"/Applications/TeXShop.app/Contents/MacOS/TeXShop",
+	"html.enable": true,
 	"html.format.enable": true,
+	"html.suggest.html5": true,
+	"html.suggest.ionic": true,
+	"html.filetypes": [
+		"html",
+		"handlebars",
+		"htmldjango",
+		"jsp"
+	],
 	"list.previewHighlightGroup": "Statement",
 	"signature.target":"float",
 	"coc.preferences.formatOnSaveFiletypes": [
@@ -149,7 +173,9 @@
 	"explorer.icon.enableNerdfont": true,
 	"explorer.file.column.git.showIgnored": true,
 	"cSpell.userWords": [
+    "NTFS",
     "Nerdfont",
+    "Pyinstaller",
     "Sergent",
     "deoplete",
     "dscacheutil",
