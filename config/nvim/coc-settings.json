@@ -177,6 +177,7 @@
     "Nerdfont",
     "Pyinstaller",
     "Sergent",
+    "alarcritty",
     "deoplete",
     "dscacheutil",
     "dtype",
@@ -184,7 +185,8 @@
     "loadtxt",
     "noob",
     "noselect",
-    "numpy"
+    "numpy",
+    "polybar"
   ],
   "cSpell.enabledLanguageIds": [
     "asciidoc",

@@ -7,6 +7,8 @@ Plug 'xuhdev/vim-latex-live-preview'
 "Plug 'ervandew/supertab'
 " Omnisharp
 Plug 'omnisharp/omnisharp-vim'
+" vim-bookmarks
+"Plug 'mattesgroeger/vim-bookmarks'
 " coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "为了Python3的第三方库安装Jedi插件
@@ -42,9 +44,8 @@ Plug 'junegunn/fzf'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
 " vim-ranger
-"Plug 'rbgrouleff/bclose.vim'	" neovim dependency
-"Plug 'francoiscabrol/ranger.vim'
-" Plug 'Jane42070/Runner'
+Plug 'rbgrouleff/bclose.vim'	" neovim dependency
+Plug 'francoiscabrol/ranger.vim'
 Plug 'morhetz/gruvbox'
 " lightline
 Plug 'itchyny/lightline.vim'
@@ -54,7 +55,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
 " Plug 'nvie/vim-flake8'
 Plug 'haya14busa/incsearch.vim'
-"Plug 'w0rp/ale'
 " Debugger support: pyhton, java, bash-script, c, c++(maybe)
 "Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python'}
 "Plug 'joonty/vdebug'
@@ -89,10 +89,17 @@ call plug#end()
 autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
 """modeconfig"""
 """""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""
+" coc-bookmarks
+nmap mj <Plug>(coc-bookmark-next)
+nmap mk <Plug>(coc-bookmark-prev)
+nmap mm <Plug>(coc-bookmark-toggle)
+nmap ma <Plug>(coc-bookmark-annotate)
+""""""""""""""""""""""""""""""""""""
+
 """"""""""""""""""""""""""""""""""""""
 "" vimspector
-"let g:vimspector_enable_mappings='HUMAN'
-"nmap <F5> <Plug>VimspectorContinue
+"let g:vimspector_enable_mappings='HUMAN' nmap <F5> <Plug>VimspectorContinue
 
 "function! s:read_template_into_buffer(template)
 	"" has to be a function to avoid the extra space fzf#run insers otherwise
@@ -275,6 +282,20 @@ noremap <up> :res +5<CR>
 noremap <down> :res -5<CR>
 noremap <left> :vertical resize-5<CR>
 noremap <right> :vertical resize+5<CR>
+
+" 对于中文括号跳出的支持
+inoremap （ （）<LEFT>
+inoremap 【 【】<LEFT>
+inoremap 《 《》<LEFT>
+inoremap “ “”<LEFT>
+inoremap ‘ ‘’<LEFT>
+
+imap ） <ESC>f）a
+imap 】 <ESC>f】a
+imap 》 <ESC>f》a
+imap ” <ESC>f”a
+imap ’ <ESC>f’a
+
 " 搜索高亮后　前后跳转: 下一个/上一个
 " n/N
 " 高亮显示复制区域
@@ -293,7 +314,7 @@ let g:SimpylFold_docstring_preview = 1
 " 设置背景颜色和主题
 let g:gruvbox_italicize_comments=1
 let g:gruvbox_italicize_strings=0
-let g:gruvbox_improved_strings=1
+"let g:gruvbox_improved_strings=1
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_improved_warnings=1
@@ -318,37 +339,6 @@ let g:markdown_fenced_languages = ['css', 'js=javascript']
 vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
 """""""""""""""""""""""""""""""""""
-""    _    _     _____
-""   / \  | |   | ____|
-""  / _ \ | |   |  _|
-"" / ___ \| |___| |___
-""/_/   \_\_____|_____|
-"" 始终开启标志列
-"let g:ale_sign_column_always = 1
-"let g:ale_set_highlights = 0
-"let g:ale_statusline_format = ['✗ %d', '⚡%d', '✔ OK']
-"" let g:ale_echo_msg_error_str = 'E'
-"" let g:ale_echo_msg_warning_str = 'W'
-"" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-""自定义error和warning图标
-"let g:ale_sign_error = '✗'
-"let g:ale_sign_warning = '⚡'
-""" 始终开启标志列
-""" let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', 'E:')
-""" let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', 'W:')
-""let airline#extensions#ale#error_symbol = '✗:'
-""let airline#extensions#ale#warning_symbol = '⚡:'
-""" 文件内容发生变化时不进行检查
-"let g:ale_lint_on_text_changed = 1
-""" 打开文件时进行检查
-"let g:ale_lint_on_enter = 1
-
-""" 使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
-"let g:ale_linters = {
-"\   'python': ['pylint'],
-"\}
-"" 对于java在中文系统上乱码
-"let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
 
 """""""""""""""""""""""""""""""""
 " 快捷键
@@ -564,8 +554,9 @@ map TT :Calendar<CR>
 """""""""""""""""""""""""""""""""""""
 " latex-preview
 "let g:livepreview_previewer = 'zathura'
-"let g:livepreview_engine = 'xelatex'
-autocmd Filetype tex setl updatetime=1
+let g:livepreview_engine = 'xelatex'
+"autocmd Filetype tex setl updatetime=20
+autocmd Filetype tex setl updatetime=500
 "let g:livepreview_previewer = 'evince'
 "nmap <F12> :LLPStartPreview<cr>
 let g:vimtex_compiler_latexmk = {
@@ -578,7 +569,9 @@ let g:vimtex_compiler_latexmk = {
     \ ],
     \}
 let g:tex_conceal='abdmg'
-let g:livepreview_previewer = 'open -a texshop'
+"let g:livepreview_previewer = 'open -a texshop'
+"let g:livepreview_previewer = 'open -a PDF\ Expert'
+let g:livepreview_previewer = 'open -a Skim'
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
@@ -638,7 +631,7 @@ let g:tex_conceal='abdmg'
 let g:asyncrun_open = 6
 let $PYTHONNUNBUFFERED=1
 map <leader>R :call CompileRun()<CR>
-    func! CompileRun()
+func! CompileRun()
         exec "w"
 if &filetype == 'c'
             exec "AsyncRun -focus=0 gcc % -o %<; ./%<"
@@ -664,13 +657,13 @@ endif
     endfunc
 
 "自动插入文件头
-autocmd BufNewFile *.cpp,*.cc,*.c,*h,*.sh,*.py exec ":call SetHeader()"
+autocmd BufNewFile *.cpp,*.cc,*.c,*h,*.sh,*.py,*.tex exec ":call SetHeader()"
 func! SetHeader()
     if expand("%:e") == 'sh'
         call setline(1,"\#!/bin/bash")
         call append(line("."), "")
     elseif expand("%:e") == 'tex'
-        call setline(1, "%! Tex program = xelatex")
+        call setline(1, "%!Tex program = xelatex")
 		call setline(2, "%-- coding: UTF-8 --")
         call append(line(".")+1, "")
     elseif expand("%:e") == 'py'
@@ -771,18 +764,6 @@ let g:lightline = {
   \   'fileformat': 'LightlineFileformat',
   \ }
 \ }
-"function! LinterStatus() abort
-    "let l:counts = ale#statusline#Count(bufnr(''))
-
-    "let l:all_errors = l:counts.error + l:counts.style_error
-    "let l:all_non_errors = l:counts.total - l:all_errors
-
-    "return l:counts.total == 0 ? 'OK' : printf(
-    "\   '⚡:%d ✗:%d',
-    "\   all_non_errors,
-    "\   all_errors
-    "\)
-"endfunction
 
 function! LightlineFilename()
   let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'

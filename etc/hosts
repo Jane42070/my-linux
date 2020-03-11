@@ -10,6 +10,7 @@
 104.18.18.18    free-ss.site
 127.0.0.1 www.sublimetext.com
 127.0.0.1 license.sublimehq.com
+#140.82.113.3   github.com
 199.232.28.133 raw.githubusercontent.com
 199.232.68.133 cloud.githubusercontent.com
 199.232.28.133 user-images.githubusercontent.com
@@ -21,12 +22,12 @@
 162.213.33.7   paste.ubuntu.com
 104.23.99.190  pastebin.com
 
-# 解锁网易云音乐
-158.199.142.239 music.163.com
-163.171.98.219  p1.music.126.net
-163.171.98.219  p3.music.126.net
-163.171.98.219  p4.music.126.net
-202.122.146.83  m10.music.126.net
+## 解锁网易云音乐
+#158.199.142.239 music.163.com
+#163.171.98.219  p1.music.126.net
+#163.171.98.219  p3.music.126.net
+#163.171.98.219  p4.music.126.net
+#202.122.146.83  m10.music.126.net
 #192.30.253.112 github.com
 #151.101.185.194 github.global.ssl.fastly.net
 #151.101.184.249 global-ssl.fastly.net
