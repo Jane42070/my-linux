@@ -15,8 +15,14 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'davidhalter/jedi-vim'
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
+Plug 'anyakichi/vim-surround'
 " 中文标准化排版
 Plug 'hotoo/pangu.vim'
+"CSV
+Plug 'chrisbra/csv.vim'
+"Plug 'mechatroner/rainbow_csv'
+" Excel
+Plug 'vim-scripts/excel.vim'
 "输入法切换
 "Plug 'CodeFalling/fcitx-vim-osx'
 " vim dict
@@ -28,6 +34,7 @@ Plug 'mg979/vim-xtabline'
 " nvim startscreen --vim-startify
 Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
+Plug 'liuchengxu/vista.vim'
 " Super searching
 Plug 'ctrlpvim/ctrlp.vim'
 " vim git
@@ -49,6 +56,8 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'morhetz/gruvbox'
 " lightline
 Plug 'itchyny/lightline.vim'
+" lightline theme
+Plug 'shinchu/lightline-gruvbox.vim'
 "" status bar --airline
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
@@ -85,10 +94,169 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""
 "	      CUSTOM MY NVIM	     	"
 """""""""""""""""""""""""""""""""""""
+" 显示行号
+set number
+" 高亮当前行
+set cursorline
+" 设置空白字符的视觉提示
+set list listchars=extends:❯,precedes:❮,tab:▸\ ,trail:˽
+syntax on	" 语法高亮
+filetype plugin indent on " 根据文件类型自动处理缩进
+" 共享剪切板
+"set clipboard+=unnamed
+filetype on
+set autochdir
+" 取消注释自动换行
+" set paste
+" 设置持久性撤销和重复
+set undofile
+
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set backspace=2		" 修正多数终端上backspace 行为
+set cindent			" 设置C自动缩进
+set incsearch		" 输入字符串就显示匹配点
+set hlsearch
+set showmatch		" 显示匹配的括号
+set scrolloff=3     " 距离顶部和底部3行"
+set encoding=utf-8  " 编码
+set fenc=utf-8      " 编码
+set mouse=a			" 启用鼠标
+set hlsearch        " 搜索高亮
+set autoindent		" 设置自动缩进
+set nowrap			" 设置不折叠
+set tags=./.tags;,.tags
+
+" Resize splits with arrow keys
+noremap <up> :res +5<CR>
+noremap <down> :res -5<CR>
+noremap <left> :vertical resize-5<CR>
+noremap <right> :vertical resize+5<CR>
+
+" 对于中文括号跳出的支持
+inoremap （ （）<LEFT>
+inoremap 【 【】<LEFT>
+inoremap 《 《》<LEFT>
+inoremap “ “”<LEFT>
+inoremap ‘ ‘’<LEFT>
+
+imap ） <ESC>f）a
+imap 】 <ESC>f】a
+imap 》 <ESC>f》a
+" 这两个触发会产生问题
+"imap ”  <ESC>f” a
+"imap ’  <ESC>f’ a
+
+
+" 搜索高亮后　前后跳转: 下一个/上一个
+" n/N
+" 高亮显示复制区域
+hi HighlightedyankRegion cterm=reverse gui=reverse
+let g:highlightedyank_highlight_duration = 500
+
+
+" SimplyFold
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+" Enable folding with the spacebar
+nnoremap <space> za
+let g:SimpylFold_docstring_preview = 1
+
+" 设置背景颜色和主题
+let g:gruvbox_italicize_comments=1
+let g:gruvbox_italicize_strings=0
+"let g:gruvbox_improved_strings=1
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_improved_warnings=1
+let g:gruvbox_termcolors=256
+
+"let g:gruvbox_invert_signs=1
+" For MacVim
+"set macligatures
+"set guifont=Fira\ Code:h17 "设置字体和大小
+colorscheme gruvbox
+set termguicolors
+"let base16colorspace=256
+"colorscheme base16-default-dark
+set background=dark
 " 开启中文规范
 autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
 """modeconfig"""
 """""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""
+"" RAINDOW-CSV.NVIM
+"autocmd BufNewFile,BufRead *.csv   set filetype=csv_semicolon
+"autocmd BufNewFile,BufRead *.dat   set filetype=csv_pipe
+"let g:rcsv_colorpairs = [['red', 'red'], ['blue', 'blue'], ['green', 'green'], ['magenta', 'magenta'], ['NONE', 'NONE'], ['darkred', 'darkred'], ['darkblue', 'darkblue'], ['darkgreen', 'darkgreen'], ['darkmagenta', 'darkmagenta'], ['darkcyan', 'darkcyan']]
+"let g:rbql_output_format='csv'
+"syntax sync fromstart
+""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" EXCEL.VIM
+let g:zipPlugin_ext = '*.zip,*.jar,*.xpi,*.ja,*.war,*.ear,*.celzip,*.oxt,*.kmz,*.wsz,*.xap,*.docx,*.docm,*.dotx,*.dotm,*.potx,*.potm,*.ppsx,*.ppsm,*.pptx,*.pptm,*.ppam,*.sldx,*.thmx,*.crtx,*.vdw,*.glox,*.gcsx,*.gqsx'
+
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" CSV.VIM
+filetype plugin on
+if exists("did_load_csvfiletype")
+  finish
+endif
+let did_load_csvfiletype=1
+
+augroup filetypedetect
+  au! BufRead,BufNewFile *.csv,*.dat    setfiletype csv
+augroup END
+
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" vista.vim
+" How each level is indented and what to prepend.
+" This could make the display more compact or more spacious.
+" e.g., more compact: ["▸ ", ""]
+" Note: this option only works the LSP executives, doesn't work for `:Vista ctags`.
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+
+" Executive used when opening vista sidebar without specifying it.
+" See all the avaliable executives via `:echo g:vista#executives`.
+let g:vista_default_executive = 'ctags'
+
+" Set the executive for some filetypes explicitly. Use the explicit executive
+" instead of the default one for these filetypes when using `:Vista` without
+" specifying the executive.
+let g:vista_executive_for = {
+  \ 'cpp': 'vim_lsp',
+  \ 'php': 'vim_lsp',
+  \ }
+
+" Declare the command including the executable and options used to generate ctags output
+" for some certain filetypes.The file path will be appened to your custom command.
+" For example:
+let g:vista_ctags_cmd = {
+      \ 'haskell': 'hasktags -x -o - -c',
+      \ }
+
+" To enable fzf's preview window set g:vista_fzf_preview.
+" The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
+" For example:
+let g:vista_fzf_preview = ['right:50%']
+" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+let g:vista#renderer#enable_icon = 1
+
+" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
+
+"""""""""""""""""""""""""""""""""""""
+
 """""""""""""""""""""""""""""""""""""
 " coc-bookmarks
 nmap mj <Plug>(coc-bookmark-next)
@@ -136,15 +304,15 @@ let g:xtabline_lazy=1
 
 """""""""""""""""""""""""""""""""""""
 
-"""""""""""""""""""""""""""""""""""""
-" tagbar
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-nmap <silent> <F9> :TagbarToggle<CR>
-let g:tagbar_width=35
-let g:tagbar_autofocus = 1
-" Auto open tagbar when opening a supported file/files
-"autocmd FileType * nested :call tagbar#autoopen(0)
-"""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""
+"" tagbar
+"let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+"nmap <silent> <F9> :TagbarToggle<CR>
+"let g:tagbar_width=35
+"let g:tagbar_autofocus = 1
+"" Auto open tagbar when opening a supported file/files
+""autocmd FileType * nested :call tagbar#autoopen(0)
+""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
 " omnisharp
@@ -191,144 +359,6 @@ let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
 " Ignore files in .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-"""""""""""""""""""""""""""""""""""""
-
-"" airline config
-"" 设置airline主题
-"nmap <s-tab> :bn<cr>  "设置tab键映射
-"" 设置tabline时间显示
-"" 只显示文件名
-"let g:airline#extensions#tabline#fnamemod = ':t'
-"let g:airline_powerline_fonts = 1
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline_theme='base16'
-""let g:airline#extensions#coc#enabled = 1
-"let g:airline#extensions#tabline#enabled=1
-"let g:airline#extensions#tabline#left_sep=''
-"let g:airline#extensions#tabline#left_alt_sep=''
-""let airline#extensions#coc#error_symbol = '✗'
-""let airline#extensions#coc#warning_symbol = '⚡'
-""let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-""let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
-"let g:airline#extensions#tabline#buffer_idx_mode = 1
-"nmap <leader>1 <Plug>AirlineSelectTab1
-"nmap <leader>2 <Plug>AirlineSelectTab2
-"nmap <leader>3 <Plug>AirlineSelectTab3
-"nmap <leader>4 <Plug>AirlineSelectTab4
-"nmap <leader>5 <Plug>AirlineSelectTab5
-"nmap <leader>6 <Plug>AirlineSelectTab6
-"nmap <leader>7 <Plug>AirlineSelectTab7
-"nmap <leader>8 <Plug>AirlineSelectTab8
-"nmap <leader>9 <Plug>AirlineSelectTab9
-"nmap <leader>- <Plug>AirlineSelectPrevTab
-"nmap <leader>+ <Plug>AirlineSelectNextTab
-""① ⓪ ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩
-"let g:airline#extensions#tabline#buffer_idx_format = {
-	"\ '0': '⓪ ',
-	"\ '1': '① ',
-	"\ '2': '② ',
-	"\ '3': '③ ',
-	"\ '4': '④ ',
-	"\ '5': '⑤ ',
-	"\ '6': '⑥ ',
-	"\ '7': '⑦ ',
-	"\ '8': '⑧ ',
-	"\ '9': '⑨ '
-	"\}
-"let g:ale_sign_error = '✗'
-"let g:ale_sign_warning = '⚡'
-"let g:ale#enable_at_startup=1
-"let g:airline#extensions#tabline#formatter='default'
-"" powerline symbols
-"let g:airline_left_sep = ''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_right_alt_sep = ''
-" 显示行号
-set number
-" 高亮当前行
-set cursorline
-" 设置空白字符的视觉提示
-set list listchars=extends:❯,precedes:❮,tab:▸\ ,trail:˽
-syntax on	" 语法高亮
-filetype plugin indent on " 根据文件类型自动处理缩进
-" 共享剪切板
-"set clipboard+=unnamed
-filetype on
-set autochdir
-" 取消注释自动换行
-" set paste
-" 设置持久性撤销和重复
-set undofile
-
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
-set backspace=2		" 修正多数终端上backspace 行为
-set cindent			" 设置C自动缩进
-set incsearch		" 输入字符串就显示匹配点
-set hlsearch
-set showmatch		" 显示匹配的括号
-set scrolloff=3     " 距离顶部和底部3行"
-set encoding=utf-8  " 编码
-set fenc=utf-8      " 编码
-set mouse=a			" 启用鼠标
-set hlsearch        " 搜索高亮
-set autoindent		" 设置自动缩进
-set wrap			" 设置折叠
-
-" Resize splits with arrow keys
-noremap <up> :res +5<CR>
-noremap <down> :res -5<CR>
-noremap <left> :vertical resize-5<CR>
-noremap <right> :vertical resize+5<CR>
-
-" 对于中文括号跳出的支持
-inoremap （ （）<LEFT>
-inoremap 【 【】<LEFT>
-inoremap 《 《》<LEFT>
-inoremap “ “”<LEFT>
-inoremap ‘ ‘’<LEFT>
-
-imap ） <ESC>f）a
-imap 】 <ESC>f】a
-imap 》 <ESC>f》a
-imap ” <ESC>f”a
-imap ’ <ESC>f’a
-
-" 搜索高亮后　前后跳转: 下一个/上一个
-" n/N
-" 高亮显示复制区域
-hi HighlightedyankRegion cterm=reverse gui=reverse
-let g:highlightedyank_highlight_duration = 500
-
-
-" SimplyFold
-" Enable folding
-set foldmethod=indent
-set foldlevel=99
-" Enable folding with the spacebar
-nnoremap <space> za
-let g:SimpylFold_docstring_preview = 1
-
-" 设置背景颜色和主题
-let g:gruvbox_italicize_comments=1
-let g:gruvbox_italicize_strings=0
-"let g:gruvbox_improved_strings=1
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark='medium'
-let g:gruvbox_improved_warnings=1
-let g:gruvbox_termcolors=256
-
-"let g:gruvbox_invert_signs=1
-" For MacVim
-"set macligatures
-"set guifont=Fira\ Code:h17 "设置字体和大小
-colorscheme gruvbox
-set termguicolors
-"let base16colorspace=256
-"colorscheme base16-default-dark
-set background=dark
 
 " markdown语言插件配置
 let g:vim_markdown_math = 1
@@ -351,7 +381,7 @@ map ,pd :PlugUpdate<CR>
 map ,pg :PlugUpgrade<CR>
 map ,pc :PlugClean<CR>
 map ,ps :PlugStatus<CR>
-map ,r :source %<CR>
+"map ,r :source %<CR>
 " 新建标签页
 map tt :tabe<CR>
 "" 前一标签页
@@ -370,6 +400,9 @@ vnoremap > >v
 
 " 映射 jk 为<ESC>
 inoremap jk <ESC>
+inoremap wjk <ESC>:w<CR>
+inoremap wqjk <ESC>:wq<CR>
+
 " 使用s + hjkl 在nvim中快速分屏
 map	sl :set splitright<CR>:vsplit<CR>
 map sh :set nosplitright<CR>:vsplit<CR>
@@ -628,9 +661,9 @@ let g:tex_conceal='abdmg'
 " /_/   \_\___/\__, |_| |_|\___|_|   \__,_|_| |_|
 "              |___/
 "   设置运行可执行文件
-let g:asyncrun_open = 6
+let g:asyncrun_open = 8
 let $PYTHONNUNBUFFERED=1
-map <leader>R :call CompileRun()<CR>
+map ,r :call CompileRun()<CR>
 func! CompileRun()
         exec "w"
 if &filetype == 'c'
@@ -653,6 +686,8 @@ elseif &filetype == 'markdown'
 			exec "MarkdownPreview"	
 elseif &filetype == 'tex'
 			exec "LLPStartPreview"
+elseif &filetype == 'vim'
+			exec "source %"
 endif
     endfunc
 
@@ -725,6 +760,7 @@ let NERDTreeWinSize=28
 " 设置书签
 let g:startify_bookmarks            = [
             \ '~/.config/nvim/init.vim',
+            \ '~/.vimrc',
             \]
 
 " 起始页显示的列表长度
@@ -732,6 +768,7 @@ let g:startify_files_number = 20
 
 """"""""""""""""""""""""""""""""""""""
 "" lightline
+" gruvbox_lightline
 set laststatus=2
 if !has('gui_running')
   set t_Co=256
@@ -745,7 +782,7 @@ let g:lightline = {
   \ 'active': {
   \   'left': [
   \     ['paste', 'mode'],
-  \     ['blame', 'readonly', 'filename'],
+  \     ['blame', 'readonly', 'filename', 'method'],
   \		['ctrlpmark'],
   \   ],
   \   'right':[
@@ -762,8 +799,14 @@ let g:lightline = {
   \	  'cocstatus':'coc#status',
   \   'filetype': 'LightlineFiletype',
   \   'fileformat': 'LightlineFileformat',
+  \	  'method': 'NearestMethodOrFunction',
   \ }
 \ }
+
+let g:lightline.colorscheme = 'gruvbox'
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
 
 function! LightlineFilename()
   let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
@@ -800,6 +843,7 @@ function! LightlineMode()
         \ &filetype ==# 'coc-explorer' ? 'explorer' :
         \ &filetype ==# 'vimshell' ? 'VimShell' :
         \ &filetype ==# 'qf' ? 'QuickFix' :
+        \ &filetype ==# '__vista__' ? 'Vista' :
         \ lightline#mode()
 endfunction
 let g:unite_force_overwrite_statusline = 0

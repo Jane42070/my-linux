@@ -200,3 +200,5 @@ export PATH="/usr/local/opt/libxml2/bin:$PATH"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
 export PATH="/usr/local/sbin:$PATH"
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-13.0.1.jdk/Contents/Home
+export PATH=$JAVA_HOME/bin:$PATH

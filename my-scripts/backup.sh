@@ -12,5 +12,7 @@ cp ~/.myclirc ~/OpenSource/my-linux/jane &
 echo "back up mycli-config"
 cp /etc/hosts ~/OpenSource/my-linux/etc &
 echo "back up hosts"
+cp ~/.ipython/profile_default/ipython_config.py &
+echo "back up ipython config"
 echo "Done"
 
