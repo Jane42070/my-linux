@@ -44,6 +44,7 @@ alias pacman="sudo pacman"
 alias dict="ydict"
 alias md="mkdir"
 alias tomcat="catalina"
+alias ra="ranger"
 # Backup conf files in Mac
 alias backup="sh ~/OpenSource/my-linux/my-scripts/backup.sh"
 

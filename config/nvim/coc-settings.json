@@ -102,9 +102,6 @@
         "--style",
         "{SPACES_AROUND_POWER_OPERATOR: True, SPACES_BEFORE_COMMENT: 1}"
     ],
-	"pyright.useLibraryCodeForTypes":true,
-	"pyright.openFilesOnly":true,
-	"pyright.disableLanguageServices":true,
 	"json.format.enable":true,
 	"css.enable": true,
 	"latex.forwardSearch.executable":"/Applications/TeXShop.app/Contents/MacOS/TeXShop",
@@ -172,6 +169,8 @@
 	"explorer.file.showHiddenFiles": true,
 	"explorer.icon.enableNerdfont": true,
 	"explorer.file.column.git.showIgnored": true,
+	"translator.toLang":"zh",
+	"translator.maxsize": 5000,
 	"cSpell.userWords": [
     "NTFS",
     "Nerdfont",

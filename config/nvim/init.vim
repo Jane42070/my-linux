@@ -7,12 +7,12 @@ Plug 'xuhdev/vim-latex-live-preview'
 "Plug 'ervandew/supertab'
 " Omnisharp
 Plug 'omnisharp/omnisharp-vim'
-" vim-bookmarks
-"Plug 'mattesgroeger/vim-bookmarks'
 " coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "为了Python3的第三方库安装Jedi插件
 "Plug 'davidhalter/jedi-vim'
+" rgb 颜色显示
+Plug 'chrisbra/colorizer'
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
 Plug 'anyakichi/vim-surround'
@@ -21,12 +21,8 @@ Plug 'hotoo/pangu.vim'
 "CSV
 Plug 'chrisbra/csv.vim'
 "Plug 'mechatroner/rainbow_csv'
-" Excel
-Plug 'vim-scripts/excel.vim'
 "输入法切换
 "Plug 'CodeFalling/fcitx-vim-osx'
-" vim dict
-Plug 'iamcco/dict.vim'
 " Calendar
 Plug 'itchyny/calendar.vim'
 " xtabline
@@ -43,7 +39,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 " Cursor Word
 Plug 'itchyny/vim-cursorword'
-
 " Interesting words
 Plug 'lfv89/vim-interestingwords'
 " file search --fzf
@@ -58,10 +53,6 @@ Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 " lightline theme
 Plug 'shinchu/lightline-gruvbox.vim'
-"" status bar --airline
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim'
 " Plug 'nvie/vim-flake8'
 Plug 'haya14busa/incsearch.vim'
 " Debugger support: pyhton, java, bash-script, c, c++(maybe)
@@ -79,13 +70,11 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'junegunn/vim-easy-align'
-" vim-colorscheme
-"Plug 'flazz/vim-colorschemes'
 " html 插件
 Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdcommenter'
 " 代码片段
-Plug 'honza/vim-snippets'
+"Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 " 代码折叠
 Plug 'tmhedberg/SimpylFold'
@@ -96,6 +85,8 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""
 " 显示行号
 set number
+" 显示相对行号
+"set relativenumber
 " 高亮当前行
 set cursorline
 " 设置空白字符的视觉提示
@@ -125,7 +116,7 @@ set fenc=utf-8      " 编码
 set mouse=a			" 启用鼠标
 set hlsearch        " 搜索高亮
 set autoindent		" 设置自动缩进
-set nowrap			" 设置不折叠
+set wrap			" 设置折叠
 set tags=./.tags;,.tags
 
 " Resize splits with arrow keys
@@ -145,8 +136,8 @@ imap ） <ESC>f）a
 imap 】 <ESC>f】a
 imap 》 <ESC>f》a
 " 这两个触发会产生问题
-"imap ”  <ESC>f” a
-"imap ’  <ESC>f’ a
+imap ”  <ESC>f” a
+imap ’  <ESC>f’ a
 
 
 " 搜索高亮后　前后跳转: 下一个/上一个
@@ -183,23 +174,44 @@ set termguicolors
 "colorscheme base16-default-dark
 set background=dark
 " 开启中文规范
-autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
+"autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
 """modeconfig"""
 """""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""
-"" RAINDOW-CSV.NVIM
-"autocmd BufNewFile,BufRead *.csv   set filetype=csv_semicolon
-"autocmd BufNewFile,BufRead *.dat   set filetype=csv_pipe
-"let g:rcsv_colorpairs = [['red', 'red'], ['blue', 'blue'], ['green', 'green'], ['magenta', 'magenta'], ['NONE', 'NONE'], ['darkred', 'darkred'], ['darkblue', 'darkblue'], ['darkgreen', 'darkgreen'], ['darkmagenta', 'darkmagenta'], ['darkcyan', 'darkcyan']]
-"let g:rbql_output_format='csv'
-"syntax sync fromstart
-""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""
+" Colorizer
+let g:colorizer_syntax = 1
+"""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
-" EXCEL.VIM
-let g:zipPlugin_ext = '*.zip,*.jar,*.xpi,*.ja,*.war,*.ear,*.celzip,*.oxt,*.kmz,*.wsz,*.xap,*.docx,*.docm,*.dotx,*.dotm,*.potx,*.potm,*.ppsx,*.ppsm,*.pptx,*.pptm,*.ppam,*.sldx,*.thmx,*.crtx,*.vdw,*.glox,*.gcsx,*.gqsx'
+" coc-snippets
+"inoremap <silent><expr> <TAB>
+	  "\ pumvisible() ? coc#_select_confirm() :
+	  "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	  "\ <SID>check_back_space() ? "\<TAB>" :
+	  "\ coc#refresh()
+
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+
+"let g:coc_snippet_next = '<tab>'
+"""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
+" coc-translator
+" popup
+nmap <Leader>t <Plug>(coc-translator-p)
+vmap <Leader>t <Plug>(coc-translator-pv)
+" echo
+nmap <Leader>e <Plug>(coc-translator-e)
+nmap <Leader>e <Plug>(coc-translator-ev)
+" replace
+nmap <Leader>r <Plug>(coc-translator-r)
+nmap <Leader>r <Plug>(coc-translator-rv)
+
+"""""""""""""""""""""""""""""""""""""
+
 
 """""""""""""""""""""""""""""""""""""
 " CSV.VIM
@@ -221,6 +233,7 @@ augroup END
 " This could make the display more compact or more spacious.
 " e.g., more compact: ["▸ ", ""]
 " Note: this option only works the LSP executives, doesn't work for `:Vista ctags`.
+noremap <silent> T :Vista!!<CR>
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 
 " Executive used when opening vista sidebar without specifying it.
@@ -254,7 +267,6 @@ let g:vista#renderer#icons = {
 \   "function": "\uf794",
 \   "variable": "\uf71b",
 \  }
-
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
@@ -264,25 +276,6 @@ nmap mk <Plug>(coc-bookmark-prev)
 nmap mm <Plug>(coc-bookmark-toggle)
 nmap ma <Plug>(coc-bookmark-annotate)
 """"""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""
-"" vimspector
-"let g:vimspector_enable_mappings='HUMAN' nmap <F5> <Plug>VimspectorContinue
-
-"function! s:read_template_into_buffer(template)
-	"" has to be a function to avoid the extra space fzf#run insers otherwise
-	"execute '0r ~/.config/nvim/sample_vimspector_json/'.a:template
-"endfunction
-"command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
-			"\   'source': 'ls -1 ~/.config/nvim/sample_vimspector_json',
-			"\   'down': 20,
-			"\   'sink': function('<sid>read_template_into_buffer')
-			"\ })
-"noremap <leader>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
-"sign define vimspectorBP text=🔴 texthl=Normal
-"sign define vimspectorBPDisabled text=🔵 texthl=Normal
-"sign define vimspectorPC text=🔶 texthl=SpellBad
-""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
 " Interesting words
@@ -297,22 +290,11 @@ let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222']
 "let g:interestingWordsRandomiseColors = 1
 """""""""""""""""""""""""""""""""""""
 
-
 """""""""""""""""""""""""""""""""""""
 " xtabline
 let g:xtabline_lazy=1
 
 """""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""
-"" tagbar
-"let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-"nmap <silent> <F9> :TagbarToggle<CR>
-"let g:tagbar_width=35
-"let g:tagbar_autofocus = 1
-"" Auto open tagbar when opening a supported file/files
-""autocmd FileType * nested :call tagbar#autoopen(0)
-""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
 " omnisharp
@@ -415,10 +397,8 @@ noremap <c-j> <c-w><c-j>
 noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
 
-"""""""""""""""""""""""""""""""""""""
 " COC.NVIM
 let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-flutter']
-"let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter']
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -444,9 +424,9 @@ set signcolumn=yes
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+	  \ pumvisible() ? "\<C-n>" :
+	  \ <SID>check_back_space() ? "\<TAB>" :
+	  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -557,7 +537,7 @@ endfunction
 
 " Mappings using CoCList:
 " Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
@@ -646,11 +626,6 @@ let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
-"""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""
-" vim-dict
-
 """""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -747,6 +722,7 @@ endif
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsEditSplit="vertical"
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " nerdtree配置

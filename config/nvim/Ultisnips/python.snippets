@@ -6,11 +6,6 @@ def ${1:main(object)}:
 if __name__ == '__main__':
 	$1
 endsnippet
-
-snippet for "for . in ."
-for ${1:i} in $2:
-	$3
-endsnippet
 	
 snippet with "with function as ..."
 with ${1:main} as ${2:name}:
@@ -21,7 +16,7 @@ snippet open "open(file, mode, encod..)"
 open("${1:file}", mode="${2:r}", encoding="${3:UTF-8}")
 endsnippet
 
-snippet if "if condition: ..."
-if ${1:true}:
-	$0
+snippet matfont "set matplotlib font"
+font = {"family": "${1:SimHei}"}
+matplotlib.rc("font", **font)
 endsnippet
