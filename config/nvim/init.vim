@@ -1,8 +1,8 @@
 call plug#begin('~/.vim/plugged')
 " 撤销树Gundo
-Plug 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
-Plug 'xuhdev/vim-latex-live-preview'
+Plug 'xuhdev/vim-latex-live-preview', {'for': 'tex'}
 "" supertab
 "Plug 'ervandew/supertab'
 " Omnisharp
@@ -19,21 +19,26 @@ Plug 'anyakichi/vim-surround'
 " 中文标准化排版
 Plug 'hotoo/pangu.vim'
 "CSV
-Plug 'chrisbra/csv.vim'
+Plug 'chrisbra/csv.vim', {'for': 'csv'}
+" Vim-move
+Plug 'matze/vim-move'
 "Plug 'mechatroner/rainbow_csv'
 "输入法切换
 "Plug 'CodeFalling/fcitx-vim-osx'
 " Calendar
-Plug 'itchyny/calendar.vim'
+Plug 'itchyny/calendar.vim', {'on': 'Calendar'}
 " xtabline
-Plug 'mg979/vim-xtabline'
+"Plug 'mg979/vim-xtabline'
 " nvim startscreen --vim-startify
+" vim-colorscheme
+"Plug 'flazz/vim-colorschemes'
 Plug 'mhinz/vim-startify'
-Plug 'majutsushi/tagbar'
-Plug 'liuchengxu/vista.vim'
+Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
+Plug 'liuchengxu/vista.vim', {'on': 'Vista'}
 " Super searching
 Plug 'ctrlpvim/ctrlp.vim'
 " vim git
+"Plug 'itchyny/vim-gitbranch'
 "Plug 'tpope/vim-fugitive'
 " Easy motion
 Plug 'easymotion/vim-easymotion'
@@ -42,36 +47,43 @@ Plug 'itchyny/vim-cursorword'
 " Interesting words
 Plug 'lfv89/vim-interestingwords'
 " file search --fzf
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', {'on': 'FZF', 'do': { -> fzf#install() }}
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
 " vim-ranger
 Plug 'rbgrouleff/bclose.vim'	" neovim dependency
-Plug 'francoiscabrol/ranger.vim'
+Plug 'francoiscabrol/ranger.vim', {'on': 'Ranger'}
 Plug 'morhetz/gruvbox'
 " lightline
 Plug 'itchyny/lightline.vim'
+" devicons make lightline more graphical
+Plug 'ryanoasis/vim-devicons'
+" lightline-bufferline
+Plug 'mengelbrecht/lightline-bufferline'
 " lightline theme
 Plug 'shinchu/lightline-gruvbox.vim'
 " Plug 'nvie/vim-flake8'
-Plug 'haya14busa/incsearch.vim'
+"Plug 'haya14busa/incsearch.vim'
 " Debugger support: pyhton, java, bash-script, c, c++(maybe)
 "Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python'}
 "Plug 'joonty/vdebug'
 " Latex插件
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', {'for': 'tex'}
 " Python
 "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" Golang
+Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
 " markdown语言插件
 "Plug 'godlygeek/tabular'
-Plug 'mzlogin/vim-markdown-toc'
-Plug 'plasticboy/vim-markdown'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'iamcco/mathjax-support-for-mkdp'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'junegunn/vim-easy-align'
+Plug 'mzlogin/vim-markdown-toc', {'for': 'markdown'}
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+Plug 'dhruvasagar/vim-table-mode', {'on': 'TableModeEnable', 'for': 'markdown'}
+Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
+Plug 'iamcco/markdown-preview.nvim', { 'on': 'MarkdownPreview', 'for':'markdown', 'do': { -> mkdp#util#install() } }
+Plug 'junegunn/vim-easy-align', {'on': '<Plug>(EasyAlign)'}
 " html 插件
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim', {'for': 'html'}
+" 注释
 Plug 'scrooloose/nerdcommenter'
 " 代码片段
 "Plug 'honza/vim-snippets'
@@ -91,7 +103,7 @@ set number
 set cursorline
 " 设置空白字符的视觉提示
 set list listchars=extends:❯,precedes:❮,tab:▸\ ,trail:˽
-syntax on	" 语法高亮
+syntax enable	" 语法高亮
 filetype plugin indent on " 根据文件类型自动处理缩进
 " 共享剪切板
 "set clipboard+=unnamed
@@ -168,15 +180,54 @@ let g:gruvbox_termcolors=256
 " For MacVim
 "set macligatures
 "set guifont=Fira\ Code:h17 "设置字体和大小
-colorscheme gruvbox
 set termguicolors
+
+colorscheme gruvbox
 "let base16colorspace=256
 "colorscheme base16-default-dark
 set background=dark
 " 开启中文规范
-"autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
+autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
 """modeconfig"""
 """""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""
+" coc-calc
+" append result on current expression
+nmap <Leader>ca <Plug>(coc-calc-result-append)
+" replace result on current expression
+nmap <Leader>cr <Plug>(coc-calc-result-replace)
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" vim-move
+let g:move_key_modifier = 'S'
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" incsearch.vim
+"map /  <Plug>(incsearch-forward)
+"map ?  <Plug>(incsearch-backward)
+"map g/ <Plug>(incsearch-stay)
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" vim-easy-align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" ranger
+let g:ranger_map_keys = 0
+map <leader>f :Ranger<cr>
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" fzf.vim
+nmap <s-f> :FZF<cr>
+
+"""""""""""""""""""""""""""""""""""""
+
 """""""""""""""""""""""""""""""""""""
 " Colorizer
 let g:colorizer_syntax = 1
@@ -233,7 +284,7 @@ augroup END
 " This could make the display more compact or more spacious.
 " e.g., more compact: ["▸ ", ""]
 " Note: this option only works the LSP executives, doesn't work for `:Vista ctags`.
-noremap <silent> T :Vista!!<CR>
+noremap <silent> ,v :Vista!!<CR>
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 
 " Executive used when opening vista sidebar without specifying it.
@@ -288,12 +339,6 @@ nnoremap <silent> N :call WordNavigation('backward')<cr>
 let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
 let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222']
 "let g:interestingWordsRandomiseColors = 1
-"""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""
-" xtabline
-let g:xtabline_lazy=1
-
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
@@ -355,6 +400,7 @@ nmap <leader>a <Plug>(coc-codeaction-selected)
 """""""""""""""""""""""""""""""""
 " 快捷键
 map <F3> :CocCommand explorer<CR>
+nnoremap <F5> :GundoToggle<CR>
 map C	:CocCommand<CR>
 "map ,f  :FZF<CR>
 map ,pl :PlugInstall<CR>
@@ -386,7 +432,7 @@ inoremap wjk <ESC>:w<CR>
 inoremap wqjk <ESC>:wq<CR>
 
 " 使用s + hjkl 在nvim中快速分屏
-map	sl :set splitright<CR>:vsplit<CR>
+map sl :set splitright<CR>:vsplit<CR>
 map sh :set nosplitright<CR>:vsplit<CR>
 map sk :set nosplitbelow<CR>:split<CR>
 map sj :set splitbelow<CR>:split<CR>
@@ -398,7 +444,7 @@ noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
 
 " COC.NVIM
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-flutter']
+"let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-flutter']
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -457,7 +503,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> ,k :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -750,44 +796,83 @@ if !has('gui_running')
   set t_Co=256
 endif
 set noshowmode
+let g:lightline#bufferline#number_map = {
+\ 0: '₀', 1: '₁', 2: '₂', 3: '₃', 4: '₄',
+\ 5: '₅', 6: '₆', 7: '₇', 8: '₈', 9: '₉'}
+let g:lightline#bufferline#show_number  = 2
+let g:lightline#bufferline#unicode_symbols = 1
+let g:lightline#bufferline#clickable = 1
+let g:lightline#bufferline#shorten_path = 1
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#unnamed      = '[No Name]'
+"let g:lightline#bufferline#ordinal_separator = ''
 let g:lightline = {
-  \ 'component': {
-  \   'lineinfo': '%3l:%-2v%<',
-  \ },
-  \ 'colorscheme': 'wombat',
-  \ 'active': {
-  \   'left': [
-  \     ['paste', 'mode'],
-  \     ['blame', 'readonly', 'filename', 'method'],
-  \		['ctrlpmark'],
-  \   ],
-  \   'right':[
-  \     ['fileformat', 'lineinfo', 'percent'],
-  \		['diagnostic', 'cocstatus'],
-  \		['filetype']
-  \   ],
-  \ },
-  \ 'component_function': {
-  \   'blame': 'LightlineGitBlame',
-  \	  'readonly': 'LightlineReadonly',
-  \	  'mode': 'LightlineMode',
-  \   'filename': 'LightlineFilename',
-  \	  'cocstatus':'coc#status',
-  \   'filetype': 'LightlineFiletype',
-  \   'fileformat': 'LightlineFileformat',
-  \	  'method': 'NearestMethodOrFunction',
-  \ }
+	\ 'tabline': {'left': [['buffers']], 'right': [['close']]},
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '', 'right': '' },
+	\ 'component': {
+	\   'lineinfo': ' %3l:%-2v',
+	\   'relativepath': '%f',
+	\   'absolutepath': '%F',
+	\ },
+	\ 'colorscheme': 'gruvbox',
+	\ 'active': {
+	\   'left': [
+	\     ['paste', 'mode'],
+	\     ['ctrlpmark', 'filename', 'fugitive', 'blame', 'method'],
+	\   ],
+	\   'right':[
+	\     ['fileencoding', 'lineinfo', 'percent'],
+	\	  ['diagnostic', 'cocstatus'],
+	\	  ['filetype']
+	\   ],
+	\ },
+	\ 'component_raw': {'buffers': 1},
+	\ 'component_type': {'buffers': 'tabsel'},
+	\ 'component_expand': {'buffers': 'lightline#bufferline#buffers'},
+	\ 'component_function': {
+	\  'fugitive': 'LightlineFugitive',
+	\  'blame': 'LightlineGitBlame',
+	\  'gitbranch': 'gitbranch#name',
+	\  'readonly': 'LightlineReadonly',
+	\  'mode': 'LightlineMode',
+	\  'filename': 'LightlineFilename',
+	\  'cocstatus':'coc#status',
+	\  'filetype': 'LightlineFiletype',
+	\  'fileformat': 'LightlineFileformat',
+	\  'method': 'NearestMethodOrFunction',
+	\ }
 \ }
-
-let g:lightline.colorscheme = 'gruvbox'
+" lightline-bufferline
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
+set showtabline=2
+set guioptions-=e
 function! NearestMethodOrFunction() abort
   return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+function! LightlineFugitive()
+	if exists('*FugitiveHead')
+		let branch = FugitiveHead()
+		return branch !=# '' ? ''.branch : ''
+	endif
+	return ''
 endfunction
 
 function! LightlineFilename()
   let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
   let modified = &modified ? ' +' : ''
-  return filename . modified
+  let readonly = &readonly ? ' ' : ''
+  return readonly . filename . modified
 endfunction
 
 function! LightlineFileformat()
@@ -798,9 +883,10 @@ function! LightlineFiletype()
   return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
 endfunction
 
-function! LightlineReadonly()
-  return &readonly && &filetype !=# 'help' ? 'RO' : ''
-endfunction
+"function! LightlineReadonly()
+  ""return &readonly && &filetype !=# 'help' ? 'RO' : ''
+		"return &readonly ? '' : ''
+"endfunction
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 

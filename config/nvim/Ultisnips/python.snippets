@@ -1,10 +1,16 @@
-snippet main "__name__ == '__main__'"
-def ${1:main(object)}:
-	${2:code}
+snippet main "def function and __name__ == '__main__'"
+def ${1:main}(${2:object}):
+	"""
+	${3:None}
+	:return: ${4:None}
+	"""
+	${5:pass}
+
+	return $4
 
 
 if __name__ == '__main__':
-	$1
+	$1($2)
 endsnippet
 	
 snippet with "with function as ..."
