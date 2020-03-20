@@ -1,20 +1,21 @@
 call plug#begin('~/.vim/plugged')
-" 撤销树Gundo
+" 撤销树 Gundo
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
 Plug 'xuhdev/vim-latex-live-preview', {'for': 'tex'}
 "" supertab
 "Plug 'ervandew/supertab'
 " Omnisharp
-Plug 'omnisharp/omnisharp-vim'
+"Plug 'omnisharp/omnisharp-vim'
 " coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"为了Python3的第三方库安装Jedi插件
+"为了 Python3 的第三方库安装 Jedi 插件
 "Plug 'davidhalter/jedi-vim'
 " rgb 颜色显示
 Plug 'chrisbra/colorizer'
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
+" 包围
 Plug 'anyakichi/vim-surround'
 " 中文标准化排版
 Plug 'hotoo/pangu.vim'
@@ -53,7 +54,9 @@ Plug 'skywind3000/asynctasks.vim'
 " vim-ranger
 Plug 'rbgrouleff/bclose.vim'	" neovim dependency
 Plug 'francoiscabrol/ranger.vim', {'on': 'Ranger'}
+Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
+Plug 'sheerun/vim-polyglot'
 " lightline
 Plug 'itchyny/lightline.vim'
 " devicons make lightline more graphical
@@ -61,19 +64,18 @@ Plug 'ryanoasis/vim-devicons'
 " lightline-bufferline
 Plug 'mengelbrecht/lightline-bufferline'
 " lightline theme
-Plug 'shinchu/lightline-gruvbox.vim'
 " Plug 'nvie/vim-flake8'
 "Plug 'haya14busa/incsearch.vim'
 " Debugger support: pyhton, java, bash-script, c, c++(maybe)
 "Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python'}
 "Plug 'joonty/vdebug'
-" Latex插件
+" Latex 插件
 Plug 'lervag/vimtex', {'for': 'tex'}
 " Python
 "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " Golang
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
-" markdown语言插件
+" markdown 语言插件
 "Plug 'godlygeek/tabular'
 Plug 'mzlogin/vim-markdown-toc', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
@@ -103,7 +105,7 @@ set number
 set cursorline
 " 设置空白字符的视觉提示
 set list listchars=extends:❯,precedes:❮,tab:▸\ ,trail:˽
-syntax enable	" 语法高亮
+syntax on	" 语法高亮
 filetype plugin indent on " 根据文件类型自动处理缩进
 " 共享剪切板
 "set clipboard+=unnamed
@@ -117,12 +119,12 @@ set undofile
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-set backspace=2		" 修正多数终端上backspace 行为
-set cindent			" 设置C自动缩进
+set backspace=2		" 修正多数终端上 backspace 行为
+set cindent			" 设置 C 自动缩进
 set incsearch		" 输入字符串就显示匹配点
 set hlsearch
 set showmatch		" 显示匹配的括号
-set scrolloff=3     " 距离顶部和底部3行"
+set scrolloff=3     " 距离顶部和底部 3 行"
 set encoding=utf-8  " 编码
 set fenc=utf-8      " 编码
 set mouse=a			" 启用鼠标
@@ -151,8 +153,11 @@ imap 》 <ESC>f》a
 imap ”  <ESC>f” a
 imap ’  <ESC>f’ a
 
+imap <c-l> <RIGHT>
+"imap <c-h> <left>
 
-" 搜索高亮后　前后跳转: 下一个/上一个
+
+" 搜索高亮后　前后跳转：下一个 / 上一个
 " n/N
 " 高亮显示复制区域
 hi HighlightedyankRegion cterm=reverse gui=reverse
@@ -175,6 +180,7 @@ let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_improved_warnings=1
 let g:gruvbox_termcolors=256
+"let g:onedark_terminal_italics=1
 
 "let g:gruvbox_invert_signs=1
 " For MacVim
@@ -183,13 +189,20 @@ let g:gruvbox_termcolors=256
 set termguicolors
 
 colorscheme gruvbox
+"colorscheme onedark
 "let base16colorspace=256
 "colorscheme base16-default-dark
 set background=dark
 " 开启中文规范
-autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
+autocmd BufWritePre *.text,*.txt,*.wiki,*.cnx,*.py call PanGuSpacing()
 """modeconfig"""
 """""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""
+" polyglot
+let g:python_highlight_all = 1
+
+"""""""""""""""""""""""""""""""""""""
+
 """""""""""""""""""""""""""""""""""""
 " coc-calc
 " append result on current expression
@@ -225,12 +238,29 @@ map <leader>f :Ranger<cr>
 """""""""""""""""""""""""""""""""""""
 " fzf.vim
 nmap <s-f> :FZF<cr>
+let g:fzf_layout = { 'down': '~30%' }
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+" [[B]Commits] Customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
+
+" [Commands] --expect expression for directly executing the command
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
 " Colorizer
+let g:colorizer_auto_color = 1
 let g:colorizer_syntax = 1
+"let g:colorizer_auto_filetype='css, html, vim'
+let g:colorizer_auto_map = 1
+"let g:colorizer_use_virtual_text = 1
+"let g:colorizer_skip_comments = 1
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
@@ -271,7 +301,14 @@ if exists("did_load_csvfiletype")
   finish
 endif
 let did_load_csvfiletype=1
-
+let g:csv_delim_test = ',;|'
+let g:csv_hiHeader = 'Pmenu'
+"hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
+"hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
+let g:csv_nl = 1
+let g:csv_nomap_cr = 1
+let b:csv_fixed_width="1,5,9,13,17,21"
+let g:csv_highlight_column = 'y'
 augroup filetypedetect
   au! BufRead,BufNewFile *.csv,*.dat    setfiletype csv
 augroup END
@@ -343,7 +380,7 @@ let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222']
 
 """""""""""""""""""""""""""""""""""""
 " omnisharp
-let g:OmniSharp_server_stdio = 1
+"let g:OmniSharp_server_stdio = 1
 
 """""""""""""""""""""""""""""""""""""
 
@@ -387,7 +424,7 @@ let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 
-" markdown语言插件配置
+" markdown 语言插件配置
 let g:vim_markdown_math = 1
 let g:markdown_fenced_languages = ['css', 'js=javascript']
 " coc-spell-checker
@@ -431,7 +468,7 @@ inoremap jk <ESC>
 inoremap wjk <ESC>:w<CR>
 inoremap wqjk <ESC>:wq<CR>
 
-" 使用s + hjkl 在nvim中快速分屏
+" 使用 s + hjkl 在 nvim 中快速分屏
 map sl :set splitright<CR>:vsplit<CR>
 map sh :set nosplitright<CR>:vsplit<CR>
 map sk :set nosplitbelow<CR>:split<CR>
@@ -704,7 +741,7 @@ elseif &filetype == 'go'
 elseif &filetype == 'markdown'
             "exec "!~/.vim/markdown.pl % > %.html &"
             "exec "!firefox %.html &"
-			exec "MarkdownPreview"	
+			exec "MarkdownPreview"
 elseif &filetype == 'tex'
 			exec "LLPStartPreview"
 elseif &filetype == 'vim'
@@ -771,14 +808,14 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" nerdtree配置
-" 1.打开neovim时自动打开目录
+" nerdtree 配置
+" 1. 打开 neovim 时自动打开目录
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" 设置NERDTree 窗口位置，窗口大小
+" 设置 NERDTree 窗口位置，窗口大小
 let NERDTreeWinPos=1
 let NERDTreeWinSize=28
-" vim-Startify设置
+" vim-Startify 设置
 " 设置书签
 let g:startify_bookmarks            = [
             \ '~/.config/nvim/init.vim',
@@ -822,8 +859,8 @@ let g:lightline = {
 	\     ['ctrlpmark', 'filename', 'fugitive', 'blame', 'method'],
 	\   ],
 	\   'right':[
-	\     ['fileencoding', 'lineinfo', 'percent'],
-	\	  ['diagnostic', 'cocstatus'],
+	\     ['fileencoding', 'fileformat', 'lineinfo', 'percent'],
+	\	  ['diagnostic', 'cocstatus', 'currentfunction'],
 	\	  ['filetype']
 	\   ],
 	\ },
@@ -838,8 +875,9 @@ let g:lightline = {
 	\  'mode': 'LightlineMode',
 	\  'filename': 'LightlineFilename',
 	\  'cocstatus':'coc#status',
-	\  'filetype': 'LightlineFiletype',
-	\  'fileformat': 'LightlineFileformat',
+	\  'currentfunction': 'CocCurrentFunction',
+	\  'filetype': 'MyFiletype',
+	\  'fileformat': 'MyFileformat',
 	\  'method': 'NearestMethodOrFunction',
 	\ }
 \ }
@@ -868,6 +906,14 @@ function! LightlineFugitive()
 	return ''
 endfunction
 
+function! MyFiletype()
+	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! MyFileformat()
+	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
 function! LightlineFilename()
   let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
   let modified = &modified ? ' +' : ''
@@ -889,6 +935,10 @@ endfunction
 "endfunction
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
+
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
 
 function! LightlineGitBlame() abort
   let blame = get(b:, 'coc_git_blame', '')

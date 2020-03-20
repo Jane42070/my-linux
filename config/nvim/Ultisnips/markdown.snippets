@@ -96,11 +96,15 @@ snippet ol "overline"
 \overline{${1:B}}
 endsnippet
 
-snippet ... "cdots ···"
+snippet c. "cdots ···"
 \cdots
 endsnippet
 
-snippet . "cdot ·"
+snippet l. "ldots ..."
+\ldots
+endsnippet
+
+snippet c "cdot ·"
 \cdot
 endsnippet
 
@@ -110,4 +114,14 @@ endsnippet
 
 snippet x "times x"
 \times
+endsnippet
+
+snippet \{ "mathjax {} "
+\left\\{ ${1} \right\\${2:\}}
+endsnippet
+
+snippet begin "begin like latex mathjax"
+\begin{${1:aligned}}
+${2:mathjax}
+\end{${1:aligned}}
 endsnippet
