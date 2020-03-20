@@ -53,7 +53,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
 " vim-ranger
 Plug 'rbgrouleff/bclose.vim'	" neovim dependency
-Plug 'francoiscabrol/ranger.vim', {'on': 'Ranger'}
+Plug 'francoiscabrol/ranger.vim' "{'on': 'Ranger'}
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
@@ -231,14 +231,15 @@ nmap ga <Plug>(EasyAlign)
 
 """""""""""""""""""""""""""""""""""""
 " ranger
-let g:ranger_map_keys = 0
-map <leader>f :Ranger<cr>
+let g:ranger_map_keys = 1
+let g:NERDTreeHijackNetrw = 0 "add this line if you use NERDTree
+let g:ranger_replace_netrw = 1 "open ranger when vim open a directory
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
 " fzf.vim
 nmap <s-f> :FZF<cr>
-let g:fzf_layout = { 'down': '~30%' }
+"let g:fzf_layout = { 'down': '~30%' }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 
@@ -250,6 +251,7 @@ let g:fzf_tags_command = 'ctags -R'
 
 " [Commands] --expect expression for directly executing the command
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6} }
 
 """""""""""""""""""""""""""""""""""""
 
@@ -303,8 +305,8 @@ endif
 let did_load_csvfiletype=1
 let g:csv_delim_test = ',;|'
 let g:csv_hiHeader = 'Pmenu'
-"hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
-"hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
+"hi CSVColumnEven term=bold ctermbg=4 0
+"hi CSVColumnOdd  term=bold ctermbg=5 0
 let g:csv_nl = 1
 let g:csv_nomap_cr = 1
 let b:csv_fixed_width="1,5,9,13,17,21"

@@ -11,7 +11,7 @@
 	"suggest.enablePreview":true,
 	"suggest.floatEnable": true,
 	"suggest.detailField": "preview",
-	"suggest.snippetIndicator": "",
+	"suggest.snippetIndicator": "~",
 	"suggest.triggerCompletionWait": 100,
 	"suggest.echodocSupport": true,
 	"suggest.completionItemKindLabels": {
@@ -84,6 +84,7 @@
 		"org"
 	],
 	"python.pythonPath":"/Library/Frameworks/Python.framework/Versions/3.8/bin/python3.8",
+	"python.analysis.downloadChannel": "stable",
 	"python.linting.pylintUseMinimalCheckers":true,
 	"python.linting.pylintPath":"/Library/Frameworks/Python.framework/Versions/3.8/bin/pylint",
 	"python.linting.enabled":true,
@@ -164,7 +165,7 @@
 				  "ignoredRootPaths": ["~"]
 				}
 		},
-	"explorer.width": 38,
+	"explorer.width": 35,
 	"explorer.file.column.indent.indentLine": true,
 	"explorer.file.showHiddenFiles": true,
 	"explorer.icon.enableNerdfont": true,
