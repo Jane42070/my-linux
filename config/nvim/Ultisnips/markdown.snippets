@@ -77,7 +77,7 @@ snippet lra "longrightarrow"
 endsnippet
 
 snippet llra "longleftrightarrow"
-\longleftrightarrow	
+\longleftrightarrow
 endsnippet
 
 snippet Lla "Longleftarrow"
@@ -117,11 +117,31 @@ snippet x "times x"
 endsnippet
 
 snippet \{ "mathjax {} "
-\left\\{ ${1} \right\\${2:\}}
+\left\\{ ${1} \right${2:\\}}
+endsnippet
+
+snippet \[ "mathjax [] "
+\left\\[ ${1} \right${2:\\]}
 endsnippet
 
 snippet begin "begin like latex mathjax"
 \begin{${1:aligned}}
 ${2:mathjax}
-\end{${1:aligned}}
+\end{$1}
+endsnippet
+
+snippet because "\because" b
+\because
+endsnippet
+
+snippet therefore "\therefore" b
+\therefore
+endsnippet
+
+snippet ift "\infty" b
+\infty
+endsnippet
+
+snippet / "\frac 12" b
+\frac ${1:12}
 endsnippet

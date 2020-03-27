@@ -57,23 +57,21 @@
 	"diagnostic.virtualTextPrefix": " ❯❯❯ ",
 	"diagnostic.virtualText": true,
 	"git.enableGutters": true,
-	"git.branchCharacter":"\uf408",
-	"git.addGBlameToBufferVar": false,
-	"git.addGBlameToVirtualText": false,
 	"git.virtualTextPrefix": " ❯❯❯ ",
 	"git.addedSign.hlGroup": "GitGutterAdd",
 	"git.changedSign.hlGroup": "GitGutterChange",
 	"git.removedSign.hlGroup": "GitGutterDelete",
 	"git.topRemovedSign.hlGroup": "GitGutterDelete",
 	"git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+	"git.branchCharacter":"",
 	"git.addedSign.text":"→",
 	"git.changedSign.text":"⇆",
 	"git.removedSign.text":"←",
 	"git.topRemovedSign.text": "↵",
 	"git.changeRemovedSign.text": "↹",
-	"git.enableGlobalStatus": false,
+	"git.enableGlobalStatus": true,
 	"git.signOffset": 2,
-	"java.home": "/Library/Java/JavaVirtualMachines/jdk-13.0.1.jdk/Contents/Home",
+	"java.home": "/Library/Java/JavaVirtualMachines/jdk-14.jdk/Contents/Home",
 	"java.format.enabled": true,
 	"java.completion.enabled": true,
 	"java.format.onType.enabled": true,
@@ -83,8 +81,15 @@
 		"com",
 		"org"
 	],
+	"xml.java.home": "/Library/Java/JavaVirtualMachines/jdk-14.jdk/Contents/Home",
+	"xml.codeLens.enabled": false,
+	"xml.format.enabled": true,
+	"xml.completion.autoCloseTags": true,
+	"xml.format.quotations": "doubleQuotes",
+	"xml.format.splitAttributes": false,
 	"python.pythonPath":"/Library/Frameworks/Python.framework/Versions/3.8/bin/python3.8",
-	"python.analysis.downloadChannel": "stable",
+	"python.analysis.downloadChannel": "beta",
+	"python.autoUpdateLanguageServer": true,
 	"python.linting.pylintUseMinimalCheckers":true,
 	"python.linting.pylintPath":"/Library/Frameworks/Python.framework/Versions/3.8/bin/pylint",
 	"python.linting.enabled":true,
@@ -92,12 +97,13 @@
 	"python.linting.flake8CategorySeverity.F":"Information",
 	"python.linting.flake8CategorySeverity.W":"Warning",
 	"python.linting.flake8Enabled":true,
-	"python.linting.flake8Path":"flake8",
+	"python.linting.flake8Path":"/Library/Frameworks/Python.framework/Versions/3.8/bin/flake8",
 	"python.pipenvPath":"/Library/Frameworks/Python.framework/Versions/3.8/bin/pip3.8",
 	"python.autoComplete.addBrackets": true,
 	"python.jediEnabled": false,
 	"python.analysis.diagnosticEnabled":true,
-	"python.analysis.diagnosticPublishDelay":300,
+	"python.analysis.diagnosticPublishDelay":200,
+	"python.trace.server": "verbose",
 	"python.formatting.provider": "yapf",
 	"python.formatting.yapfArgs": [
         "--style",
@@ -105,7 +111,6 @@
     ],
 	"json.format.enable":true,
 	"css.enable": true,
-	"latex.forwardSearch.executable":"/Applications/TeXShop.app/Contents/MacOS/TeXShop",
 	"html.enable": true,
 	"html.format.enable": true,
 	"html.suggest.html5": true,
@@ -116,7 +121,8 @@
 		"htmldjango",
 		"jsp"
 	],
-	"list.previewHighlightGroup": "Statement",
+	"latex.lint.onSave": true,
+	"latex.forwardSearch.executable": "/Applications/Skim.app/Contents/MacOS/Skim",
 	"signature.target":"float",
 	"coc.preferences.formatOnSaveFiletypes": [
 		"javascript",
@@ -126,58 +132,78 @@
 		"dart",
 		"go",
 		"php",
-		"sh"
+		"sh",
+		"md",
+		"markdown"
 	],
+	"cmake.cmakePath": "cmake",
+	"tsserver.trace.server":"verbose",
 	  "languageserver": {
-		          "intelephense": {
-            "command": "intelephense",
-            "args": ["--stdio"],
-            "filetypes": ["php"],
-            "initializationOptions": {
-                "storagePath": "/tmp/intelephense"
-							}
-						},
-					"golang": {
-				  "command": "gopls",
-				  "rootPatterns": ["go.mod"],
-				  "disableWorkspaceFolders": true,
-				  "filetypes": ["go"]
+		      "foo": {
+      "module": "/usr/local/lib/node_modules/foo/index.js",
+      "args": ["--node-ipc"],
+      "filetypes": ["foo"],
+      "trace.server": "verbose",
+      "rootPatterns": ["root.yml"],
+      "execArgv": ["--nolazy", "--inspect-brk=6045"],
+      "initializationOptions": {
+      },
+      "settings": {
+        "validate": true
+      }
+    },
+	  "intelephense": {
+		"command": "intelephense",
+		"args": ["--stdio"],
+		"filetypes": ["php"],
+		"initializationOptions": {
+			"storagePath": "/tmp/intelephense"
+						}
 					},
-					"ccls": {
-				  "command": "ccls",
-				  "filetypes": ["c", "cpp", "objc", "objcpp"],
-				  "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
-				  "initializationOptions": {
-					 "cache": {
-						   "directory": "/tmp/ccls"
-						 }
-					   }
-					},
-			  "dockerfile": {
-				  "command": "docker-langserver",
-				  "filetypes": ["dockerfile"],
-				  "args": ["--stdio"]
+				"golang": {
+			  "command": "gopls",
+			  "rootPatterns": ["go.mod"],
+			  "disableWorkspaceFolders": true,
+			  "filetypes": ["go"]
 				},
-					"bash": {
-				  "command": "bash-language-server",
-				  "args": ["start"],
-				  "filetypes": ["sh"],
-				  "ignoredRootPaths": ["~"]
-				}
+				"clangd": {
+      "command": "clangd",
+      "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+      "filetypes": ["c", "cpp", "objc", "objcpp"]
+    },
+		  "dockerfile": {
+			  "command": "docker-langserver",
+			  "filetypes": ["dockerfile"],
+			  "args": ["--stdio"]
+			},
+				"bash": {
+			  "command": "bash-language-server",
+			  "args": ["start"],
+			  "filetypes": ["sh"],
+			  "ignoredRootPaths": ["~"]
+			}
 		},
 	"explorer.width": 35,
 	"explorer.file.column.indent.indentLine": true,
 	"explorer.file.showHiddenFiles": true,
 	"explorer.icon.enableNerdfont": true,
 	"explorer.file.column.git.showIgnored": true,
+	"explorer.icon.enableVimDevicons": true,
 	"translator.toLang":"zh",
 	"translator.maxsize": 5000,
+	"translator.engines": [
+		"bing",
+		"ciba"
+	],
 	"cSpell.userWords": [
     "Kaggle",
+    "Leftrightarrow",
     "Longrightarrow",
     "NTFS",
     "Nerdfont",
+    "Pangu",
     "Pyinstaller",
+    "Rightarrow",
     "Sergent",
     "Vectorizer",
     "alarcritty",
@@ -199,7 +225,8 @@
     "polybar",
     "scikit",
     "sklearn",
-    "toarray"
+    "toarray",
+    "vimrc"
   ],
   "cSpell.enabledLanguageIds": [
     "asciidoc",

@@ -3,14 +3,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
 Plug 'xuhdev/vim-latex-live-preview', {'for': 'tex'}
-"" supertab
-"Plug 'ervandew/supertab'
-" Omnisharp
-"Plug 'omnisharp/omnisharp-vim'
 " coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"为了 Python3 的第三方库安装 Jedi 插件
-"Plug 'davidhalter/jedi-vim'
 " rgb 颜色显示
 Plug 'chrisbra/colorizer'
 " 括号补全
@@ -19,28 +13,22 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'anyakichi/vim-surround'
 " 中文标准化排版
 Plug 'hotoo/pangu.vim'
+" 增强<C-A>/<C-X>
+Plug 'tpope/vim-speeddating'
+" 增强.
+Plug 'tpope/vim-repeat'
 "CSV
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 " Vim-move
 Plug 'matze/vim-move'
-"Plug 'mechatroner/rainbow_csv'
-"输入法切换
-"Plug 'CodeFalling/fcitx-vim-osx'
 " Calendar
 Plug 'itchyny/calendar.vim', {'on': 'Calendar'}
-" xtabline
-"Plug 'mg979/vim-xtabline'
 " nvim startscreen --vim-startify
-" vim-colorscheme
-"Plug 'flazz/vim-colorschemes'
 Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'liuchengxu/vista.vim', {'on': 'Vista'}
 " Super searching
-Plug 'ctrlpvim/ctrlp.vim'
-" vim git
-"Plug 'itchyny/vim-gitbranch'
-"Plug 'tpope/vim-fugitive'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 " Easy motion
 Plug 'easymotion/vim-easymotion'
 " Cursor Word
@@ -48,27 +36,27 @@ Plug 'itchyny/vim-cursorword'
 " Interesting words
 Plug 'lfv89/vim-interestingwords'
 " file search --fzf
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf', {'on': 'FZF', 'do': { -> fzf#install() }}
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
 " vim-ranger
 Plug 'rbgrouleff/bclose.vim'	" neovim dependency
 Plug 'francoiscabrol/ranger.vim' "{'on': 'Ranger'}
-Plug 'joshdick/onedark.vim'
-Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 " lightline
+Plug 'morhetz/gruvbox'
+" onedark theme
+Plug 'joshdick/onedark.vim'
+" snowy theme
+" Plug 'raphamorim/lucario'
+" iceberg theme
+Plug 'cocopon/iceberg.vim'
 Plug 'itchyny/lightline.vim'
 " devicons make lightline more graphical
 Plug 'ryanoasis/vim-devicons'
 " lightline-bufferline
 Plug 'mengelbrecht/lightline-bufferline'
-" lightline theme
-" Plug 'nvie/vim-flake8'
-"Plug 'haya14busa/incsearch.vim'
-" Debugger support: pyhton, java, bash-script, c, c++(maybe)
-"Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python'}
-"Plug 'joonty/vdebug'
 " Latex 插件
 Plug 'lervag/vimtex', {'for': 'tex'}
 " Python
@@ -76,12 +64,12 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 " Golang
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
 " markdown 语言插件
-"Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 Plug 'mzlogin/vim-markdown-toc', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
-Plug 'dhruvasagar/vim-table-mode', {'on': 'TableModeEnable', 'for': 'markdown'}
+Plug 'dhruvasagar/vim-table-mode', {'on': 'TableModeEnable'}
 Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
-Plug 'iamcco/markdown-preview.nvim', { 'on': 'MarkdownPreview', 'for':'markdown', 'do': { -> mkdp#util#install() } }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'junegunn/vim-easy-align', {'on': '<Plug>(EasyAlign)'}
 " html 插件
 Plug 'mattn/emmet-vim', {'for': 'html'}
@@ -91,16 +79,13 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 " 代码折叠
-Plug 'tmhedberg/SimpylFold'
+Plug 'konfekt/fastfold'
 call plug#end()
-
 """""""""""""""""""""""""""""""""""""
 "	      CUSTOM MY NVIM	     	"
 """""""""""""""""""""""""""""""""""""
 " 显示行号
 set number
-" 显示相对行号
-"set relativenumber
 " 高亮当前行
 set cursorline
 " 设置空白字符的视觉提示
@@ -115,7 +100,15 @@ set autochdir
 " set paste
 " 设置持久性撤销和重复
 set undofile
-
+" 大小写不敏感
+set ignorecase
+" 开启智能推测
+set smartcase
+set textwidth=80
+" 不对单词折行
+set linebreak
+set scrolloff=5
+set sidescrolloff=15
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -124,7 +117,7 @@ set cindent			" 设置 C 自动缩进
 set incsearch		" 输入字符串就显示匹配点
 set hlsearch
 set showmatch		" 显示匹配的括号
-set scrolloff=3     " 距离顶部和底部 3 行"
+set scrolloff=3     " 距离顶部和底部 3 行
 set encoding=utf-8  " 编码
 set fenc=utf-8      " 编码
 set mouse=a			" 启用鼠标
@@ -149,13 +142,13 @@ inoremap ‘ ‘’<LEFT>
 imap ） <ESC>f）a
 imap 】 <ESC>f】a
 imap 》 <ESC>f》a
-" 这两个触发会产生问题
+" 这两个触发可能会产生问题
 imap ”  <ESC>f” a
 imap ’  <ESC>f’ a
 
+" 貌似没什么用
 imap <c-l> <RIGHT>
 "imap <c-h> <left>
-
 
 " 搜索高亮后　前后跳转：下一个 / 上一个
 " n/N
@@ -163,44 +156,134 @@ imap <c-l> <RIGHT>
 hi HighlightedyankRegion cterm=reverse gui=reverse
 let g:highlightedyank_highlight_duration = 500
 
-
-" SimplyFold
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
-" Enable folding with the spacebar
-nnoremap <space> za
-let g:SimpylFold_docstring_preview = 1
 
 " 设置背景颜色和主题
 let g:gruvbox_italicize_comments=1
+" SimplyFold
 let g:gruvbox_italicize_strings=0
-"let g:gruvbox_improved_strings=1
 let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_contrast_dark='soft'
+let g:gruvbox_contrast_light='soft'
 let g:gruvbox_improved_warnings=1
 let g:gruvbox_termcolors=256
-"let g:onedark_terminal_italics=1
 
-"let g:gruvbox_invert_signs=1
+" reverse the color of signs, not good!
+" let g:gruvbox_invert_signs=1
+set background=dark
+colorscheme gruvbox
 " For MacVim
 "set macligatures
 "set guifont=Fira\ Code:h17 "设置字体和大小
 set termguicolors
 
-colorscheme gruvbox
-"colorscheme onedark
-"let base16colorspace=256
-"colorscheme base16-default-dark
-set background=dark
 " 开启中文规范
 autocmd BufWritePre *.text,*.txt,*.wiki,*.cnx,*.py call PanGuSpacing()
 """modeconfig"""
 """""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""
+" leaderF
+" don't show the help in normal mode
+let g:Lf_HideHelp = 1
+let g:Lf_UseCache = 0
+let g:Lf_UseVersionControlTool = 0
+let g:Lf_IgnoreCurrentBufferName = 1
+" popup mode
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
+let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
+" let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
+let g:Lf_ShortcutF = "<leader>ff"
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+
+noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+" search visually selected text literally
+xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+noremap go :<C-U>Leaderf! rg --recall<CR>
+
+" should use `Leaderf gtags --update` first
+let g:Lf_GtagsAutoGenerate = 0
+let g:Lf_Gtagslabel = 'native-pygments'
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" coc-actions
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" tabular
+let g:tabular_loaded = 1
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" fastfold
+nmap zuz <Plug>(FastFoldUpdate)
+" Enable folding with the spacebar
+nnoremap <space> za
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x', 'X', 'a', 'A', 'o', 'O', 'c', 'C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+let g:markdown_folding = 1
+let g:tex_fold_enabled = 1
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:sh_fold_enabled= 7
+let g:javaScript_fold = 1
+let g:ruby_fold = 1
+let g:perl_fold = 1
+let g:perl_fold_blocks = 1
+let g:r_syntax_folding = 1
+let g:rust_fold = 1
+let g:php_folding = 1
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
+" nerdcommenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""
 " polyglot
 let g:python_highlight_all = 1
-
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
@@ -214,13 +297,6 @@ nmap <Leader>cr <Plug>(coc-calc-result-replace)
 """""""""""""""""""""""""""""""""""""
 " vim-move
 let g:move_key_modifier = 'S'
-"""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""
-" incsearch.vim
-"map /  <Plug>(incsearch-forward)
-"map ?  <Plug>(incsearch-backward)
-"map g/ <Plug>(incsearch-stay)
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
@@ -252,33 +328,41 @@ let g:fzf_tags_command = 'ctags -R'
 " [Commands] --expect expression for directly executing the command
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6} }
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+" Enable per-command history
+" - History files will be stored in the specified directory
+" - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
+"   'previous-history' instead of 'down' and 'up'.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
 " Colorizer
-let g:colorizer_auto_color = 1
+"let g:colorizer_auto_color = 1
 let g:colorizer_syntax = 1
-"let g:colorizer_auto_filetype='css, html, vim'
+let g:colorizer_auto_filetype='css, html'
 let g:colorizer_auto_map = 1
-"let g:colorizer_use_virtual_text = 1
-"let g:colorizer_skip_comments = 1
-"""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""
-" coc-snippets
-"inoremap <silent><expr> <TAB>
-	  "\ pumvisible() ? coc#_select_confirm() :
-	  "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-	  "\ <SID>check_back_space() ? "\<TAB>" :
-	  "\ coc#refresh()
-
-"function! s:check_back_space() abort
-  "let col = col('.') - 1
-  "return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
-
-"let g:coc_snippet_next = '<tab>'
+let g:colorizer_use_virtual_text = 1
+let g:colorizer_skip_comments = 1
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
@@ -295,7 +379,6 @@ nmap <Leader>r <Plug>(coc-translator-rv)
 
 """""""""""""""""""""""""""""""""""""
 
-
 """""""""""""""""""""""""""""""""""""
 " CSV.VIM
 filetype plugin on
@@ -305,8 +388,6 @@ endif
 let did_load_csvfiletype=1
 let g:csv_delim_test = ',;|'
 let g:csv_hiHeader = 'Pmenu'
-"hi CSVColumnEven term=bold ctermbg=4 0
-"hi CSVColumnOdd  term=bold ctermbg=5 0
 let g:csv_nl = 1
 let g:csv_nomap_cr = 1
 let b:csv_fixed_width="1,5,9,13,17,21"
@@ -314,7 +395,6 @@ let g:csv_highlight_column = 'y'
 augroup filetypedetect
   au! BufRead,BufNewFile *.csv,*.dat    setfiletype csv
 augroup END
-
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
@@ -323,7 +403,7 @@ augroup END
 " This could make the display more compact or more spacious.
 " e.g., more compact: ["▸ ", ""]
 " Note: this option only works the LSP executives, doesn't work for `:Vista ctags`.
-noremap <silent> ,v :Vista!!<CR>
+noremap <silent> <F4> :Vista!!<CR>
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 
 " Executive used when opening vista sidebar without specifying it.
@@ -381,12 +461,6 @@ let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222']
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
-" omnisharp
-"let g:OmniSharp_server_stdio = 1
-
-"""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""
 " coc-git
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 " navigate chunks of current buffer
@@ -404,44 +478,24 @@ xmap ag <Plug>(coc-git-chunk-outer)
 
 """""""""""""""""""""""""""""""""""""
 
-"""""""""""""""""""""""""""""""""""""
-" ctrlp
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-" Set invoked default directory to working direcotry
-let g:ctrlp_working_path_mode = 'ra'
-" Exclude files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-" Use a custom file listing command
-let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
-" Ignore files in .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-
 " markdown 语言插件配置
+let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_math = 1
 let g:markdown_fenced_languages = ['css', 'js=javascript']
+
 " coc-spell-checker
 "<leader>aap for current paragraph
 "<leader>aw for current word
-vmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
+" vmap <leader>a <Plug>(coc-codeaction-selected)
+" nmap <leader>a <Plug>(coc-codeaction-selected)
 """""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""
 " 快捷键
 map <F3> :CocCommand explorer<CR>
 nnoremap <F5> :GundoToggle<CR>
-map C	:CocCommand<CR>
-"map ,f  :FZF<CR>
+map C :CocCommand<CR>
+" map ,f  :FZF<CR>
 map ,pl :PlugInstall<CR>
 map ,ps :PlugStatus<CR>
 map ,pd :PlugUpdate<CR>
@@ -451,15 +505,8 @@ map ,ps :PlugStatus<CR>
 "map ,r :source %<CR>
 " 新建标签页
 map tt :tabe<CR>
-"" 前一标签页
-"map t- :-tabnext<CR>
-"" 后一标签页
-"map t= :+tabnext<CR>
 "" 浏览标签页
 map <TAB><TAB> :tabnext<CR>
-"map tu :tabe<CR>
-"map ti :+tabnext<CR>
-"map tn :-tabnext<CR>
 map tc :tabclose<CR>
 " 快捷缩进
 vnoremap < <v
@@ -483,7 +530,7 @@ noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
 
 " COC.NVIM
-"let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-flutter']
+let g:coc_global_extensions = ['coc-powershell', 'coc-texlab', 'coc-python', 'coc-snippets', 'coc-java', 'coc-bookmark', 'coc-omnisharp', 'coc-phpls', 'coc-vimlsp', 'coc-xml', 'coc-calc', 'coc-cmake', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-stylelint', 'coc-git', 'coc-explorer', 'coc-translator', 'coc-flutter']
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -496,7 +543,7 @@ set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=200
+set updatetime=100
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -670,6 +717,7 @@ let g:tex_conceal='abdmg'
 "let g:livepreview_previewer = 'open -a texshop'
 "let g:livepreview_previewer = 'open -a PDF\ Expert'
 let g:livepreview_previewer = 'open -a Skim'
+" let g:livepreview_previewer = 'open -a PDF\ Reader\ Pro'
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
@@ -686,18 +734,16 @@ inoreabbrev <expr> <bar><bar>
           \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
 inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
+
 " To get ReST-compatible tables use
 "let g:table_mode_corner_corner='+'
 " For Markdown-compatible tables use
 let g:table_mode_corner='|'
 "let g:table_mode_header_fillchar='='
-
-
 """""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""
 " markdown-preview
-let g:mkdp_path_to_chrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 
@@ -810,41 +856,33 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" nerdtree 配置
-" 1. 打开 neovim 时自动打开目录
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" 设置 NERDTree 窗口位置，窗口大小
-let NERDTreeWinPos=1
-let NERDTreeWinSize=28
 " vim-Startify 设置
 " 设置书签
 let g:startify_bookmarks            = [
             \ '~/.config/nvim/init.vim',
             \ '~/.vimrc',
+			\ '~/.config/nvim/coc-settings.json',
             \]
 
 " 起始页显示的列表长度
 let g:startify_files_number = 20
 
 """"""""""""""""""""""""""""""""""""""
-"" lightline
-" gruvbox_lightline
+" lightline
 set laststatus=2
 if !has('gui_running')
   set t_Co=256
 endif
 set noshowmode
 let g:lightline#bufferline#number_map = {
-\ 0: '₀', 1: '₁', 2: '₂', 3: '₃', 4: '₄',
-\ 5: '₅', 6: '₆', 7: '₇', 8: '₈', 9: '₉'}
+\ 0: '⓿ ', 1: '① ', 2: '② ', 3: '③ ', 4: '④ ',
+\ 5: '⑤ ', 6: '⑥ ', 7: '⑦ ', 8: '⑧ ', 9: '⑨ '}
 let g:lightline#bufferline#show_number  = 2
 let g:lightline#bufferline#unicode_symbols = 1
 let g:lightline#bufferline#clickable = 1
 let g:lightline#bufferline#shorten_path = 1
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unnamed      = '[No Name]'
-"let g:lightline#bufferline#ordinal_separator = ''
 let g:lightline = {
 	\ 'tabline': {'left': [['buffers']], 'right': [['close']]},
 	\ 'separator': { 'left': '', 'right': '' },
@@ -858,11 +896,11 @@ let g:lightline = {
 	\ 'active': {
 	\   'left': [
 	\     ['paste', 'mode'],
-	\     ['ctrlpmark', 'filename', 'fugitive', 'blame', 'method'],
+	\     ['fugitive', 'ctrlpmark', 'filename', 'method'],
 	\   ],
 	\   'right':[
 	\     ['fileencoding', 'fileformat', 'lineinfo', 'percent'],
-	\	  ['diagnostic', 'cocstatus', 'currentfunction'],
+	\	  ['diagnostic', 'blame', 'cocstatus', 'currentfunction'],
 	\	  ['filetype']
 	\   ],
 	\ },
@@ -872,7 +910,6 @@ let g:lightline = {
 	\ 'component_function': {
 	\  'fugitive': 'LightlineFugitive',
 	\  'blame': 'LightlineGitBlame',
-	\  'gitbranch': 'gitbranch#name',
 	\  'readonly': 'LightlineReadonly',
 	\  'mode': 'LightlineMode',
 	\  'filename': 'LightlineFilename',
@@ -900,14 +937,6 @@ function! NearestMethodOrFunction() abort
   return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 
-function! LightlineFugitive()
-	if exists('*FugitiveHead')
-		let branch = FugitiveHead()
-		return branch !=# '' ? ''.branch : ''
-	endif
-	return ''
-endfunction
-
 function! MyFiletype()
 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
@@ -931,13 +960,6 @@ function! LightlineFiletype()
   return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
 endfunction
 
-"function! LightlineReadonly()
-  ""return &readonly && &filetype !=# 'help' ? 'RO' : ''
-		"return &readonly ? '' : ''
-"endfunction
-let g:unite_force_overwrite_statusline = 0
-let g:vimfiler_force_overwrite_statusline = 0
-
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
@@ -948,6 +970,7 @@ function! LightlineGitBlame() abort
   return winwidth(0) > 120 ? blame : ''
 endfunction
 
+autocmd User CocGitStatusChange {command}
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 function! LightlineMode()

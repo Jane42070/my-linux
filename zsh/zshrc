@@ -272,7 +272,6 @@ bindkey -M vicmd 'j' history-substring-search-down
 alias pip="/Library/Frameworks/Python.framework/Versions/3.8/bin/pip"
 # install ranger
 alias ra="/usr/local/bin/ranger"
-
 # alias scp="scrcpy"
 alias md="mkdir"
 # install neofetch
