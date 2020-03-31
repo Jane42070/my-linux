@@ -1,2 +1,3 @@
-#!/bin/sh
-feh --recursive --randomize --bg-fill ~/Pictures/wallpapers/Tech
+#!/bin/bash
+feh --recursive --randomize --bg-fill ~/wallpapers
+# feh --recursive --randomize --bg-fill ~/wallpapers/Tech
