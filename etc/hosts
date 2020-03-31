@@ -1,0 +1,29 @@
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1	localhost
+255.255.255.255	broadcasthost
+::1             localhost
+104.18.18.18    free-ss.site
+127.0.0.1 www.sublimetext.com
+127.0.0.1 license.sublimehq.com
+
+140.82.112.3   github.com
+140.82.114.5   api.github.com
+199.232.28.133 raw.githubusercontent.com
+199.232.68.133 cloud.githubusercontent.com
+199.232.28.133 user-images.githubusercontent.com
+199.232.68.133 camo.githubusercontent.com
+# 52.216.206.139 amazonaws.com
+198.58.101.18  vimawesome.com
+151.101.129.69 stackoverflow.com
+162.213.33.7   ubuntu.com
+162.213.33.7   paste.ubuntu.com
+104.23.99.190  pastebin.com
+
+
+127.0.0.1 xmind.net
+127.0.0.1 www.xmind.net
